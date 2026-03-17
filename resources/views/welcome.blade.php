@@ -265,10 +265,10 @@
 
         <div class="relative z-10 hidden md:flex items-center space-x-8 text-[13px] font-medium tracking-[0.2em] uppercase py-4">
             <a class="text-white/60 hover:text-white transition-opacity" href="#main">Main</a>
-            <a class="text-white/60 hover:text-white transition-opacity" href="#about-us">About Us</a>
-            <a class="text-white/60 hover:text-white transition-opacity" href="#keynote-speakers">Keynote Speakers</a>
             <a class="text-white/60 hover:text-white transition-opacity" href="#agenda">Agenda</a>
+            <a class="text-white/60 hover:text-white transition-opacity" href="#keynote-speakers">Keynote Speakers</a>
             <a class="text-white/60 hover:text-white transition-opacity" href="#venue">Venue</a>
+            <a class="text-white/60 hover:text-white transition-opacity" href="#about-us">About Us</a>
             <a class="text-white/60 hover:text-white transition-opacity" href="#more">More</a>
         </div>
         
@@ -283,10 +283,10 @@
 
     <div class="md:hidden mt-4 glass rounded-2xl p-6 flex flex-col space-y-4 shadow-2xl" x-show="mobileMenu" x-transition:enter="transition ease-out duration-300" x-transition:enter-end="opacity-100 scale-100" x-transition:enter-start="opacity-0 scale-95" style="display: none;">
         <a @click="mobileMenu = false" class="text-lg font-serif" href="#main">Main</a>
-        <a @click="mobileMenu = false" class="text-lg font-serif" href="#about-us">About Us</a>
-        <a @click="mobileMenu = false" class="text-lg font-serif" href="#keynote-speakers">Keynote Speakers</a>
         <a @click="mobileMenu = false" class="text-lg font-serif" href="#agenda">Agenda</a>
+        <a @click="mobileMenu = false" class="text-lg font-serif" href="#keynote-speakers">Keynote Speakers</a>
         <a @click="mobileMenu = false" class="text-lg font-serif" href="#venue">Venue</a>
+        <a @click="mobileMenu = false" class="text-lg font-serif" href="#about-us">About Us</a>
         <a @click="mobileMenu = false" class="text-lg font-serif" href="#more">More</a>
         <button @click="modalOpen = true; mobileMenu = false" class="w-full border border-slate-400/30 text-white font-bold py-4 rounded-xl">Register Interest</button>
     </div>
@@ -325,36 +325,6 @@
             </div>
 
             <button @click="modalOpen = true" class="inline-flex items-center justify-center px-12 py-6 bg-gradient-to-r from-slate-200 to-slate-400 text-slate-950 font-extrabold tracking-[0.25em] text-lg rounded-2xl shadow-[0_0_30px_rgba(148,163,184,0.5)] hover:scale-105 active:scale-95 transition-all duration-500 uppercase">Pre-Register Now</button>
-        </div>
-    </section>
-
-    <section class="py-20 bg-slate-950 px-6 border-t border-white/5" id="about-us">
-        <div class="max-w-6xl mx-auto space-y-8">
-            <h2 class="text-4xl md:text-5xl font-serif font-bold text-gradient-platinum italic">About Us</h2>
-
-            <div class="glass rounded-2xl p-8 md:p-10 space-y-6 text-slate-300 leading-relaxed">
-                <p>
-                    Steel Exporters' Association is one of six associations which has been operating under the body of
-                    General Secretariat of Istanbul Mineral and Metals Exporters' Association (IMMIB).
-                </p>
-
-                <p>
-                    The Association is a non-profit business organization of more than 3,700 companies representing
-                    the largest steel producers and exporters in Turkiye.
-                </p>
-
-                <p>
-                    It carries on its operations with the aim of increasing the export potential of steel industry and
-                    paves the way for steel producers and exporters, with main objective to foster and attain
-                    sustainable global steel market based on free and fair trade.
-                </p>
-
-                <p>
-                    The Association also solves the problems its member companies face at home and abroad, provides
-                    contact between members and foreign importers in order to ease export processes, and serves
-                    up-to-date domestic and global market news, reports, and analyses.
-                </p>
-            </div>
         </div>
     </section>
 
@@ -524,12 +494,6 @@
         </div>
     </section>
 
-    <section class="py-20 bg-slate-950 px-6 border-t border-white/5" id="more">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-4xl md:text-5xl font-serif font-bold text-gradient-platinum italic">More</h2>
-        </div>
-    </section>
-
     <section class="py-24 bg-slate-950 px-6 border-t border-white/5" id="venue">
         <div class="max-w-7xl mx-auto">
             <div class="relative w-full h-[560px] md:h-[680px] rounded-3xl overflow-hidden shadow-2xl">
@@ -540,6 +504,42 @@
                     <p class="text-slate-400">Experience unmatched Turkish hospitality at the crossroads of Europe and Asia.</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-slate-950 px-6 border-t border-white/5" id="about-us">
+        <div class="max-w-6xl mx-auto space-y-8">
+            <h2 class="text-4xl md:text-5xl font-serif font-bold text-gradient-platinum italic">About Us</h2>
+
+            <div class="glass rounded-2xl p-8 md:p-10 space-y-6 text-slate-300 leading-relaxed">
+                <p>
+                    Steel Exporters' Association is one of six associations which has been operating under the body of
+                    General Secretariat of Istanbul Mineral and Metals Exporters' Association (IMMIB).
+                </p>
+
+                <p>
+                    The Association is a non-profit business organization of more than 3,700 companies representing
+                    the largest steel producers and exporters in Turkiye.
+                </p>
+
+                <p>
+                    It carries on its operations with the aim of increasing the export potential of steel industry and
+                    paves the way for steel producers and exporters, with main objective to foster and attain
+                    sustainable global steel market based on free and fair trade.
+                </p>
+
+                <p>
+                    The Association also solves the problems its member companies face at home and abroad, provides
+                    contact between members and foreign importers in order to ease export processes, and serves
+                    up-to-date domestic and global market news, reports, and analyses.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-slate-950 px-6 border-t border-white/5" id="more">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-serif font-bold text-gradient-platinum italic">More</h2>
         </div>
     </section>
 
@@ -585,7 +585,7 @@
                     src="https://flux360.net/wp-content/uploads/2026/03/steel-networking-logo.png"/>
                 <p class="text-slate-400 text-sm mt-4">The premier networking event for the global iron and steel community.</p>
             </div>
-            <div><h4 class="text-white font-bold tracking-wider uppercase text-xs mb-4">Explore</h4><ul class="space-y-2"><li><a class="text-slate-400 hover:text-white text-sm" href="#main">Main</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#about-us">About Us</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#keynote-speakers">Keynote Speakers</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#agenda">Agenda</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#venue">Venue</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#more">More</a></li></ul></div>
+            <div><h4 class="text-white font-bold tracking-wider uppercase text-xs mb-4">Explore</h4><ul class="space-y-2"><li><a class="text-slate-400 hover:text-white text-sm" href="#main">Main</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#agenda">Agenda</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#keynote-speakers">Keynote Speakers</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#venue">Venue</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#about-us">About Us</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#more">More</a></li></ul></div>
             <div><h4 class="text-white font-bold tracking-wider uppercase text-xs mb-4">Legal</h4><ul class="space-y-2"><li><a class="text-slate-400 hover:text-white text-sm" href="#">Privacy Policy</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#">Terms of Service</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#">KVKK/GDPR</a></li></ul></div>
             <div><h4 class="text-white font-bold tracking-wider uppercase text-xs mb-4">Contact Us</h4><p class="text-slate-400 text-sm">info@steelsummits.com</p><p class="text-slate-400 text-sm mt-2">+1 (555) 123-4567</p></div>
         </div>
