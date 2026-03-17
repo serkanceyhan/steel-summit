@@ -290,7 +290,7 @@
         <a @click="mobileMenu = false" class="text-lg font-serif" href="#more">More</a>
         <button @click="modalOpen = true; mobileMenu = false" class="w-full border border-slate-400/30 text-white font-bold py-4 rounded-xl">Register Interest</button>
     </div>
-</nav>
+</nav>  
     <section class="relative min-h-screen flex items-center justify-center overflow-hidden" id="main">
         <div class="absolute inset-0 z-0">
             <img alt="Istanbul Bosphorus Night" class="w-full h-full object-cover scale-110" src="https://flux360.net/wp-content/uploads/2026/03/steel-summit-istanbul-compress.jpg" />
@@ -329,8 +329,32 @@
     </section>
 
     <section class="py-20 bg-slate-950 px-6 border-t border-white/5" id="about-us">
-        <div class="max-w-6xl mx-auto">
+        <div class="max-w-6xl mx-auto space-y-8">
             <h2 class="text-4xl md:text-5xl font-serif font-bold text-gradient-platinum italic">About Us</h2>
+
+            <div class="glass rounded-2xl p-8 md:p-10 space-y-6 text-slate-300 leading-relaxed">
+                <p>
+                    Steel Exporters' Association is one of six associations which has been operating under the body of
+                    General Secretariat of Istanbul Mineral and Metals Exporters' Association (IMMIB).
+                </p>
+
+                <p>
+                    The Association is a non-profit business organization of more than 3,700 companies representing
+                    the largest steel producers and exporters in Turkiye.
+                </p>
+
+                <p>
+                    It carries on its operations with the aim of increasing the export potential of steel industry and
+                    paves the way for steel producers and exporters, with main objective to foster and attain
+                    sustainable global steel market based on free and fair trade.
+                </p>
+
+                <p>
+                    The Association also solves the problems its member companies face at home and abroad, provides
+                    contact between members and foreign importers in order to ease export processes, and serves
+                    up-to-date domestic and global market news, reports, and analyses.
+                </p>
+            </div>
         </div>
     </section>
 
