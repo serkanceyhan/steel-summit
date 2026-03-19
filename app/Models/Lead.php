@@ -19,6 +19,7 @@ class Lead extends Model
         return [
             'gdpr_approved' => 'boolean',
             'kvkk_approved' => 'boolean',
+            'privacy_approved' => 'boolean',
         ];
     }
 }

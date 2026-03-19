@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bosphorus Steel Networking Summit 2026 | VIP Experience</title>
+    <title>Steel Networking Summit 2026 | VIP Experience</title>
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script defer src="https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
@@ -293,18 +293,18 @@
 </nav>  
     <section class="relative min-h-screen flex items-center justify-center overflow-hidden" id="main">
         <div class="absolute inset-0 z-0">
-            <img alt="Istanbul Bosphorus Night" class="w-full h-full object-cover scale-110" src="https://flux360.net/wp-content/uploads/2026/03/steel-summit-istanbul-compress.jpg" />
+            <img alt="Istanbul Night" class="w-full h-full object-cover scale-110" src="https://flux360.net/wp-content/uploads/2026/03/steel-summit-istanbul-compress.jpg" />
             <div class="absolute inset-0 hero-gradient"></div>
         </div>
 
-        <div class="relative z-10 text-center px-6 max-w-6xl mx-auto pt-24">
+        <div class="relative z-10 text-center px-6 max-w-6xl mx-auto pt-32 md:pt-36">
             
-            <div class="inline-block px-5 py-1.5 border border-white/10 rounded-full mb-8 glass">
+            <div class="inline-block px-5 py-1.5 border border-white/10 rounded-full mb-8 mt-6 md:mt-8 glass">
                 <span class="text-slate-300 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase">Invitation Only - Istanbul 2026</span>
             </div>
 
             <h1 class="text-5xl md:text-8xl font-serif font-bold mb-8 leading-[1.1] text-white">
-                Bosphorus <br />
+                Istanbul <br />
                 <span class="bg-clip-text text-transparent bg-gradient-to-r from-slate-100 via-slate-300 to-slate-500 italic">Steel Networking</span> <br />
                 Summit 2026
             </h1>
@@ -312,14 +312,14 @@
             <p class="text-lg md:text-2xl text-slate-400 mb-12 font-light max-w-3xl mx-auto leading-relaxed">
                 The world's most exclusive assembly for steel industry titans.
                 <br class="hidden md:block" />
-                <span class="text-slate-300 font-medium">25 - 27 October 2026</span> | Swissotel the Bosphorus
+                <span class="text-slate-300 font-medium">25 - 27 October 2026</span> | Swissotel Istanbul
             </p>
 
-            <div class="flex items-center justify-center space-x-8 md:space-x-16 mb-16" x-data="countdownTimer()" x-init="start()">
-                <template x-for="(val, label, index) in remaining" :key="label">
-                    <div :class="index !== 0 ? 'border-l border-white/10 pl-8 md:pl-16' : ''" class="flex flex-col items-center">
-                        <span class="text-4xl md:text-6xl font-serif font-light text-white mb-2" x-text="val">00</span>
-                        <span class="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-medium" x-text="label">Days</span>
+            <div class="mx-auto mb-16 flex w-full max-w-3xl items-center justify-center" x-data="countdownTimer()" x-init="start()">
+                <template x-for="(item, index) in remaining" :key="item.label">
+                    <div :class="index > 0 ? 'border-l border-white/10' : ''" class="flex w-1/4 min-w-0 flex-col items-center px-2 md:px-8">
+                        <span class="text-4xl md:text-6xl font-serif font-light text-white mb-2 tabular-nums w-[2.5ch] text-center" x-text="item.value">00</span>
+                        <span class="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-medium" x-text="item.label">Days</span>
                     </div>
                 </template>
             </div>
@@ -332,7 +332,7 @@
         <div class="max-w-6xl mx-auto">
             <div class="mb-12 text-center">
                 <h2 class="text-4xl md:text-5xl font-serif font-bold text-gradient-platinum mb-4 italic">STEEL Networking Summits Program</h2>
-                <p class="text-slate-400 text-sm md:text-base">25-27 October 2026 | Swissotel the Bosphorus</p>
+                <p class="text-slate-400 text-sm md:text-base">25-27 October 2026 | Swissotel Istanbul</p>
             </div>
 
             <div class="flex overflow-x-auto pb-4 mb-8 border-b border-white/10">
@@ -346,7 +346,7 @@
             <div class="space-y-4" x-show="activeTab === 1">
                 <div class="glass rounded-xl p-6">
                     <p class="text-slate-300 text-xs uppercase tracking-[0.2em] mb-2">18:00</p>
-                    <h4 class="text-lg md:text-xl font-semibold text-white tracking-wide">Networking on Bosphorus</h4>
+                    <h4 class="text-lg md:text-xl font-semibold text-white tracking-wide">Networking on Istanbul Strait</h4>
                     <p class="text-slate-400 mt-2">Boat Tour and DJ Performance (Under the Sponsorship of X).</p>
                 </div>
             </div>
@@ -497,10 +497,10 @@
     <section class="py-24 bg-slate-950 px-6 border-t border-white/5" id="venue">
         <div class="max-w-7xl mx-auto">
             <div class="relative w-full h-[560px] md:h-[680px] rounded-3xl overflow-hidden shadow-2xl">
-                <img alt="Swissotel The Bosphorus Night View" class="absolute inset-0 w-full h-full object-cover" src="https://flux360.net/wp-content/uploads/2026/03/a5d2_bu_00_p_2048x1536.jpg" />
+                <img alt="Swissotel Istanbul Night View" class="absolute inset-0 w-full h-full object-cover" src="https://flux360.net/wp-content/uploads/2026/03/a5d2_bu_00_p_2048x1536.jpg" />
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
                 <div class="absolute bottom-10 left-6 md:left-12 bg-slate-900/80 backdrop-blur-xl border border-slate-500/30 p-8 rounded-2xl max-w-lg">
-                    <h3 class="text-3xl font-serif font-bold text-gradient-platinum italic mb-2">Swissotel The Bosphorus</h3>
+                    <h3 class="text-3xl font-serif font-bold text-gradient-platinum italic mb-2">Swissotel Istanbul</h3>
                     <p class="text-slate-400">Experience unmatched Turkish hospitality at the crossroads of Europe and Asia.</p>
                 </div>
             </div>
@@ -553,14 +553,23 @@
             </div>
 
             
-            <form action="/register" method="POST" class="space-y-8">
+            <form action="/register" method="POST" class="space-y-8" x-data="phoneField()" x-init="init()">
                 <input type="hidden" name="_token" value="hUlHQMkXXCF8ZvuWiDU9tbHJkLZ2WeDSBtDHe9I2" autocomplete="off">
                 <div class="grid md:grid-cols-2 gap-6">
                     <input class="w-full bg-transparent border-0 border-b border-white/20 px-0 py-3 text-white focus:ring-0 focus:border-slate-400 placeholder:text-slate-600" name="full_name" type="text" placeholder="Full Name" value="" required />
                     <input class="w-full bg-transparent border-0 border-b border-white/20 px-0 py-3 text-white focus:ring-0 focus:border-slate-400 placeholder:text-slate-600" name="email" type="email" placeholder="Business Email" value="" required />
                 </div>
 
-                <input class="w-full bg-transparent border-0 border-b border-white/20 px-0 py-3 text-white focus:ring-0 focus:border-slate-400 placeholder:text-slate-600" name="company_name" type="text" placeholder="Organization" value="" required />
+                <div class="grid md:grid-cols-2 gap-6">
+                    <input class="w-full bg-transparent border-0 border-b border-white/20 px-0 py-3 text-white focus:ring-0 focus:border-slate-400 placeholder:text-slate-600" name="company_name" type="text" placeholder="Organization" value="" required />
+
+                    <div class="flex items-center border-0 border-b border-white/20 gap-4">
+                        <div class="w-28 border-r border-white/10 pr-3">
+                            <input class="w-full bg-transparent border-0 px-0 py-3 text-slate-200 text-sm font-medium focus:ring-0 focus:border-0 placeholder:text-slate-500" name="phone_country_code" type="text" inputmode="numeric" pattern="\+[0-9]{1,4}" maxlength="5" x-model="phoneCountryCode" @input="sanitizeCountryCode()" placeholder="+___" required />
+                        </div>
+                        <input class="w-full bg-transparent border-0 px-0 py-3 text-white focus:ring-0 focus:border-0 placeholder:text-slate-600" name="phone" type="tel" inputmode="numeric" pattern="[0-9]{6,15}" maxlength="15" oninput="this.value = this.value.replace(/\D/g, '')" placeholder="Phone Number" value="" required />
+                    </div>
+                </div>
 
                 <label class="flex items-start space-x-3">
                     <input class="w-5 h-5 rounded border-white/20 bg-transparent text-slate-400 focus:ring-slate-500/50 mt-0.5" name="gdpr_approved" type="checkbox" value="1"  required />
@@ -568,7 +577,11 @@
                 </label>
                 <label class="flex items-start space-x-3">
                     <input class="w-5 h-5 rounded border-white/20 bg-transparent text-slate-400 focus:ring-slate-500/50 mt-0.5" name="kvkk_approved" type="checkbox" value="1"  required />
-                    <span class="text-xs text-slate-500 leading-relaxed">I approve KVKK communication consent.</span>
+                    <span class="text-xs text-slate-500 leading-relaxed">I approve communication consent under applicable local data protection regulations.</span>
+                </label>
+                <label class="flex items-start space-x-3">
+                    <input class="w-5 h-5 rounded border-white/20 bg-transparent text-slate-400 focus:ring-slate-500/50 mt-0.5" name="privacy_approved" type="checkbox" value="1" required />
+                    <span class="text-xs text-slate-500 leading-relaxed">I have read and accept the Privacy Notice regarding the processing and storage of my personal data.</span>
                 </label>
 
                 <button class="w-full bg-gradient-to-r from-slate-200 to-slate-400 text-slate-950 font-bold py-4 rounded-xl uppercase tracking-widest text-sm" type="submit">Submit Formal Request</button>
@@ -586,10 +599,10 @@
                 <p class="text-slate-400 text-sm mt-4">The premier networking event for the global iron and steel community.</p>
             </div>
             <div><h4 class="text-white font-bold tracking-wider uppercase text-xs mb-4">Explore</h4><ul class="space-y-2"><li><a class="text-slate-400 hover:text-white text-sm" href="#main">Main</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#agenda">Agenda</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#keynote-speakers">Keynote Speakers</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#venue">Venue</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#about-us">About Us</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#more">More</a></li></ul></div>
-            <div><h4 class="text-white font-bold tracking-wider uppercase text-xs mb-4">Legal</h4><ul class="space-y-2"><li><a class="text-slate-400 hover:text-white text-sm" href="#">Privacy Policy</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#">Terms of Service</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#">KVKK/GDPR</a></li></ul></div>
+            <div><h4 class="text-white font-bold tracking-wider uppercase text-xs mb-4">Legal</h4><ul class="space-y-2"><li><a class="text-slate-400 hover:text-white text-sm" href="#">Privacy Policy</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#">Terms of Service</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#">Data Protection</a></li></ul></div>
             <div><h4 class="text-white font-bold tracking-wider uppercase text-xs mb-4">Contact Us</h4><p class="text-slate-400 text-sm">info@steelsummits.com</p><p class="text-slate-400 text-sm mt-2">+1 (555) 123-4567</p></div>
         </div>
-        <div class="max-w-7xl mx-auto border-t border-slate-800/50 mt-10 pt-6 text-slate-500 text-xs">© 2026 Bosphorus Steel Networking Summit. All rights reserved.</div>
+        <div class="max-w-7xl mx-auto border-t border-slate-800/50 mt-10 pt-6 text-slate-500 text-xs">© 2026 Steel Networking Summit. All rights reserved.</div>
     </footer>
 
     <button
@@ -610,7 +623,12 @@
         function countdownTimer() {
             return {
                 targetDate: new Date("October 25, 2026 09:00:00").getTime(),
-                remaining: { Days: "00", Hours: "00", Mins: "00", Secs: "00" },
+                remaining: [
+                    { label: 'Days', value: '00' },
+                    { label: 'Hours', value: '00' },
+                    { label: 'Mins', value: '00' },
+                    { label: 'Secs', value: '00' },
+                ],
                 start() {
                     const update = () => {
                         const now = new Date().getTime();
@@ -618,13 +636,37 @@
                         if (distance < 0) {
                             return;
                         }
-                        this.remaining.Days = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2, "0");
-                        this.remaining.Hours = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, "0");
-                        this.remaining.Mins = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, "0");
-                        this.remaining.Secs = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, "0");
+                        this.remaining[0].value = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2, "0");
+                        this.remaining[1].value = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, "0");
+                        this.remaining[2].value = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, "0");
+                        this.remaining[3].value = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, "0");
                     };
                     update();
                     setInterval(update, 1000);
+                },
+            };
+        }
+
+        function phoneField() {
+            return {
+                phoneCountryCode: '+90',
+                sanitizeCountryCode() {
+                    this.phoneCountryCode = '+' + this.phoneCountryCode.replace(/\D/g, '').slice(0, 4);
+                },
+                async init() {
+                    try {
+                        const response = await fetch('https://ipapi.co/json/');
+                        if (!response.ok) {
+                            return;
+                        }
+
+                        const data = await response.json();
+                        if (typeof data.country_calling_code === 'string' && /^\+[0-9]{1,4}$/.test(data.country_calling_code)) {
+                            this.phoneCountryCode = data.country_calling_code;
+                        }
+                    } catch (error) {
+                        // Fallback keeps default +90 when geolocation is unavailable.
+                    }
                 },
             };
         }
