@@ -266,9 +266,9 @@
         <div class="relative z-10 hidden md:flex items-center space-x-8 text-[13px] font-medium tracking-[0.2em] uppercase py-4">
             <a class="text-white/60 hover:text-white transition-opacity" href="#main">Main</a>
             <a class="text-white/60 hover:text-white transition-opacity" href="#agenda">Agenda</a>
+            <a class="text-white/60 hover:text-white transition-opacity" href="#about">About</a>
             <a class="text-white/60 hover:text-white transition-opacity" href="#keynote-speakers">Keynote Speakers</a>
             <a class="text-white/60 hover:text-white transition-opacity" href="#venue">Venue</a>
-            <a class="text-white/60 hover:text-white transition-opacity" href="#about-us">About Us</a>
             <a class="text-white/60 hover:text-white transition-opacity" href="#more">More</a>
         </div>
         
@@ -284,9 +284,9 @@
     <div class="md:hidden mt-4 glass rounded-2xl p-6 flex flex-col space-y-4 shadow-2xl" x-show="mobileMenu" x-transition:enter="transition ease-out duration-300" x-transition:enter-end="opacity-100 scale-100" x-transition:enter-start="opacity-0 scale-95" style="display: none;">
         <a @click="mobileMenu = false" class="text-lg font-serif" href="#main">Main</a>
         <a @click="mobileMenu = false" class="text-lg font-serif" href="#agenda">Agenda</a>
+        <a @click="mobileMenu = false" class="text-lg font-serif" href="#about">About</a>
         <a @click="mobileMenu = false" class="text-lg font-serif" href="#keynote-speakers">Keynote Speakers</a>
         <a @click="mobileMenu = false" class="text-lg font-serif" href="#venue">Venue</a>
-        <a @click="mobileMenu = false" class="text-lg font-serif" href="#about-us">About Us</a>
         <a @click="mobileMenu = false" class="text-lg font-serif" href="#more">More</a>
         <button @click="modalOpen = true; mobileMenu = false" class="w-full border border-slate-400/30 text-white font-bold py-4 rounded-xl">Register Interest</button>
     </div>
@@ -435,6 +435,50 @@
         </div>
     </section>
 
+    <section class="py-20 bg-slate-950 px-6 border-t border-white/5" id="about">
+        <div class="max-w-6xl mx-auto space-y-10">
+            <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+                <div>
+                    <p class="text-xs font-bold tracking-[0.35em] uppercase text-slate-500 mb-3">About</p>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-gradient-platinum italic">Steel Networking Summits</h2>
+                </div>
+                <p class="max-w-2xl text-slate-400 leading-relaxed">
+                    An international gathering built to connect the most influential decision-makers across the global steel industry.
+                </p>
+            </div>
+
+            <div class="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+                <article class="glass rounded-[2rem] p-8 md:p-10 flex flex-col justify-between min-h-[320px]">
+                    <div>
+                        <p class="text-xs font-bold tracking-[0.3em] uppercase text-slate-500 mb-5">Overview</p>
+                        <h3 class="text-3xl md:text-5xl font-serif font-bold text-white leading-tight mb-8">
+                            About the Steel Networking Summits
+                        </h3>
+                        <p class="text-lg md:text-xl text-slate-300 leading-relaxed max-w-2xl">
+                            Steel Networking Summits 2026, is an international steel conference that brings together the most influential and powerful players of the global steel industry in Istanbul.
+                        </p>
+                    </div>
+                </article>
+
+                <div class="grid gap-6">
+                    <article class="rounded-[2rem] border border-slate-400/20 bg-slate-900/70 p-7 md:p-8 shadow-[0_20px_45px_rgba(2,6,23,0.45)]">
+                        <p class="text-xs font-bold tracking-[0.3em] uppercase text-slate-500 mb-4">At The Conference</p>
+                        <p class="text-slate-200 text-lg md:text-xl leading-relaxed font-medium">
+                            Leading companies, decision-makers, and opinion leaders shaping the industry from around the world will participate both as speakers and as top-level attendees at this prestigious event.
+                        </p>
+                    </article>
+
+                    <article class="rounded-[2rem] border border-slate-400/20 bg-slate-900/70 p-7 md:p-8 shadow-[0_20px_45px_rgba(2,6,23,0.45)]">
+                        <p class="text-xs font-bold tracking-[0.3em] uppercase text-slate-500 mb-4">2026 Focus</p>
+                        <p class="text-slate-200 text-lg md:text-xl leading-relaxed font-medium">
+                            Steel Networking Summits 2026, while taking a comprehensive view of the past, present, and future of the global steel industry, will provide up-to-date and in-depth insights into steel markets across all regions, from Europe to Asia, and from the Americas to the Middle East and Africa.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="py-32 bg-slate-950 px-6 border-t border-white/5" id="keynote-speakers">
         <div class="max-w-7xl mx-auto">
             <div class="mb-20 text-center">
@@ -507,36 +551,6 @@
         </div>
     </section>
 
-    <section class="py-20 bg-slate-950 px-6 border-t border-white/5" id="about-us">
-        <div class="max-w-6xl mx-auto space-y-8">
-            <h2 class="text-4xl md:text-5xl font-serif font-bold text-gradient-platinum italic">About Us</h2>
-
-            <div class="glass rounded-2xl p-8 md:p-10 space-y-6 text-slate-300 leading-relaxed">
-                <p>
-                    Steel Exporters' Association is one of six associations which has been operating under the body of
-                    General Secretariat of Istanbul Mineral and Metals Exporters' Association (IMMIB).
-                </p>
-
-                <p>
-                    The Association is a non-profit business organization of more than 3,700 companies representing
-                    the largest steel producers and exporters in Turkiye.
-                </p>
-
-                <p>
-                    It carries on its operations with the aim of increasing the export potential of steel industry and
-                    paves the way for steel producers and exporters, with main objective to foster and attain
-                    sustainable global steel market based on free and fair trade.
-                </p>
-
-                <p>
-                    The Association also solves the problems its member companies face at home and abroad, provides
-                    contact between members and foreign importers in order to ease export processes, and serves
-                    up-to-date domestic and global market news, reports, and analyses.
-                </p>
-            </div>
-        </div>
-    </section>
-
     <section class="py-20 bg-slate-950 px-6 border-t border-white/5" id="more">
         <div class="max-w-6xl mx-auto">
             <h2 class="text-4xl md:text-5xl font-serif font-bold text-gradient-platinum italic">More</h2>
@@ -598,7 +612,7 @@
                     src="https://flux360.net/wp-content/uploads/2026/03/steel-networking-logo.png"/>
                 <p class="text-slate-400 text-sm mt-4">The premier networking event for the global iron and steel community.</p>
             </div>
-            <div><h4 class="text-white font-bold tracking-wider uppercase text-xs mb-4">Explore</h4><ul class="space-y-2"><li><a class="text-slate-400 hover:text-white text-sm" href="#main">Main</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#agenda">Agenda</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#keynote-speakers">Keynote Speakers</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#venue">Venue</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#about-us">About Us</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#more">More</a></li></ul></div>
+            <div><h4 class="text-white font-bold tracking-wider uppercase text-xs mb-4">Explore</h4><ul class="space-y-2"><li><a class="text-slate-400 hover:text-white text-sm" href="#main">Main</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#agenda">Agenda</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#about">About</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#keynote-speakers">Keynote Speakers</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#venue">Venue</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#more">More</a></li></ul></div>
             <div><h4 class="text-white font-bold tracking-wider uppercase text-xs mb-4">Legal</h4><ul class="space-y-2"><li><a class="text-slate-400 hover:text-white text-sm" href="#">Privacy Policy</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#">Terms of Service</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#">Data Protection</a></li></ul></div>
             <div><h4 class="text-white font-bold tracking-wider uppercase text-xs mb-4">Contact Us</h4><p class="text-slate-400 text-sm">info@steelsummits.com</p><p class="text-slate-400 text-sm mt-2">+1 (555) 123-4567</p></div>
         </div>
