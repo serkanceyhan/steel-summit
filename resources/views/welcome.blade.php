@@ -568,7 +568,7 @@
 
             
             <form action="/register" method="POST" class="space-y-8" x-data="phoneField()" x-init="init()">
-                <input type="hidden" name="_token" value="hUlHQMkXXCF8ZvuWiDU9tbHJkLZ2WeDSBtDHe9I2" autocomplete="off">
+                @csrf
                 <div class="grid md:grid-cols-2 gap-6">
                     <input class="w-full bg-transparent border-0 border-b border-white/20 px-0 py-3 text-white focus:ring-0 focus:border-slate-400 placeholder:text-slate-600" name="full_name" type="text" placeholder="Full Name" value="" required />
                     <input class="w-full bg-transparent border-0 border-b border-white/20 px-0 py-3 text-white focus:ring-0 focus:border-slate-400 placeholder:text-slate-600" name="email" type="email" placeholder="Business Email" value="" required />
