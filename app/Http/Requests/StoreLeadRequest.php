@@ -41,6 +41,7 @@ class StoreLeadRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'email.unique' => 'This email is already pre-registered.',
             'phone.required' => 'Phone number is required.',
             'phone.regex' => 'Phone number must contain only digits and be 6 to 15 characters long.',
             'phone_country_code.regex' => 'Country code format is invalid.',

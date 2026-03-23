@@ -251,7 +251,7 @@
 <body
     @scroll.window="scrolled = (window.pageYOffset > 20); showToTop = (window.pageYOffset > 420)"
     class="bg-slate-950 text-slate-200 font-sans antialiased overflow-x-hidden"
-    x-data="{ mobileMenu: false, scrolled: false, showToTop: false, modalOpen: false }"
+    x-data="{ mobileMenu: false, scrolled: false, showToTop: false, modalOpen: @js($errors->any() || session()->has('status')) }"
 >
   <nav :class="scrolled ? 'top-4' : 'top-6'" class="fixed left-1/2 -translate-x-1/2 w-[92%] max-w-7xl z-50 transition-all duration-500 ease-in-out">
     
@@ -567,34 +567,51 @@
             </div>
 
             
-            <form action="/register" method="POST" class="space-y-8" x-data="phoneField()" x-init="init()">
+            <form action="/register" method="POST" class="space-y-8" x-data="phoneField(@js(old('phone_country_code', '+90')))" x-init="init()">
                 @csrf
+
+                @if (session('status'))
+                    <div class="rounded-xl border border-emerald-300/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-100">
+                        {{ session('status') }}
+                    </div>
+                @endif
+
+                @if ($errors->any())
+                    <div class="rounded-xl border border-rose-300/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-100">
+                        <ul class="space-y-1">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <div class="grid md:grid-cols-2 gap-6">
-                    <input class="w-full bg-transparent border-0 border-b border-white/20 px-0 py-3 text-white focus:ring-0 focus:border-slate-400 placeholder:text-slate-600" name="full_name" type="text" placeholder="Full Name" value="" required />
-                    <input class="w-full bg-transparent border-0 border-b border-white/20 px-0 py-3 text-white focus:ring-0 focus:border-slate-400 placeholder:text-slate-600" name="email" type="email" placeholder="Business Email" value="" required />
+                    <input class="w-full bg-transparent border-0 border-b border-white/20 px-0 py-3 text-white focus:ring-0 focus:border-slate-400 placeholder:text-slate-600" name="full_name" type="text" placeholder="Full Name" value="{{ old('full_name') }}" required />
+                    <input class="w-full bg-transparent border-0 border-b border-white/20 px-0 py-3 text-white focus:ring-0 focus:border-slate-400 placeholder:text-slate-600" name="email" type="email" placeholder="Business Email" value="{{ old('email') }}" required />
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-6">
-                    <input class="w-full bg-transparent border-0 border-b border-white/20 px-0 py-3 text-white focus:ring-0 focus:border-slate-400 placeholder:text-slate-600" name="company_name" type="text" placeholder="Organization" value="" required />
+                    <input class="w-full bg-transparent border-0 border-b border-white/20 px-0 py-3 text-white focus:ring-0 focus:border-slate-400 placeholder:text-slate-600" name="company_name" type="text" placeholder="Organization" value="{{ old('company_name') }}" required />
 
                     <div class="flex items-center border-0 border-b border-white/20 gap-4">
                         <div class="w-28 border-r border-white/10 pr-3">
                             <input class="w-full bg-transparent border-0 px-0 py-3 text-slate-200 text-sm font-medium focus:ring-0 focus:border-0 placeholder:text-slate-500" name="phone_country_code" type="text" inputmode="numeric" pattern="\+[0-9]{1,4}" maxlength="5" x-model="phoneCountryCode" @input="sanitizeCountryCode()" placeholder="+___" required />
                         </div>
-                        <input class="w-full bg-transparent border-0 px-0 py-3 text-white focus:ring-0 focus:border-0 placeholder:text-slate-600" name="phone" type="tel" inputmode="numeric" pattern="[0-9]{6,15}" maxlength="15" oninput="this.value = this.value.replace(/\D/g, '')" placeholder="Phone Number" value="" required />
+                        <input class="w-full bg-transparent border-0 px-0 py-3 text-white focus:ring-0 focus:border-0 placeholder:text-slate-600" name="phone" type="tel" inputmode="numeric" pattern="[0-9]{6,15}" maxlength="15" oninput="this.value = this.value.replace(/\D/g, '')" placeholder="Phone Number" value="{{ old('phone') }}" required />
                     </div>
                 </div>
 
                 <label class="flex items-start space-x-3">
-                    <input class="w-5 h-5 rounded border-white/20 bg-transparent text-slate-400 focus:ring-slate-500/50 mt-0.5" name="gdpr_approved" type="checkbox" value="1"  required />
+                    <input class="w-5 h-5 rounded border-white/20 bg-transparent text-slate-400 focus:ring-slate-500/50 mt-0.5" name="gdpr_approved" type="checkbox" value="1" @checked(old('gdpr_approved')) required />
                     <span class="text-xs text-slate-500 leading-relaxed">I approve GDPR communication consent.</span>
                 </label>
                 <label class="flex items-start space-x-3">
-                    <input class="w-5 h-5 rounded border-white/20 bg-transparent text-slate-400 focus:ring-slate-500/50 mt-0.5" name="kvkk_approved" type="checkbox" value="1"  required />
+                    <input class="w-5 h-5 rounded border-white/20 bg-transparent text-slate-400 focus:ring-slate-500/50 mt-0.5" name="kvkk_approved" type="checkbox" value="1" @checked(old('kvkk_approved')) required />
                     <span class="text-xs text-slate-500 leading-relaxed">I approve communication consent under applicable local data protection regulations.</span>
                 </label>
                 <label class="flex items-start space-x-3">
-                    <input class="w-5 h-5 rounded border-white/20 bg-transparent text-slate-400 focus:ring-slate-500/50 mt-0.5" name="privacy_approved" type="checkbox" value="1" required />
+                    <input class="w-5 h-5 rounded border-white/20 bg-transparent text-slate-400 focus:ring-slate-500/50 mt-0.5" name="privacy_approved" type="checkbox" value="1" @checked(old('privacy_approved')) required />
                     <span class="text-xs text-slate-500 leading-relaxed">I have read and accept the Privacy Notice regarding the processing and storage of my personal data.</span>
                 </label>
 
@@ -661,9 +678,9 @@
             };
         }
 
-        function phoneField() {
+        function phoneField(initialCountryCode = '+90') {
             return {
-                phoneCountryCode: '+90',
+                phoneCountryCode: initialCountryCode,
                 sanitizeCountryCode() {
                     this.phoneCountryCode = '+' + this.phoneCountryCode.replace(/\D/g, '').slice(0, 4);
                 },
