@@ -260,7 +260,7 @@
         <div class="absolute inset-y-0 right-0 left-12 md:left-20 glass rounded-2xl shadow-2xl pointer-events-none -z-10"></div>
 
         <div class="relative z-10 flex items-center group cursor-pointer pl-0 md:-ml-2">
-            <img alt="Steel Summits Logo" class="h-16 md:h-[88px] w-auto object-contain transition-transform duration-300 hover:scale-105" src="{{ asset('images/steel-networking-logo-main.png') }}">
+            <img alt="Steel Summits Logo" class="h-16 md:h-[88px] w-auto object-contain transition-transform duration-300 hover:scale-105" src="{{ asset('images/steel-networking-logo-main.webp') }}">
         </div>
 
         <div class="relative z-10 hidden md:flex items-center space-x-8 text-[13px] font-medium tracking-[0.2em] uppercase py-4">
@@ -293,7 +293,7 @@
 </nav>  
     <section class="relative min-h-screen flex items-center justify-center overflow-hidden" id="main">
         <div class="absolute inset-0 z-0">
-            <img alt="Istanbul Night" class="w-full h-full object-cover scale-110" src="{{ asset('images/hero-istanbul.jpg') }}" />
+            <img alt="Istanbul Night" class="w-full h-full object-cover scale-110" src="{{ asset('images/hero-istanbul.webp') }}" />
             <div class="absolute inset-0 hero-gradient"></div>
         </div>
 
@@ -489,7 +489,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div class="bg-white/5 backdrop-blur-md border border-slate-600/30 rounded-2xl p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start hover:bg-white/10 transition duration-300 group">
                     <div class="w-28 h-28 flex-shrink-0 rounded-full border-2 border-slate-500/50 group-hover:border-slate-300 transition-colors overflow-hidden bg-slate-800 flex items-center justify-center grayscale">
-                        <img alt="Keynote speaker portrait" class="w-full h-full object-cover" src="{{ asset('images/speaker-dalbeler.jpg') }}" />
+                        <img alt="Keynote speaker portrait" class="w-full h-full object-cover" src="{{ asset('images/speaker-dalbeler.webp') }}" />
                     </div>
                     <div class="flex-1 text-center sm:text-left">
                         <h3 class="text-xl font-bold text-white font-sans">Ugur Dalbeler</h3>
@@ -501,7 +501,7 @@
 
                 <div class="bg-white/5 backdrop-blur-md border border-slate-600/30 rounded-2xl p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start hover:bg-white/10 transition duration-300 group">
                     <div class="w-28 h-28 flex-shrink-0 rounded-full border-2 border-slate-500/50 group-hover:border-slate-300 transition-colors overflow-hidden bg-slate-800 flex items-center justify-center grayscale">
-                        <img alt="Keynote speaker portrait" class="w-full h-full object-cover" src="{{ asset('images/speaker-dalbeler.jpg') }}" />
+                        <img alt="Keynote speaker portrait" class="w-full h-full object-cover" src="{{ asset('images/speaker-dalbeler.webp') }}" />
                     </div>
                     <div class="flex-1 text-center sm:text-left">
                         <h3 class="text-xl font-bold text-white font-sans">Ugur Dalbeler</h3>
@@ -513,7 +513,7 @@
 
                 <div class="bg-white/5 backdrop-blur-md border border-slate-600/30 rounded-2xl p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start hover:bg-white/10 transition duration-300 group">
                     <div class="w-28 h-28 flex-shrink-0 rounded-full border-2 border-slate-500/50 group-hover:border-slate-300 transition-colors overflow-hidden bg-slate-800 flex items-center justify-center grayscale">
-                        <img alt="Keynote speaker portrait" class="w-full h-full object-cover" src="{{ asset('images/speaker-dalbeler.jpg') }}" />
+                        <img alt="Keynote speaker portrait" class="w-full h-full object-cover" src="{{ asset('images/speaker-dalbeler.webp') }}" />
                     </div>
                     <div class="flex-1 text-center sm:text-left">
                         <h3 class="text-xl font-bold text-white font-sans">Ugur Dalbeler</h3>
@@ -525,7 +525,7 @@
 
                 <div class="bg-white/5 backdrop-blur-md border border-slate-600/30 rounded-2xl p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start hover:bg-white/10 transition duration-300 group">
                     <div class="w-28 h-28 flex-shrink-0 rounded-full border-2 border-slate-500/50 group-hover:border-slate-300 transition-colors overflow-hidden bg-slate-800 flex items-center justify-center grayscale">
-                        <img alt="Keynote speaker portrait" class="w-full h-full object-cover" src="{{ asset('images/speaker-dalbeler.jpg') }}" />
+                        <img alt="Keynote speaker portrait" class="w-full h-full object-cover" src="{{ asset('images/speaker-dalbeler.webp') }}" />
                     </div>
                     <div class="flex-1 text-center sm:text-left">
                         <h3 class="text-xl font-bold text-white font-sans">Ugur Dalbeler</h3>
@@ -541,7 +541,7 @@
     <section class="py-24 bg-slate-950 px-6 border-t border-white/5" id="venue">
         <div class="max-w-7xl mx-auto">
             <div class="relative w-full h-[560px] md:h-[680px] rounded-3xl overflow-hidden shadow-2xl">
-                <img alt="Swissotel Istanbul Night View" class="absolute inset-0 w-full h-full object-cover" src="{{ asset('images/venue-swissotel.jpg') }}" />
+                <img alt="Swissotel Istanbul Night View" class="absolute inset-0 w-full h-full object-cover" src="{{ asset('images/venue-swissotel.webp') }}" />
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
                 <div class="absolute bottom-10 left-6 md:left-12 bg-slate-900/80 backdrop-blur-xl border border-slate-500/30 p-8 rounded-2xl max-w-lg">
                     <h3 class="text-3xl font-serif font-bold text-gradient-platinum italic mb-2">Swissotel Istanbul</h3>
@@ -626,7 +626,7 @@
                 <img
                     alt="Steel Networking Summits"
                     class="h-10 w-auto object-contain"
-                    src="{{ asset('images/steel-networking-logo-footer.png') }}"/>
+                    src="{{ asset('images/steel-networking-logo-footer.webp') }}"/>
                 <p class="text-slate-400 text-sm mt-4">The premier networking event for the global iron and steel community.</p>
             </div>
             <div><h4 class="text-white font-bold tracking-wider uppercase text-xs mb-4">Explore</h4><ul class="space-y-2"><li><a class="text-slate-400 hover:text-white text-sm" href="#main">Main</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#agenda">Agenda</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#about">About</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#keynote-speakers">Keynote Speakers</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#venue">Venue</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#more">More</a></li></ul></div>
