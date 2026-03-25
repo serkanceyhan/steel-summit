@@ -463,14 +463,14 @@
                 <div class="grid gap-6">
                     <article class="rounded-[2rem] border border-slate-400/20 bg-slate-900/70 p-7 md:p-8 shadow-[0_20px_45px_rgba(2,6,23,0.45)]">
                         <p class="text-xs font-bold tracking-[0.3em] uppercase text-slate-500 mb-4">At The Conference</p>
-                        <p class="text-slate-200 text-lg md:text-xl leading-relaxed font-medium">
+                        <p class="text-slate-200 text-lg md:text-xl leading-relaxed">
                             Leading companies, decision-makers, and opinion leaders shaping the industry from around the world will participate both as speakers and as top-level attendees at this prestigious event.
                         </p>
                     </article>
 
                     <article class="rounded-[2rem] border border-slate-400/20 bg-slate-900/70 p-7 md:p-8 shadow-[0_20px_45px_rgba(2,6,23,0.45)]">
                         <p class="text-xs font-bold tracking-[0.3em] uppercase text-slate-500 mb-4">2026 Focus</p>
-                        <p class="text-slate-200 text-lg md:text-xl leading-relaxed font-medium">
+                        <p class="text-slate-200 text-lg md:text-xl leading-relaxed">
                             Steel Networking Summits 2026, while taking a comprehensive view of the past, present, and future of the global steel industry, will provide up-to-date and in-depth insights into steel markets across all regions, from Europe to Asia, and from the Americas to the Middle East and Africa.
                         </p>
                     </article>
