@@ -12,6 +12,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/23.0.4/css/intlTelInput.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/23.0.4/js/intlTelInput.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
 
     <script>
         tailwind.config = {
@@ -59,6 +66,23 @@
             border-color: rgba(148, 163, 184, 0.4);
             box-shadow: 0 0 20px rgba(148, 163, 184, 0.1);
         }
+
+        /* Intl Tel Input & Tom Select Dark overrides */
+        .iti { width: 100%; }
+        .iti__country-list { background-color: #020617; border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; border-radius: 0.5rem; }
+        .iti__country.iti__highlight { background-color: rgba(255, 255, 255, 0.1); }
+        .iti__search-input { background: #0f172a; color: #fff; border: 1px solid rgba(255,255,255,0.2) !important; border-radius: 0.25rem !important; }
+        .iti__selected-country { opacity: 0.8; }
+        .iti__selected-country:hover { opacity: 1; background-color: transparent !important; }
+        
+        .ts-control { background: transparent !important; border: none !important; border-bottom: 1px solid rgba(255,255,255,0.2) !important; color: #fff !important; padding: 0.75rem 0 !important; border-radius: 0 !important; box-shadow: none !important; }
+        .ts-control>input { color: #fff !important; }
+        .ts-dropdown { background: #020617 !important; border: 1px solid rgba(255,255,255,0.1) !important; border-radius: 0.5rem !important; margin-top: 5px !important; }
+        .ts-dropdown .option { color: #cbd5e1 !important; padding: 0.5rem 1rem !important; }
+        .ts-dropdown .option.active, .ts-dropdown .option:hover { background: rgba(255,255,255,0.1) !important; color: #fff !important; }
+        .ts-wrapper.single .ts-control::after { border-color: rgba(255,255,255,0.4) transparent transparent transparent !important; right: 0 !important;}
+        .ts-control.has-items { padding-bottom: 0px !important; }
+        .ts-control .item { color: #fff !important; font-size: 1rem; }
     </style>
 <script id="browser-logger-active">
 (function() {
@@ -257,19 +281,18 @@
     
     <div class="relative flex items-stretch justify-between w-full pr-6">
         
-        <div class="absolute inset-y-0 right-0 left-12 md:left-20 glass rounded-2xl shadow-2xl pointer-events-none -z-10"></div>
+        <div class="absolute inset-y-0 right-0 left-[68px] md:left-20 glass rounded-2xl shadow-2xl pointer-events-none -z-10"></div>
 
         <div class="relative z-10 flex items-center group cursor-pointer pl-0 md:-ml-2">
-            <img alt="Steel Summits Logo" class="h-16 md:h-[88px] w-auto object-contain transition-transform duration-300 hover:scale-105" src="{{ asset('images/steel-networking-logo-main.webp') }}">
+            <img alt="Steel Summits Logo" class="h-[76px] md:h-[88px] w-auto object-contain transition-transform duration-300 hover:scale-105" src="{{ asset('images/steel-networking-logo-main.webp') }}">
         </div>
 
-        <div class="relative z-10 hidden md:flex items-center space-x-8 text-[13px] font-medium tracking-[0.2em] uppercase py-4">
-            <a class="text-white/60 hover:text-white transition-opacity" href="#main">Main</a>
-            <a class="text-white/60 hover:text-white transition-opacity" href="#agenda">Agenda</a>
-            <a class="text-white/60 hover:text-white transition-opacity" href="#about">About</a>
-            <a class="text-white/60 hover:text-white transition-opacity" href="#keynote-speakers">Keynote Speakers</a>
-            <a class="text-white/60 hover:text-white transition-opacity" href="#venue">Venue</a>
-            <a class="text-white/60 hover:text-white transition-opacity" href="#more">More</a>
+        <div class="relative z-10 hidden md:flex items-center space-x-8 text-[14px] font-bold tracking-[0.2em] uppercase py-4">
+            <a class="text-slate-300 hover:text-white transition-opacity" href="#agenda">Agenda</a>
+            <a class="text-slate-300 hover:text-white transition-opacity" href="#about">About Us</a>
+            <a class="text-slate-300 hover:text-white transition-opacity" href="#keynote-speakers">Keynote Speakers</a>
+            <a class="text-slate-300 hover:text-white transition-opacity" href="#sponsorship">Sponsorship</a>
+            <a class="text-slate-300 hover:text-white transition-opacity" href="#venue">Venue</a>
         </div>
         
         <div class="relative z-10 flex items-center space-x-4 py-4">
@@ -282,12 +305,11 @@
     </div>
 
     <div class="md:hidden mt-4 glass rounded-2xl p-6 flex flex-col space-y-4 shadow-2xl" x-show="mobileMenu" x-transition:enter="transition ease-out duration-300" x-transition:enter-end="opacity-100 scale-100" x-transition:enter-start="opacity-0 scale-95" style="display: none;">
-        <a @click="mobileMenu = false" class="text-lg font-serif" href="#main">Main</a>
-        <a @click="mobileMenu = false" class="text-lg font-serif" href="#agenda">Agenda</a>
-        <a @click="mobileMenu = false" class="text-lg font-serif" href="#about">About</a>
-        <a @click="mobileMenu = false" class="text-lg font-serif" href="#keynote-speakers">Keynote Speakers</a>
-        <a @click="mobileMenu = false" class="text-lg font-serif" href="#venue">Venue</a>
-        <a @click="mobileMenu = false" class="text-lg font-serif" href="#more">More</a>
+        <a @click="mobileMenu = false" class="text-lg font-serif font-bold" href="#agenda">Agenda</a>
+        <a @click="mobileMenu = false" class="text-lg font-serif font-bold" href="#about">About Us</a>
+        <a @click="mobileMenu = false" class="text-lg font-serif font-bold" href="#keynote-speakers">Keynote Speakers</a>
+        <a @click="mobileMenu = false" class="text-lg font-serif font-bold" href="#sponsorship">Sponsorship</a>
+        <a @click="mobileMenu = false" class="text-lg font-serif font-bold" href="#venue">Venue</a>
         <button @click="modalOpen = true; mobileMenu = false" class="w-full border border-slate-400/30 text-white font-bold py-4 rounded-xl">Register Interest</button>
     </div>
 </nav>  
@@ -297,41 +319,48 @@
             <div class="absolute inset-0 hero-gradient"></div>
         </div>
 
-        <div class="relative z-10 text-center px-6 max-w-6xl mx-auto pt-32 md:pt-36">
+        <div class="relative z-10 text-center px-6 max-w-6xl mx-auto pt-20 md:pt-28 pb-16 md:pb-0">
             
-            <div class="inline-block px-5 py-1.5 border border-white/10 rounded-full mb-8 mt-6 md:mt-8 glass">
-                <span class="text-slate-300 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase">Invitation Only - Istanbul 2026</span>
+            <div class="inline-block px-4 md:px-5 py-1 md:py-1.5 border border-white/10 rounded-full mb-6 md:mb-8 mt-4 md:mt-8 glass">
+                <span class="text-slate-300 text-[9px] md:text-xs font-bold tracking-[0.2em] md:tracking-[0.3em] uppercase">Invitation Only - Istanbul 2026</span>
             </div>
 
-            <h1 class="text-5xl md:text-8xl font-serif font-bold mb-8 leading-[1.1] text-white">
+            <h1 class="text-5xl md:text-8xl font-serif font-bold mb-6 md:mb-8 leading-[1.1] text-white">
                 Istanbul <br />
-                <span class="bg-clip-text text-transparent bg-gradient-to-r from-slate-100 via-slate-300 to-slate-500 italic">Steel Networking</span> <br />
-                Summit 2026
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-slate-100 via-slate-300 to-slate-500 italic pb-2">Steel Summit</span> <br />
+                2026
             </h1>
 
-            <p class="text-lg md:text-2xl text-slate-400 mb-12 font-light max-w-3xl mx-auto leading-relaxed">
+            <p class="text-base md:text-2xl text-slate-400 mb-8 md:mb-12 font-light max-w-3xl mx-auto leading-relaxed">
                 The world's most exclusive assembly for steel industry titans.
                 <br class="hidden md:block" />
                 <span class="text-slate-300 font-medium">25 - 27 October 2026</span> | Swissotel Istanbul
             </p>
 
-            <div class="mx-auto mb-16 flex w-full max-w-3xl items-center justify-center" x-data="countdownTimer()" x-init="start()">
+            <div class="mx-auto mb-4 md:mb-16 flex w-full max-w-xl items-center justify-center" x-data="countdownTimer()" x-init="start()">
                 <template x-for="(item, index) in remaining" :key="item.label">
-                    <div :class="index > 0 ? 'border-l border-white/10' : ''" class="flex w-1/4 min-w-0 flex-col items-center px-2 md:px-8">
-                        <span class="text-4xl md:text-6xl font-serif font-light text-white mb-2 tabular-nums w-[2.5ch] text-center" x-text="item.value">00</span>
-                        <span class="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-medium" x-text="item.label">Days</span>
+                    <div :class="index > 0 ? 'border-l border-white/10' : ''" class="flex w-1/4 min-w-0 flex-col items-center px-1 md:px-8">
+                        <span class="text-3xl md:text-6xl font-serif font-light text-white mb-1 md:mb-2 tabular-nums w-[2.5ch] text-center" x-text="item.value">00</span>
+                        <span class="text-[9px] md:text-[10px] uppercase tracking-[0.2em] text-slate-500 font-medium" x-text="item.label">Days</span>
                     </div>
                 </template>
             </div>
 
-            <button @click="modalOpen = true" class="inline-flex items-center justify-center px-12 py-6 bg-gradient-to-r from-slate-200 to-slate-400 text-slate-950 font-extrabold tracking-[0.25em] text-lg rounded-2xl shadow-[0_0_30px_rgba(148,163,184,0.5)] hover:scale-105 active:scale-95 transition-all duration-500 uppercase">Pre-Register Now</button>
+            <button @click="modalOpen = true" class="hidden md:inline-flex items-center justify-center px-12 py-6 bg-gradient-to-r from-slate-200 to-slate-400 text-slate-950 font-extrabold tracking-[0.25em] text-lg rounded-2xl shadow-[0_0_30px_rgba(148,163,184,0.5)] hover:scale-105 active:scale-95 transition-all duration-500 uppercase">Pre-Register Now</button>
         </div>
     </section>
+
+    <!-- Mobile Fixed CTA -->
+    <div class="md:hidden fixed bottom-0 left-0 w-full z-50 p-4 bg-gradient-to-t from-slate-950 via-slate-950/90 to-transparent pt-10 pointer-events-none" style="padding-bottom: max(0.75rem, env(safe-area-inset-bottom));">
+        <button @click="modalOpen = true" class="w-full flex items-center justify-center px-6 py-4 bg-gradient-to-r from-slate-200 to-slate-400 text-slate-950 font-extrabold tracking-[0.2em] text-[14px] md:text-[15px] rounded-xl shadow-[0_0_30px_rgba(148,163,184,0.3)] active:scale-95 transition-all duration-300 uppercase pointer-events-auto">
+            Pre-Register Now
+        </button>
+    </div>
 
     <section class="py-24 bg-slate-950 px-6" id="agenda" x-data="{ activeTab: 1 }">
         <div class="max-w-6xl mx-auto">
             <div class="mb-12 text-center">
-                <h2 class="text-4xl md:text-5xl font-serif font-bold text-gradient-platinum mb-4 italic">STEEL Networking Summits Program</h2>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-gradient-platinum mb-4 italic">STEEL Summit Program</h2>
                 <p class="text-slate-400 text-sm md:text-base">25-27 October 2026 | Swissotel Istanbul</p>
             </div>
 
@@ -346,7 +375,7 @@
             <div class="space-y-4" x-show="activeTab === 1">
                 <div class="glass rounded-xl p-6">
                     <p class="text-slate-300 text-xs uppercase tracking-[0.2em] mb-2">18:00</p>
-                    <h4 class="text-lg md:text-xl font-semibold text-white tracking-wide">Networking on Istanbul Strait</h4>
+                    <h4 class="text-lg md:text-xl font-semibold text-white tracking-wide">Networking on the Bosphorus</h4>
                     <p class="text-slate-400 mt-2">Boat Tour and DJ Performance (Under the Sponsorship of X).</p>
                 </div>
             </div>
@@ -439,8 +468,7 @@
         <div class="max-w-6xl mx-auto space-y-10">
             <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
                 <div>
-                    <p class="text-xs font-bold tracking-[0.35em] uppercase text-slate-500 mb-3">About</p>
-                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-gradient-platinum italic">Steel Networking Summits</h2>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-gradient-platinum uppercase tracking-widest">About Us</h2>
                 </div>
                 <p class="max-w-2xl text-slate-400 leading-relaxed">
                     An international gathering built to connect the most influential decision-makers across the global steel industry.
@@ -450,12 +478,8 @@
             <div class="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
                 <article class="glass rounded-[2rem] p-8 md:p-10 flex flex-col justify-between min-h-[320px]">
                     <div>
-                        <p class="text-xs font-bold tracking-[0.3em] uppercase text-slate-500 mb-5">Overview</p>
-                        <h3 class="text-3xl md:text-5xl font-serif font-bold text-white leading-tight mb-8">
-                            About the Steel Networking Summits
-                        </h3>
                         <p class="text-lg md:text-xl text-slate-300 leading-relaxed max-w-2xl">
-                            Steel Networking Summits 2026, is an international steel conference that brings together the most influential and powerful players of the global steel industry in Istanbul.
+                            Steel Summit 2026, is an international steel conference that brings together the most influential and powerful players of the global steel industry in Istanbul.
                         </p>
                     </div>
                 </article>
@@ -471,7 +495,7 @@
                     <article class="rounded-[2rem] border border-slate-400/20 bg-slate-900/70 p-7 md:p-8 shadow-[0_20px_45px_rgba(2,6,23,0.45)]">
                         <p class="text-xs font-bold tracking-[0.3em] uppercase text-slate-500 mb-4">2026 Focus</p>
                         <p class="text-slate-200 text-lg md:text-xl leading-relaxed">
-                            Steel Networking Summits 2026, while taking a comprehensive view of the past, present, and future of the global steel industry, will provide up-to-date and in-depth insights into steel markets across all regions, from Europe to Asia, and from the Americas to the Middle East and Africa.
+                            Steel Summit 2026, while taking a comprehensive view of the past, present, and future of the global steel industry, will provide up-to-date and in-depth insights into steel markets across all regions, from Europe to Asia, and from the Americas to the Middle East and Africa.
                         </p>
                     </article>
                 </div>
@@ -538,6 +562,93 @@
         </div>
     </section>
 
+<!-- BEGIN: Who Attends -->
+<section class="py-32 bg-slate-950 px-6 border-t border-white/5" id="who-attends">
+<div class="max-w-7xl mx-auto">
+<div class="mb-20 text-center">
+<h2 class="text-4xl md:text-5xl font-serif font-bold text-gradient-platinum mb-4 italic">Who Attends</h2>
+<p class="text-slate-400 text-lg font-light max-w-2xl mx-auto">A cross-disciplinary assembly of the industry's primary stakeholders.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+<div class="glass p-6 rounded-2xl text-center group hover:bg-white/10 transition-all duration-300">
+<span class="material-symbols-outlined text-4xl text-cyan-400 group-hover:text-cyan-300 mb-4 transition-colors">factory</span>
+<h4 class="text-xs font-bold uppercase tracking-widest text-slate-300">Steel Producers</h4>
+</div>
+<div class="glass p-6 rounded-2xl text-center group hover:bg-white/10 transition-all duration-300">
+<span class="material-symbols-outlined text-4xl text-cyan-400 group-hover:text-cyan-300 mb-4 transition-colors">local_shipping</span>
+<h4 class="text-xs font-bold uppercase tracking-widest text-slate-300">Logistics</h4>
+</div>
+<div class="glass p-6 rounded-2xl text-center group hover:bg-white/10 transition-all duration-300">
+<span class="material-symbols-outlined text-4xl text-cyan-400 group-hover:text-cyan-300 mb-4 transition-colors">account_balance</span>
+<h4 class="text-xs font-bold uppercase tracking-widest text-slate-300">Financial Inst.</h4>
+</div>
+<div class="glass p-6 rounded-2xl text-center group hover:bg-white/10 transition-all duration-300">
+<span class="material-symbols-outlined text-4xl text-cyan-400 group-hover:text-cyan-300 mb-4 transition-colors">analytics</span>
+<h4 class="text-xs font-bold uppercase tracking-widest text-slate-300">Market Analysts</h4>
+</div>
+<div class="glass p-6 rounded-2xl text-center group hover:bg-white/10 transition-all duration-300">
+<span class="material-symbols-outlined text-4xl text-cyan-400 group-hover:text-cyan-300 mb-4 transition-colors">construction</span>
+<h4 class="text-xs font-bold uppercase tracking-widest text-slate-300">End Users</h4>
+</div>
+<div class="glass p-6 rounded-2xl text-center group hover:bg-white/10 transition-all duration-300">
+<span class="material-symbols-outlined text-4xl text-cyan-400 group-hover:text-cyan-300 mb-4 transition-colors">recycling</span>
+<h4 class="text-xs font-bold uppercase tracking-widest text-slate-300">Scrap Traders</h4>
+</div>
+</div>
+</div>
+</section>
+
+<!-- BEGIN: Why You Should Attend -->
+<section class="py-32 bg-slate-950 px-6 border-t border-white/5" id="why-attend">
+<div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
+<div class="lg:w-1/2 relative">
+<div class="absolute -inset-4 bg-slate-500/10 blur-3xl rounded-full"></div>
+<img alt="Strategic Networking" class="relative rounded-3xl w-full h-[500px] object-cover border border-slate-700/50" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEinaNILYjhM6gt35xHARPVFW2C-g4W3JXREZybWOnjQ37MWhEGYZpZaHtHm3cdinNSpkfD-9KR41SdWgY3-W01Sr3MTtPWGTyADS-vSTFqUeSlljSMIo9w5LKcvBk3c7arntp3LANARHHsXfhbbz2yvzzB1jF9iwWP6WJ0AiJ4Yc804tRqGB1-o3DvFxao26oP3qI8O2nfpl6W1I9DJh6GAwPFLP4mJw91pa0zX5wBqbnJyDGAiqnmjSHoaQ0QMDcO35vF7uSYYo"/>
+</div>
+<div class="lg:w-1/2">
+<h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-8">Elevate Your Strategy</h2>
+<ul class="space-y-6 mb-12">
+<li class="flex items-start space-x-4">
+<span class="material-symbols-outlined text-cyan-400 mt-1">insights</span>
+<div>
+<h4 class="text-lg font-bold text-slate-200">Proprietary Intelligence</h4>
+<p class="text-slate-400 font-light">Gain access to exclusive data and forecasts not available through public channels.</p>
+</div>
+</li>
+<li class="flex items-start space-x-4">
+<span class="material-symbols-outlined text-cyan-400 mt-1">handshake</span>
+<div>
+<h4 class="text-lg font-bold text-slate-200">Vetted B2B Network</h4>
+<p class="text-slate-400 font-light">Direct introduction to C-level executives from the world's largest steel producers.</p>
+</div>
+</li>
+<li class="flex items-start space-x-4">
+<span class="material-symbols-outlined text-cyan-400 mt-1">verified</span>
+<div>
+<h4 class="text-lg font-bold text-slate-200">Decarbonization Roadmap</h4>
+<p class="text-slate-400 font-light">Real-world case studies on the transition to hydrogen and green steel technology.</p>
+</div>
+</li>
+</ul>
+<button @click="modalOpen = true" class="bg-white/5 border border-slate-600 px-10 py-4 rounded-xl text-white font-bold tracking-widest uppercase hover:bg-white/10 transition-all flex items-center gap-3 group">
+                Download Brochure
+                <span class="material-symbols-outlined group-hover:translate-y-1 transition-transform">download</span>
+</button>
+</div>
+</div>
+</section>
+
+    <section class="py-24 bg-slate-950 px-6 border-t border-white/5" id="sponsorship">
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-serif font-bold text-gradient-platinum uppercase tracking-widest mb-12">Sponsorship</h2>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                <a href="#our-sponsors" class="w-full sm:w-auto px-10 py-5 glass hover:bg-white/10 text-white font-bold tracking-wider uppercase rounded-xl transition duration-300">Our Sponsors</a>
+                <a href="#sponsorship-packages" class="w-full sm:w-auto px-10 py-5 bg-gradient-to-r from-slate-200 to-slate-400 text-slate-950 hover:scale-105 active:scale-95 font-bold tracking-wider uppercase rounded-xl transition-all duration-300">Sponsorship Packages</a>
+            </div>
+        </div>
+    </section>
+
     <section class="py-24 bg-slate-950 px-6 border-t border-white/5" id="venue">
         <div class="max-w-7xl mx-auto">
             <div class="relative w-full h-[560px] md:h-[680px] rounded-3xl overflow-hidden shadow-2xl">
@@ -567,7 +678,7 @@
             </div>
 
             
-            <form action="/register" method="POST" class="space-y-8" x-data="phoneField(@js(old('phone_country_code', '+90')))" x-init="init()">
+            <form action="/register" method="POST" class="space-y-8" id="register-form">
                 @csrf
 
                 @if (session('status'))
@@ -587,32 +698,69 @@
                 @endif
 
                 <div class="grid md:grid-cols-2 gap-6">
-                    <input class="w-full bg-transparent border-0 border-b border-white/20 px-0 py-3 text-white focus:ring-0 focus:border-slate-400 placeholder:text-slate-600" name="full_name" type="text" placeholder="Full Name" value="{{ old('full_name') }}" required />
-                    <input class="w-full bg-transparent border-0 border-b border-white/20 px-0 py-3 text-white focus:ring-0 focus:border-slate-400 placeholder:text-slate-600" name="email" type="email" placeholder="Business Email" value="{{ old('email') }}" required />
-                </div>
-
-                <div class="grid md:grid-cols-2 gap-6">
-                    <input class="w-full bg-transparent border-0 border-b border-white/20 px-0 py-3 text-white focus:ring-0 focus:border-slate-400 placeholder:text-slate-600" name="company_name" type="text" placeholder="Organization" value="{{ old('company_name') }}" required />
-
-                    <div class="flex items-center border-0 border-b border-white/20 gap-4">
-                        <div class="w-28 border-r border-white/10 pr-3">
-                            <input class="w-full bg-transparent border-0 px-0 py-3 text-slate-200 text-sm font-medium focus:ring-0 focus:border-0 placeholder:text-slate-500" name="phone_country_code" type="text" inputmode="numeric" pattern="\+[0-9]{1,4}" maxlength="5" x-model="phoneCountryCode" @input="sanitizeCountryCode()" placeholder="+___" required />
-                        </div>
-                        <input class="w-full bg-transparent border-0 px-0 py-3 text-white focus:ring-0 focus:border-0 placeholder:text-slate-600" name="phone" type="tel" inputmode="numeric" pattern="[0-9]{6,15}" maxlength="15" oninput="this.value = this.value.replace(/\D/g, '')" placeholder="Phone Number" value="{{ old('phone') }}" required />
+                    <div class="relative z-0 w-full group">
+                        <input type="text" name="first_name" id="first_name" class="block py-3 px-0 w-full text-base text-white bg-transparent border-0 border-b border-white/20 appearance-none focus:outline-none focus:ring-0 focus:border-slate-400 peer" placeholder=" " value="{{ old('first_name') }}" required />
+                        <label for="first_name" class="peer-focus:font-medium absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-slate-300 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Name</label>
+                    </div>
+                    <div class="relative z-0 w-full group">
+                        <input type="text" name="last_name" id="last_name" class="block py-3 px-0 w-full text-base text-white bg-transparent border-0 border-b border-white/20 appearance-none focus:outline-none focus:ring-0 focus:border-slate-400 peer" placeholder=" " value="{{ old('last_name') }}" required />
+                        <label for="last_name" class="peer-focus:font-medium absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-slate-300 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Surname</label>
                     </div>
                 </div>
 
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="relative z-0 w-full group">
+                        <input type="email" name="email" id="email" class="block py-3 px-0 w-full text-base text-white bg-transparent border-0 border-b border-white/20 appearance-none focus:outline-none focus:ring-0 focus:border-slate-400 peer" placeholder=" " value="{{ old('email') }}" required />
+                        <label for="email" class="peer-focus:font-medium absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-slate-300 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Business Email</label>
+                    </div>
+                    <div class="relative z-0 w-full group">
+                        <input type="text" name="company_name" id="company_name" class="block py-3 px-0 w-full text-base text-white bg-transparent border-0 border-b border-white/20 appearance-none focus:outline-none focus:ring-0 focus:border-slate-400 peer" placeholder=" " value="{{ old('company_name') }}" required />
+                        <label for="company_name" class="peer-focus:font-medium absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-slate-300 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Organization/Company</label>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="relative z-0 w-full group">
+                        <select name="country" id="country" class="block py-3 px-0 w-full text-base text-white bg-transparent border-0 border-b border-white/20 appearance-none focus:outline-none focus:ring-0 focus:border-slate-400 peer" required>
+                            <option value="">Select Country</option>
+                            <option value="Turkey">Turkey</option>
+                            <option value="United States">United States</option>
+                            <option value="United Kingdom">United Kingdom</option>
+                            <option value="Germany">Germany</option>
+                            <option value="France">France</option>
+                            <option value="Italy">Italy</option>
+                            <option value="Spain">Spain</option>
+                            <option value="China">China</option>
+                            <option value="Japan">Japan</option>
+                            <option value="India">India</option>
+                            <option value="Brazil">Brazil</option>
+                            <option value="Canada">Canada</option>
+                            <option value="Australia">Australia</option>
+                            <option value="South Korea">South Korea</option>
+                            <option value="United Arab Emirates">United Arab Emirates</option>
+                            <option value="Saudi Arabia">Saudi Arabia</option>
+                            <option value="Egypt">Egypt</option>
+                        </select>
+                    </div>
+
+                    <div class="relative z-0 w-full group iti-wrapper">
+                        <input type="tel" name="phone_full" id="phone_full" class="block py-3 px-0 w-full text-base text-white bg-transparent border-0 border-b border-white/20 appearance-none focus:outline-none focus:ring-0 focus:border-slate-400 peer" placeholder=" " value="{{ old('phone_full') }}" required />
+                        <input type="hidden" name="phone_country_code" id="phone_country_code" />
+                        <input type="hidden" name="phone" id="phone_pure" />
+                    </div>
+                </div>
+                <!-- Some custom css to align intl-tel-input's input box with tailwind floating label -->
+                <style>
+                    .iti-wrapper .iti { width: 100%; border-bottom: 1px solid rgba(255,255,255,0.2); }
+                    .iti-wrapper .iti__tel-input { background: transparent !important; border: none !important; color: white !important; width: 100%; padding: 0.75rem 0 !important; }
+                    .iti-wrapper .iti__tel-input:focus { outline: none !important; box-shadow: none !important; }
+                    .iti-wrapper:focus-within .iti { border-bottom-color: #94a3b8; }
+                    .iti-wrapper .iti--allow-dropdown input { padding-left: 52px !important; }
+                </style>
+
                 <label class="flex items-start space-x-3">
-                    <input class="w-5 h-5 rounded border-white/20 bg-transparent text-slate-400 focus:ring-slate-500/50 mt-0.5" name="gdpr_approved" type="checkbox" value="1" @checked(old('gdpr_approved')) required />
-                    <span class="text-xs text-slate-500 leading-relaxed">I approve GDPR communication consent.</span>
-                </label>
-                <label class="flex items-start space-x-3">
-                    <input class="w-5 h-5 rounded border-white/20 bg-transparent text-slate-400 focus:ring-slate-500/50 mt-0.5" name="kvkk_approved" type="checkbox" value="1" @checked(old('kvkk_approved')) required />
-                    <span class="text-xs text-slate-500 leading-relaxed">I approve communication consent under applicable local data protection regulations.</span>
-                </label>
-                <label class="flex items-start space-x-3">
-                    <input class="w-5 h-5 rounded border-white/20 bg-transparent text-slate-400 focus:ring-slate-500/50 mt-0.5" name="privacy_approved" type="checkbox" value="1" @checked(old('privacy_approved')) required />
-                    <span class="text-xs text-slate-500 leading-relaxed">I have read and accept the Privacy Notice regarding the processing and storage of my personal data.</span>
+                    <input class="w-5 h-5 rounded border-white/20 bg-transparent text-slate-400 focus:ring-slate-500/50 mt-0.5" name="consent_approved" type="checkbox" value="1" @checked(old('consent_approved')) required />
+                    <span class="text-xs text-slate-500 leading-relaxed">I approve communication consent and confirm that I have read and accepted the Privacy Notice regarding the processing and storage of my personal data.</span>
                 </label>
 
                 <button class="w-full bg-gradient-to-r from-slate-200 to-slate-400 text-slate-950 font-bold py-4 rounded-xl uppercase tracking-widest text-sm" type="submit">Submit Formal Request</button>
@@ -629,11 +777,11 @@
                     src="{{ asset('images/steel-networking-logo-footer.webp') }}"/>
                 <p class="text-slate-400 text-sm mt-4">The premier networking event for the global iron and steel community.</p>
             </div>
-            <div><h4 class="text-white font-bold tracking-wider uppercase text-xs mb-4">Explore</h4><ul class="space-y-2"><li><a class="text-slate-400 hover:text-white text-sm" href="#main">Main</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#agenda">Agenda</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#about">About</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#keynote-speakers">Keynote Speakers</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#venue">Venue</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#more">More</a></li></ul></div>
+            <div><h4 class="text-white font-bold tracking-wider uppercase text-xs mb-4">Explore</h4><ul class="space-y-2"><li><a class="text-slate-400 hover:text-white text-sm" href="#main">Main</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#agenda">Agenda</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#about">About Us</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#keynote-speakers">Keynote Speakers</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#sponsorship">Sponsorship</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#venue">Venue</a></li></ul></div>
             <div><h4 class="text-white font-bold tracking-wider uppercase text-xs mb-4">Legal</h4><ul class="space-y-2"><li><a class="text-slate-400 hover:text-white text-sm" href="#">Privacy Policy</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#">Terms of Service</a></li><li><a class="text-slate-400 hover:text-white text-sm" href="#">Data Protection</a></li></ul></div>
             <div><h4 class="text-white font-bold tracking-wider uppercase text-xs mb-4">Contact Us</h4><p class="text-slate-400 text-sm">info@steelsummits.com</p><p class="text-slate-400 text-sm mt-2">+1 (555) 123-4567</p></div>
         </div>
-        <div class="max-w-7xl mx-auto border-t border-slate-800/50 mt-10 pt-6 text-slate-500 text-xs">© 2026 Steel Networking Summit. All rights reserved.</div>
+        <div class="max-w-7xl mx-auto border-t border-slate-800/50 mt-10 pt-6 text-slate-500 text-xs">© 2026 Steel Summit. All rights reserved.</div>
     </footer>
 
     <button
@@ -678,29 +826,45 @@
             };
         }
 
-        function phoneField(initialCountryCode = '+90') {
-            return {
-                phoneCountryCode: initialCountryCode,
-                sanitizeCountryCode() {
-                    this.phoneCountryCode = '+' + this.phoneCountryCode.replace(/\D/g, '').slice(0, 4);
-                },
-                async init() {
-                    try {
-                        const response = await fetch('https://ipapi.co/json/');
-                        if (!response.ok) {
-                            return;
-                        }
-
-                        const data = await response.json();
-                        if (typeof data.country_calling_code === 'string' && /^\+[0-9]{1,4}$/.test(data.country_calling_code)) {
-                            this.phoneCountryCode = data.country_calling_code;
-                        }
-                    } catch (error) {
-                        // Fallback keeps default +90 when geolocation is unavailable.
+        // Floating label functionality for Tom Select and intl-tel-input
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tom Select for Country
+            if (document.getElementById('country')) {
+                new TomSelect('#country', {
+                    create: false,
+                    sortField: {
+                        field: "text",
+                        direction: "asc"
                     }
-                },
-            };
-        }
+                });
+            }
+
+            // Intl-Tel-Input for Phone
+            const phoneInput = document.querySelector("#phone_full");
+            if (phoneInput) {
+                const iti = window.intlTelInput(phoneInput, {
+                    initialCountry: "auto",
+                    geoIpLookup: function(callback) {
+                        fetch("https://ipapi.co/json/")
+                        .then(function(res) { return res.json(); })
+                        .then(function(data) { callback(data.country_code); })
+                        .catch(function() { callback("tr"); });
+                    },
+                    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/23.0.4/js/utils.js",
+                    separateDialCode: true,
+                });
+
+                // Update hidden fields before submit
+                const form = document.querySelector('#register-form');
+                if (form) {
+                    form.addEventListener('submit', function() {
+                        const countryData = iti.getSelectedCountryData();
+                        document.getElementById('phone_country_code').value = countryData ? '+' + countryData.dialCode : '';
+                        document.getElementById('phone_pure').value = phoneInput.value;
+                    });
+                }
+            }
+        });
     </script>
 </body>
 </html>
