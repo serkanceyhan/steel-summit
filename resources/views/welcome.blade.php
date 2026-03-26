@@ -562,6 +562,7 @@
         </div>
     </section>
 
+{{-- Orijinal 'Who Attends' ve 'Why You Should Attend' bölümleri, geri dönülebilmek adına gizlenmiştir. 
 <!-- BEGIN: Who Attends -->
 <section class="py-32 bg-slate-950 px-6 border-t border-white/5" id="who-attends">
 <div class="max-w-7xl mx-auto">
@@ -636,6 +637,218 @@
 </button>
 </div>
 </div>
+</section>
+--}}
+
+<!-- BEGIN: Who Attends -->
+<section class="py-24 md:py-32 bg-slate-950 px-6 border-t border-white/5" id="who-attends-new">
+    <div class="max-w-7xl mx-auto">
+        <div class="mb-16 md:mb-20 text-center">
+            <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4 italic">Who Attends?</h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+            
+            <!-- Card 1: Steel Producers -->
+            <div class="glass flex flex-col md:flex-row rounded-2xl overflow-hidden group hover:-translate-y-1 transition-transform duration-300 shadow-lg border border-b-4 border-blue-500/50">
+                <div class="md:w-2/5 relative h-56 md:h-auto overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f20?q=80&w=600&auto=format&fit=crop" alt="Steel Producers" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-blue-900/60 mix-blend-multiply"></div>
+                </div>
+                <div class="md:w-3/5 p-6 md:p-8 flex flex-col justify-center bg-gradient-to-br from-blue-900/20 to-transparent">
+                    <h3 class="text-xl md:text-2xl font-bold text-white mb-4">Steel Producers and Traders</h3>
+                    <ul class="space-y-2 text-sm text-slate-300 font-light list-disc pl-4 marker:text-blue-400">
+                        <li>Owners and Senior Executives of Fortune 500 Companies</li>
+                        <li>Board Chairs and Members</li>
+                        <li>CEOs and C-Level Executives (C-Suite) International Steel Traders</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Card 2: Raw Material -->
+            <div class="glass flex flex-col md:flex-row rounded-2xl overflow-hidden group hover:-translate-y-1 transition-transform duration-300 shadow-lg border border-b-4 border-amber-500/50">
+                <div class="md:w-2/5 relative h-56 md:h-auto overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1587304193325-1e4eb41b6ac0?q=80&w=600&auto=format&fit=crop" alt="Raw Material" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-amber-900/60 mix-blend-multiply"></div>
+                </div>
+                <div class="md:w-3/5 p-6 md:p-8 flex flex-col justify-center bg-gradient-to-br from-amber-900/20 to-transparent">
+                    <h3 class="text-xl md:text-2xl font-bold text-white mb-2">Raw Material and Scrap Suppliers</h3>
+                    <p class="text-xs text-amber-300/70 mb-3 italic">Key players in the supply chain for major products such as:</p>
+                    <ul class="space-y-2 text-sm text-slate-300 font-light list-disc pl-4 marker:text-amber-400">
+                        <li>Iron ore</li>
+                        <li>Scrap</li>
+                        <li>Coal</li>
+                        <li>Ferroalloys</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Card 3: Machinery -->
+            <div class="glass flex flex-col md:flex-row rounded-2xl overflow-hidden group hover:-translate-y-1 transition-transform duration-300 shadow-lg border border-b-4 border-cyan-500/50">
+                <div class="md:w-2/5 relative h-56 md:h-auto overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1565514020179-026b92b64757?q=80&w=600&auto=format&fit=crop" alt="Machinery" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-cyan-900/60 mix-blend-multiply"></div>
+                </div>
+                <div class="md:w-3/5 p-6 md:p-8 flex flex-col justify-center bg-gradient-to-br from-cyan-900/20 to-transparent">
+                    <h3 class="text-xl md:text-2xl font-bold text-white mb-2">Machinery, Equipment & Tech</h3>
+                    <p class="text-xs text-cyan-300/70 mb-3 italic">Engineering firms developing technologies for:</p>
+                    <ul class="space-y-2 text-sm text-slate-300 font-light list-disc pl-4 marker:text-cyan-400">
+                        <li>Rolling</li>
+                        <li>Melting</li>
+                        <li>Automation and process systems</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Card 4: Logistics -->
+            <div class="glass flex flex-col md:flex-row rounded-2xl overflow-hidden group hover:-translate-y-1 transition-transform duration-300 shadow-lg border border-b-4 border-indigo-500/50">
+                <div class="md:w-2/5 relative h-56 md:h-auto overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1586528116311-ad8ed7c80a30?q=80&w=600&auto=format&fit=crop" alt="Logistics" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-indigo-900/60 mix-blend-multiply"></div>
+                </div>
+                <div class="md:w-3/5 p-6 md:p-8 flex flex-col justify-center bg-gradient-to-br from-indigo-900/20 to-transparent">
+                    <h3 class="text-xl md:text-2xl font-bold text-white mb-4">Logistics, Port & Insurance</h3>
+                    <ul class="space-y-2 text-sm text-slate-300 font-light list-disc pl-4 marker:text-indigo-400">
+                        <li>Port operators</li>
+                        <li>Logistics and transportation companies</li>
+                        <li>Warehousing and customs service providers</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Card 5: Digitalization -->
+            <div class="glass flex flex-col md:flex-row rounded-2xl overflow-hidden group hover:-translate-y-1 transition-transform duration-300 shadow-lg border border-b-4 border-yellow-500/50">
+                <div class="md:w-2/5 relative h-56 md:h-auto overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop" alt="Digitalization" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-yellow-700/60 mix-blend-multiply"></div>
+                </div>
+                <div class="md:w-3/5 p-6 md:p-8 flex flex-col justify-center bg-gradient-to-br from-yellow-700/20 to-transparent">
+                    <h3 class="text-xl md:text-2xl font-bold text-white mb-4">Digitalization, AI & High-Tech</h3>
+                    <ul class="space-y-2 text-sm text-slate-300 font-light list-disc pl-4 marker:text-yellow-400">
+                        <li>Technology leaders offering AI solutions and efficiency innovations for the steel industry.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Card 6: Banking -->
+            <div class="glass flex flex-col md:flex-row rounded-2xl overflow-hidden group hover:-translate-y-1 transition-transform duration-300 shadow-lg border border-b-4 border-rose-500/50">
+                <div class="md:w-2/5 relative h-56 md:h-auto overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop" alt="Banking" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-rose-900/60 mix-blend-multiply"></div>
+                </div>
+                <div class="md:w-3/5 p-6 md:p-8 flex flex-col justify-center bg-gradient-to-br from-rose-900/20 to-transparent">
+                    <h3 class="text-xl md:text-2xl font-bold text-white mb-4">Banking and Financial Institutions</h3>
+                    <ul class="space-y-2 text-sm text-slate-300 font-light list-disc pl-4 marker:text-rose-400">
+                        <li>Banks</li>
+                        <li>Trade finance organizations</li>
+                        <li>Insurance and risk management firms</li>
+                        <li>International investors and fund managers</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Card 7: Industry Institutions -->
+            <div class="glass flex flex-col md:flex-row rounded-2xl overflow-hidden group hover:-translate-y-1 transition-transform duration-300 shadow-lg border border-b-4 border-slate-500/50 lg:col-span-2 lg:mx-32">
+                <div class="md:w-2/5 relative h-56 md:h-auto overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=600&auto=format&fit=crop" alt="Institutions" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-slate-800/60 mix-blend-multiply"></div>
+                </div>
+                <div class="md:w-3/5 p-6 md:p-8 flex flex-col justify-center bg-gradient-to-br from-slate-700/20 to-transparent">
+                    <h3 class="text-xl md:text-2xl font-bold text-white mb-4">Industry Institutions & Organizations</h3>
+                    <ul class="space-y-2 text-sm text-slate-300 font-light list-disc pl-4 marker:text-slate-400">
+                        <li>National and international steel associations, institutions, and organizations</li>
+                        <li>Chambers of commerce and industry</li>
+                        <li>Industry associations and their senior representatives</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- BEGIN: Why You Should Attend -->
+<section class="relative py-24 md:py-36 bg-slate-950 px-6 border-t border-white/5 overflow-hidden" id="why-attend-new">
+    
+    <!-- Premium Background Glow/Flare -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full md:w-3/4 h-3/4 bg-cyan-900/20 blur-[120px] rounded-full pointer-events-none"></div>
+    
+    <div class="relative max-w-5xl mx-auto text-center z-10">
+        <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-6">
+            Why You Should <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 italic pr-2">Attend?</span>
+        </h2>
+        
+        <p class="text-lg md:text-xl text-slate-400 font-light leading-relaxed mb-16 max-w-3xl mx-auto">
+            Connect with steel producers, traders, international organizations, and industry leaders from around the world on a single, exclusive platform.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 text-left mb-20">
+            <!-- Feature 1 -->
+            <div class="group relative p-8 md:p-10 rounded-[2rem] bg-slate-900/50 border border-slate-800 hover:bg-slate-800/80 hover:border-cyan-500/50 transition-all duration-500 overflow-hidden shadow-lg hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]">
+                <div class="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-cyan-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="flex items-center space-x-6">
+                    <div class="flex-shrink-0 w-16 h-16 rounded-2xl bg-slate-800/80 border border-slate-700 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/50 group-hover:bg-cyan-900/30 transition-all duration-500">
+                        <span class="material-symbols-outlined text-3xl text-cyan-500 group-hover:text-cyan-400 transition-colors">public</span>
+                    </div>
+                    <div>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-200 mb-1 group-hover:text-white transition-colors">Direct Access</h4>
+                        <p class="text-sm text-slate-400 font-light">to the Global Steel Ecosystem</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="group relative p-8 md:p-10 rounded-[2rem] bg-slate-900/50 border border-slate-800 hover:bg-slate-800/80 hover:border-cyan-500/50 transition-all duration-500 overflow-hidden shadow-lg hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]">
+                <div class="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-cyan-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="flex items-center space-x-6">
+                    <div class="flex-shrink-0 w-16 h-16 rounded-2xl bg-slate-800/80 border border-slate-700 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/50 group-hover:bg-cyan-900/30 transition-all duration-500">
+                        <span class="material-symbols-outlined text-3xl text-cyan-500 group-hover:text-cyan-400 transition-colors">military_tech</span>
+                    </div>
+                    <div>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-200 mb-1 group-hover:text-white transition-colors">Prestige & Visibility</h4>
+                        <p class="text-sm text-slate-400 font-light">Elevate your brand presence</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="group relative p-8 md:p-10 rounded-[2rem] bg-slate-900/50 border border-slate-800 hover:bg-slate-800/80 hover:border-cyan-500/50 transition-all duration-500 overflow-hidden shadow-lg hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]">
+                <div class="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-cyan-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="flex items-center space-x-6">
+                    <div class="flex-shrink-0 w-16 h-16 rounded-2xl bg-slate-800/80 border border-slate-700 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/50 group-hover:bg-cyan-900/30 transition-all duration-500">
+                        <span class="material-symbols-outlined text-3xl text-cyan-500 group-hover:text-cyan-400 transition-colors">trending_up</span>
+                    </div>
+                    <div>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-200 mb-1 group-hover:text-white transition-colors">Market Perspective</h4>
+                        <p class="text-sm text-slate-400 font-light">& Global Industry Outlook</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="group relative p-8 md:p-10 rounded-[2rem] bg-slate-900/50 border border-slate-800 hover:bg-slate-800/80 hover:border-cyan-500/50 transition-all duration-500 overflow-hidden shadow-lg hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]">
+                <div class="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-cyan-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="flex items-center space-x-6">
+                    <div class="flex-shrink-0 w-16 h-16 rounded-2xl bg-slate-800/80 border border-slate-700 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/50 group-hover:bg-cyan-900/30 transition-all duration-500">
+                        <span class="material-symbols-outlined text-3xl text-cyan-500 group-hover:text-cyan-400 transition-colors">hub</span>
+                    </div>
+                    <div>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-200 mb-1 group-hover:text-white transition-colors">High-Impact</h4>
+                        <p class="text-sm text-slate-400 font-light">Strategic Networking</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium Glow CTA Button -->
+        <div class="relative inline-block group w-full sm:w-auto">
+            <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
+            <button @click="modalOpen = true" class="relative flex w-full sm:w-auto items-center justify-center px-10 md:px-14 py-5 bg-slate-900 border border-slate-700/50 text-white font-extrabold tracking-[0.2em] text-sm md:text-lg rounded-2xl hover:bg-slate-800 active:scale-95 transition-all duration-300 uppercase">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-blue-300">Click Here To Register</span>
+                <span class="material-symbols-outlined ml-3 text-cyan-400 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span>
+            </button>
+        </div>
+    </div>
 </section>
 
     <section class="py-24 bg-slate-950 px-6 border-t border-white/5" id="sponsorship">

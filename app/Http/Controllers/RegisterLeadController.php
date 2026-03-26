@@ -15,15 +15,16 @@ class RegisterLeadController extends Controller
     {
         $phoneCountryCode = $request->string('phone_country_code')->toString();
         $phoneNumber = preg_replace('/\s+/', '', $request->string('phone')->toString()) ?? '';
+        $consentApproved = $request->boolean('consent_approved');
 
         Lead::create([
             'full_name' => $request->string('full_name')->toString(),
             'email' => $request->string('email')->toString(),
             'company_name' => $request->string('company_name')->toString(),
             'phone' => $phoneCountryCode.$phoneNumber,
-            'gdpr_approved' => $request->boolean('gdpr_approved'),
-            'kvkk_approved' => $request->boolean('kvkk_approved'),
-            'privacy_approved' => $request->boolean('privacy_approved'),
+            'gdpr_approved' => $consentApproved,
+            'kvkk_approved' => $consentApproved,
+            'privacy_approved' => $consentApproved,
         ]);
 
         return back()->with('status', 'Registration request received. Our hospitality team will contact you shortly.');

@@ -29,9 +29,7 @@ class StoreLeadRequest extends FormRequest
             'company_name' => ['required', 'string', 'max:255'],
             'phone_country_code' => ['required', 'string', 'regex:/^\+[0-9]{1,4}$/'],
             'phone' => ['required', 'string', 'regex:/^[0-9]{6,15}$/'],
-            'gdpr_approved' => ['accepted'],
-            'kvkk_approved' => ['accepted'],
-            'privacy_approved' => ['accepted'],
+            'consent_approved' => ['accepted'],
         ];
     }
 
@@ -45,9 +43,7 @@ class StoreLeadRequest extends FormRequest
             'phone.required' => 'Phone number is required.',
             'phone.regex' => 'Phone number must contain only digits and be 6 to 15 characters long.',
             'phone_country_code.regex' => 'Country code format is invalid.',
-            'gdpr_approved.accepted' => 'GDPR consent is required.',
-            'kvkk_approved.accepted' => 'Local data protection consent is required.',
-            'privacy_approved.accepted' => 'Privacy notice consent is required.',
+            'consent_approved.accepted' => 'Consent approval is required.',
         ];
     }
 }
