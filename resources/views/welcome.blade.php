@@ -71,18 +71,59 @@
         .iti { width: 100%; }
         .iti__country-list { background-color: #020617; border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; border-radius: 0.5rem; }
         .iti__country.iti__highlight { background-color: rgba(255, 255, 255, 0.1); }
-        .iti__search-input { background: #0f172a; color: #fff; border: 1px solid rgba(255,255,255,0.2) !important; border-radius: 0.25rem !important; }
+        .iti__search-input { background-color: #0f172a !important; color: #fff !important; border: 1px solid rgba(255,255,255,0.2) !important; border-radius: 0.25rem !important; padding: 10px !important; margin: 5px !important; width: calc(100% - 10px) !important; }
         .iti__selected-country { opacity: 0.8; }
         .iti__selected-country:hover { opacity: 1; background-color: transparent !important; }
         
-        .ts-control { background: transparent !important; border: none !important; border-bottom: 1px solid rgba(255,255,255,0.2) !important; color: #fff !important; padding: 0.75rem 0 !important; border-radius: 0 !important; box-shadow: none !important; }
+        .ts-control { background: transparent !important; border: none !important; border-bottom: 1px solid rgba(255,255,255,0.2) !important; color: #fff !important; padding: 0.75rem 0 !important; border-radius: 0 !important; box-shadow: none !important; min-height: 46px !important; }
         .ts-control>input { color: #fff !important; }
-        .ts-dropdown { background: #020617 !important; border: 1px solid rgba(255,255,255,0.1) !important; border-radius: 0.5rem !important; margin-top: 5px !important; }
+        .ts-dropdown { background: #020617 !important; border: 1px solid rgba(255,255,255,0.1) !important; border-radius: 0.5rem !important; margin-top: 5px !important; z-index: 1000 !important; }
         .ts-dropdown .option { color: #cbd5e1 !important; padding: 0.5rem 1rem !important; }
         .ts-dropdown .option.active, .ts-dropdown .option:hover { background: rgba(255,255,255,0.1) !important; color: #fff !important; }
         .ts-wrapper.single .ts-control::after { border-color: rgba(255,255,255,0.4) transparent transparent transparent !important; right: 0 !important;}
         .ts-control.has-items { padding-bottom: 0px !important; }
         .ts-control .item { color: #fff !important; font-size: 1rem; }
+        
+        /* Hide original select to prevent double lines */
+        select.tomselected {
+            display: none !important;
+        }
+
+        /* Browser Autofill Styling Fix */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus, 
+        input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px #0f172a inset !important;
+            -webkit-text-fill-color: white !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+
+        /* Force floating labels up on autofill */
+        input:-webkit-autofill + label,
+        input:-internal-autofill-selected + label,
+        input:not(:placeholder-shown) + label,
+        label.active-label {
+            transform: translateY(-1.5rem) scale(0.75) !important;
+            color: #94a3b8 !important;
+            transform-origin: 0 0 !important;
+            z-index: 10 !important;
+        }
+
+        .animate-fade-in {
+            animation: fade-in 1s ease-out forwards;
+        }
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
+        }
     </style>
 <script id="browser-logger-active">
 (function() {
@@ -290,6 +331,7 @@
         <div class="relative z-10 hidden md:flex items-center space-x-8 text-[14px] font-bold tracking-[0.2em] uppercase py-4">
             <a class="text-slate-300 hover:text-white transition-opacity" href="#agenda">Agenda</a>
             <a class="text-slate-300 hover:text-white transition-opacity" href="#about">About Us</a>
+            <a class="text-slate-300 hover:text-white transition-opacity" href="#who-attends">Who Attends</a>
             <a class="text-slate-300 hover:text-white transition-opacity" href="#keynote-speakers">Keynote Speakers</a>
             <a class="text-slate-300 hover:text-white transition-opacity" href="#sponsorship">Sponsorship</a>
             <a class="text-slate-300 hover:text-white transition-opacity" href="#venue">Venue</a>
@@ -307,6 +349,7 @@
     <div class="md:hidden mt-4 glass rounded-2xl p-6 flex flex-col space-y-4 shadow-2xl" x-show="mobileMenu" x-transition:enter="transition ease-out duration-300" x-transition:enter-end="opacity-100 scale-100" x-transition:enter-start="opacity-0 scale-95" style="display: none;">
         <a @click="mobileMenu = false" class="text-lg font-serif font-bold" href="#agenda">Agenda</a>
         <a @click="mobileMenu = false" class="text-lg font-serif font-bold" href="#about">About Us</a>
+        <a @click="mobileMenu = false" class="text-lg font-serif font-bold" href="#who-attends">Who Attends</a>
         <a @click="mobileMenu = false" class="text-lg font-serif font-bold" href="#keynote-speakers">Keynote Speakers</a>
         <a @click="mobileMenu = false" class="text-lg font-serif font-bold" href="#sponsorship">Sponsorship</a>
         <a @click="mobileMenu = false" class="text-lg font-serif font-bold" href="#venue">Venue</a>
@@ -475,29 +518,113 @@
                 </p>
             </div>
 
-            <div class="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+            <div class="grid gap-6">
                 <article class="glass rounded-[2rem] p-8 md:p-10 flex flex-col justify-between min-h-[320px]">
-                    <div>
-                        <p class="text-lg md:text-xl text-slate-300 leading-relaxed max-w-2xl">
-                            Steel Summit 2026, is an international steel conference that brings together the most influential and powerful players of the global steel industry in Istanbul.
-                        </p>
+                    <div class="space-y-6">
+                        <div class="space-y-4">
+                            <p class="text-xl md:text-2xl text-white font-serif italic border-l-4 border-slate-400 pl-6 py-2">
+                                Steel Networking Summits was created to meet the need for a truly global networking conference that brings together all stakeholders across the international steel trade.
+                            </p>
+                            <p class="text-slate-400 text-lg leading-relaxed">
+                                It aims to bring together all stakeholders of the global steel trade on a single platform:
+                            </p>
+                            <ul class="space-y-3 text-slate-300">
+                                <li class="flex items-center gap-3">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+                                    <span>From producers to international traders,</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+                                    <span>From industry institutions and organizations to finance and logistics providers.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="pt-6 border-t border-white/5">
+                            <div class="flex items-center gap-3 mb-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-200">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <circle cx="12" cy="12" r="6"></circle>
+                                    <circle cx="12" cy="12" r="2"></circle>
+                                </svg>
+                                <h4 class="text-white font-bold tracking-wider uppercase text-sm">Our Vision</h4>
+                            </div>
+                            <p class="text-slate-300 text-lg italic">
+                                To create a truly global and integrated steel networking platform.
+                            </p>
+                        </div>
                     </div>
                 </article>
+            </div>
+        </div>
+    </section>
 
-                <div class="grid gap-6">
-                    <article class="rounded-[2rem] border border-slate-400/20 bg-slate-900/70 p-7 md:p-8 shadow-[0_20px_45px_rgba(2,6,23,0.45)]">
-                        <p class="text-xs font-bold tracking-[0.3em] uppercase text-slate-500 mb-4">At The Conference</p>
-                        <p class="text-slate-200 text-lg md:text-xl leading-relaxed">
-                            Leading companies, decision-makers, and opinion leaders shaping the industry from around the world will participate both as speakers and as top-level attendees at this prestigious event.
-                        </p>
-                    </article>
+    <!-- NEW: What to Expect Section -->
+    <section class="py-24 bg-slate-950 px-6 border-t border-white/5 overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Left: Content -->
+                <div class="space-y-10">
+                    <div class="inline-block px-4 py-1.5 bg-slate-800/50 rounded-full border border-white/10">
+                        <span class="text-xs font-bold tracking-[0.3em] uppercase text-slate-400">Conference Experience</span>
+                    </div>
+                    
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-white tracking-tight">
+                        What to <span class="text-gradient-platinum">Expect?</span>
+                    </h2>
 
-                    <article class="rounded-[2rem] border border-slate-400/20 bg-slate-900/70 p-7 md:p-8 shadow-[0_20px_45px_rgba(2,6,23,0.45)]">
-                        <p class="text-xs font-bold tracking-[0.3em] uppercase text-slate-500 mb-4">2026 Focus</p>
-                        <p class="text-slate-200 text-lg md:text-xl leading-relaxed">
-                            Steel Summit 2026, while taking a comprehensive view of the past, present, and future of the global steel industry, will provide up-to-date and in-depth insights into steel markets across all regions, from Europe to Asia, and from the Americas to the Middle East and Africa.
-                        </p>
-                    </article>
+                    <div class="space-y-8">
+                        <!-- Item 1 -->
+                        <div class="flex gap-6 group">
+                            <div class="w-14 h-14 flex-shrink-0 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 group-hover:border-slate-400 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-300">
+                                    <path d="m3 21 1.9-1.9"></path>
+                                    <path d="m3 3 1.9 1.9"></path>
+                                    <path d="M5 16h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2Z"></path>
+                                    <path d="M15 14h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2Z"></path>
+                                    <path d="m19 19 2 2"></path>
+                                    <path d="m19 3 2 2"></path>
+                                    <path d="M21 16v-5a2 2 0 0 0-2-2h-1"></path>
+                                    <path d="M11 5v14"></path>
+                                </svg>
+                            </div>
+                            <div class="space-y-2">
+                                <h3 class="text-xl font-bold text-white">Industry Leaders</h3>
+                                <p class="text-slate-400 leading-relaxed text-lg">
+                                    Leading companies, decision-makers, and opinion leaders shaping the industry from around the world will participate both as speakers and as top-level attendees at this prestigious event.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="flex gap-6 group">
+                            <div class="w-14 h-14 flex-shrink-0 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 group-hover:border-slate-400 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-300">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                                    <path d="M2 12h20"></path>
+                                </svg>
+                            </div>
+                            <div class="space-y-2">
+                                <h3 class="text-xl font-bold text-white">Global Markets</h3>
+                                <p class="text-slate-400 leading-relaxed text-lg">
+                                    While taking a comprehensive view of the past, present, and future of the global steel industry, it will provide up-to-date and in-depth insights into steel markets across all regions.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Visual -->
+                <div class="relative group">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-slate-200/20 to-slate-400/20 rounded-[2.5rem] blur-2xl opacity-50 group-hover:opacity-100 transition duration-1000"></div>
+                    <div class="relative glass rounded-[2rem] overflow-hidden aspect-[4/5] border border-white/10">
+                        <img src="{{ asset('images/what-to-expect.png') }}" alt="Steel Summit Networking" class="w-full h-full object-cover scale-105 group-hover:scale-100 transition duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-10 left-10">
+                            <p class="text-white text-2xl font-serif italic italic font-bold">Reshaping Global Alliances</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -562,7 +689,7 @@
         </div>
     </section>
 
-{{-- Orijinal 'Who Attends' ve 'Why You Should Attend' bölümleri, geri dönülebilmek adına gizlenmiştir. 
+{{-- Orijinal 'Who Attends' ve 'Why You Should Attend' bölümleri, geri dönülebilmek adına gizlenmiştir.
 <!-- BEGIN: Who Attends -->
 <section class="py-32 bg-slate-950 px-6 border-t border-white/5" id="who-attends">
 <div class="max-w-7xl mx-auto">
@@ -637,230 +764,400 @@
 </button>
 </div>
 </div>
-</section>
+    </div>
+                   </section>
 --}}
 
+
 <!-- BEGIN: Who Attends -->
-<section class="py-24 md:py-32 bg-slate-950 px-6 border-t border-white/5" id="who-attends-new">
-    <div class="max-w-7xl mx-auto">
-        <div class="mb-16 md:mb-20 text-center">
-            <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4 italic">Who Attends?</h2>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
-            
-            <!-- Card 1: Steel Producers -->
-            <div class="glass flex flex-col md:flex-row rounded-2xl overflow-hidden group hover:-translate-y-1 transition-transform duration-300 shadow-lg border border-b-4 border-blue-500/50">
-                <div class="md:w-2/5 relative h-56 md:h-auto overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f20?q=80&w=600&auto=format&fit=crop" alt="Steel Producers" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-blue-900/60 mix-blend-multiply"></div>
-                </div>
-                <div class="md:w-3/5 p-6 md:p-8 flex flex-col justify-center bg-gradient-to-br from-blue-900/20 to-transparent">
-                    <h3 class="text-xl md:text-2xl font-bold text-white mb-4">Steel Producers and Traders</h3>
-                    <ul class="space-y-2 text-sm text-slate-300 font-light list-disc pl-4 marker:text-blue-400">
-                        <li>Owners and Senior Executives of Fortune 500 Companies</li>
-                        <li>Board Chairs and Members</li>
-                        <li>CEOs and C-Level Executives (C-Suite) International Steel Traders</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Card 2: Raw Material -->
-            <div class="glass flex flex-col md:flex-row rounded-2xl overflow-hidden group hover:-translate-y-1 transition-transform duration-300 shadow-lg border border-b-4 border-amber-500/50">
-                <div class="md:w-2/5 relative h-56 md:h-auto overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1587304193325-1e4eb41b6ac0?q=80&w=600&auto=format&fit=crop" alt="Raw Material" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-amber-900/60 mix-blend-multiply"></div>
-                </div>
-                <div class="md:w-3/5 p-6 md:p-8 flex flex-col justify-center bg-gradient-to-br from-amber-900/20 to-transparent">
-                    <h3 class="text-xl md:text-2xl font-bold text-white mb-2">Raw Material and Scrap Suppliers</h3>
-                    <p class="text-xs text-amber-300/70 mb-3 italic">Key players in the supply chain for major products such as:</p>
-                    <ul class="space-y-2 text-sm text-slate-300 font-light list-disc pl-4 marker:text-amber-400">
-                        <li>Iron ore</li>
-                        <li>Scrap</li>
-                        <li>Coal</li>
-                        <li>Ferroalloys</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Card 3: Machinery -->
-            <div class="glass flex flex-col md:flex-row rounded-2xl overflow-hidden group hover:-translate-y-1 transition-transform duration-300 shadow-lg border border-b-4 border-cyan-500/50">
-                <div class="md:w-2/5 relative h-56 md:h-auto overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1565514020179-026b92b64757?q=80&w=600&auto=format&fit=crop" alt="Machinery" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-cyan-900/60 mix-blend-multiply"></div>
-                </div>
-                <div class="md:w-3/5 p-6 md:p-8 flex flex-col justify-center bg-gradient-to-br from-cyan-900/20 to-transparent">
-                    <h3 class="text-xl md:text-2xl font-bold text-white mb-2">Machinery, Equipment & Tech</h3>
-                    <p class="text-xs text-cyan-300/70 mb-3 italic">Engineering firms developing technologies for:</p>
-                    <ul class="space-y-2 text-sm text-slate-300 font-light list-disc pl-4 marker:text-cyan-400">
-                        <li>Rolling</li>
-                        <li>Melting</li>
-                        <li>Automation and process systems</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Card 4: Logistics -->
-            <div class="glass flex flex-col md:flex-row rounded-2xl overflow-hidden group hover:-translate-y-1 transition-transform duration-300 shadow-lg border border-b-4 border-indigo-500/50">
-                <div class="md:w-2/5 relative h-56 md:h-auto overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1586528116311-ad8ed7c80a30?q=80&w=600&auto=format&fit=crop" alt="Logistics" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-indigo-900/60 mix-blend-multiply"></div>
-                </div>
-                <div class="md:w-3/5 p-6 md:p-8 flex flex-col justify-center bg-gradient-to-br from-indigo-900/20 to-transparent">
-                    <h3 class="text-xl md:text-2xl font-bold text-white mb-4">Logistics, Port & Insurance</h3>
-                    <ul class="space-y-2 text-sm text-slate-300 font-light list-disc pl-4 marker:text-indigo-400">
-                        <li>Port operators</li>
-                        <li>Logistics and transportation companies</li>
-                        <li>Warehousing and customs service providers</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Card 5: Digitalization -->
-            <div class="glass flex flex-col md:flex-row rounded-2xl overflow-hidden group hover:-translate-y-1 transition-transform duration-300 shadow-lg border border-b-4 border-yellow-500/50">
-                <div class="md:w-2/5 relative h-56 md:h-auto overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop" alt="Digitalization" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-yellow-700/60 mix-blend-multiply"></div>
-                </div>
-                <div class="md:w-3/5 p-6 md:p-8 flex flex-col justify-center bg-gradient-to-br from-yellow-700/20 to-transparent">
-                    <h3 class="text-xl md:text-2xl font-bold text-white mb-4">Digitalization, AI & High-Tech</h3>
-                    <ul class="space-y-2 text-sm text-slate-300 font-light list-disc pl-4 marker:text-yellow-400">
-                        <li>Technology leaders offering AI solutions and efficiency innovations for the steel industry.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Card 6: Banking -->
-            <div class="glass flex flex-col md:flex-row rounded-2xl overflow-hidden group hover:-translate-y-1 transition-transform duration-300 shadow-lg border border-b-4 border-rose-500/50">
-                <div class="md:w-2/5 relative h-56 md:h-auto overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop" alt="Banking" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-rose-900/60 mix-blend-multiply"></div>
-                </div>
-                <div class="md:w-3/5 p-6 md:p-8 flex flex-col justify-center bg-gradient-to-br from-rose-900/20 to-transparent">
-                    <h3 class="text-xl md:text-2xl font-bold text-white mb-4">Banking and Financial Institutions</h3>
-                    <ul class="space-y-2 text-sm text-slate-300 font-light list-disc pl-4 marker:text-rose-400">
-                        <li>Banks</li>
-                        <li>Trade finance organizations</li>
-                        <li>Insurance and risk management firms</li>
-                        <li>International investors and fund managers</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Card 7: Industry Institutions -->
-            <div class="glass flex flex-col md:flex-row rounded-2xl overflow-hidden group hover:-translate-y-1 transition-transform duration-300 shadow-lg border border-b-4 border-slate-500/50 lg:col-span-2 lg:mx-32">
-                <div class="md:w-2/5 relative h-56 md:h-auto overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=600&auto=format&fit=crop" alt="Institutions" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-slate-800/60 mix-blend-multiply"></div>
-                </div>
-                <div class="md:w-3/5 p-6 md:p-8 flex flex-col justify-center bg-gradient-to-br from-slate-700/20 to-transparent">
-                    <h3 class="text-xl md:text-2xl font-bold text-white mb-4">Industry Institutions & Organizations</h3>
-                    <ul class="space-y-2 text-sm text-slate-300 font-light list-disc pl-4 marker:text-slate-400">
-                        <li>National and international steel associations, institutions, and organizations</li>
-                        <li>Chambers of commerce and industry</li>
-                        <li>Industry associations and their senior representatives</li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<!-- BEGIN: Why You Should Attend -->
-<section class="relative py-24 md:py-36 bg-slate-950 px-6 border-t border-white/5 overflow-hidden" id="why-attend-new">
-    
-    <!-- Premium Background Glow/Flare -->
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full md:w-3/4 h-3/4 bg-cyan-900/20 blur-[120px] rounded-full pointer-events-none"></div>
-    
-    <div class="relative max-w-5xl mx-auto text-center z-10">
-        <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-6">
-            Why You Should <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 italic pr-2">Attend?</span>
+<section class="py-32 bg-slate-950 overflow-hidden" id="who-attends">
+    <!-- Header: Aligned with container left -->
+    <div class="max-w-7xl mx-auto px-6 mb-16 animate-fade-in">
+        <h2 class="text-4xl md:text-7xl font-serif font-bold text-white mb-6 leading-tight">
+            Who <br class="hidden md:block" />
+            <span class="text-slate-500 italic">Attends?</span>
         </h2>
-        
-        <p class="text-lg md:text-xl text-slate-400 font-light leading-relaxed mb-16 max-w-3xl mx-auto">
-            Connect with steel producers, traders, international organizations, and industry leaders from around the world on a single, exclusive platform.
+        <p class="text-slate-400 text-lg md:text-2xl font-light max-w-2xl font-sans leading-relaxed">
+            A cross-disciplinary assembly of the global steel industry's primary stakeholders.
         </p>
+    </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 text-left mb-20">
-            <!-- Feature 1 -->
-            <div class="group relative p-8 md:p-10 rounded-[2rem] bg-slate-900/50 border border-slate-800 hover:bg-slate-800/80 hover:border-cyan-500/50 transition-all duration-500 overflow-hidden shadow-lg hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]">
-                <div class="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-cyan-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div class="flex items-center space-x-6">
-                    <div class="flex-shrink-0 w-16 h-16 rounded-2xl bg-slate-800/80 border border-slate-700 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/50 group-hover:bg-cyan-900/30 transition-all duration-500">
-                        <span class="material-symbols-outlined text-3xl text-cyan-500 group-hover:text-cyan-400 transition-colors">public</span>
-                    </div>
-                    <div>
-                        <h4 class="text-lg md:text-xl font-bold text-slate-200 mb-1 group-hover:text-white transition-colors">Direct Access</h4>
-                        <p class="text-sm text-slate-400 font-light">to the Global Steel Ecosystem</p>
-                    </div>
-                </div>
-            </div>
+    <!-- Apple Style Slider -->
+    <div class="relative group">
+        <!-- Horizontal Scroll Container -->
+        <div class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide space-x-5 px-[max(1.5rem,calc((100%-80rem)/2))] pb-12">
             
-            <!-- Feature 2 -->
-            <div class="group relative p-8 md:p-10 rounded-[2rem] bg-slate-900/50 border border-slate-800 hover:bg-slate-800/80 hover:border-cyan-500/50 transition-all duration-500 overflow-hidden shadow-lg hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]">
-                <div class="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-cyan-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div class="flex items-center space-x-6">
-                    <div class="flex-shrink-0 w-16 h-16 rounded-2xl bg-slate-800/80 border border-slate-700 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/50 group-hover:bg-cyan-900/30 transition-all duration-500">
-                        <span class="material-symbols-outlined text-3xl text-cyan-500 group-hover:text-cyan-400 transition-colors">military_tech</span>
-                    </div>
-                    <div>
-                        <h4 class="text-lg md:text-xl font-bold text-slate-200 mb-1 group-hover:text-white transition-colors">Prestige & Visibility</h4>
-                        <p class="text-sm text-slate-400 font-light">Elevate your brand presence</p>
-                    </div>
+            <!-- Card 1: Producers -->
+            <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
+                <div class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden bg-slate-900 border border-white/5 shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
+                    <img src="{{ asset('images/attendees/producers_v2.png') }}" alt="Steel Producers" class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent"></div>
+                </div>
+                <div class="mt-8 px-4">
+                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-3">Steel Producers</h4>
+                    <p class="text-slate-400 text-base md:text-lg font-light leading-relaxed">
+                        Global manufacturers driving the industry forward with next-gen production tech.
+                    </p>
                 </div>
             </div>
 
-            <!-- Feature 3 -->
-            <div class="group relative p-8 md:p-10 rounded-[2rem] bg-slate-900/50 border border-slate-800 hover:bg-slate-800/80 hover:border-cyan-500/50 transition-all duration-500 overflow-hidden shadow-lg hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]">
-                <div class="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-cyan-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div class="flex items-center space-x-6">
-                    <div class="flex-shrink-0 w-16 h-16 rounded-2xl bg-slate-800/80 border border-slate-700 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/50 group-hover:bg-cyan-900/30 transition-all duration-500">
-                        <span class="material-symbols-outlined text-3xl text-cyan-500 group-hover:text-cyan-400 transition-colors">trending_up</span>
-                    </div>
-                    <div>
-                        <h4 class="text-lg md:text-xl font-bold text-slate-200 mb-1 group-hover:text-white transition-colors">Market Perspective</h4>
-                        <p class="text-sm text-slate-400 font-light">& Global Industry Outlook</p>
-                    </div>
+            <!-- Card 2: International Traders -->
+            <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
+                <div class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden bg-slate-900 border border-white/5 shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
+                    <img src="{{ asset('images/attendees/traders_v2.png') }}" alt="International Traders" class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent"></div>
+                </div>
+                <div class="mt-8 px-4">
+                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-3">International Traders</h4>
+                    <p class="text-slate-400 text-base md:text-lg font-light leading-relaxed">
+                        Strategic networkers connecting supply with demand across global corridors.
+                    </p>
                 </div>
             </div>
 
-            <!-- Feature 4 -->
-            <div class="group relative p-8 md:p-10 rounded-[2rem] bg-slate-900/50 border border-slate-800 hover:bg-slate-800/80 hover:border-cyan-500/50 transition-all duration-500 overflow-hidden shadow-lg hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]">
-                <div class="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-cyan-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div class="flex items-center space-x-6">
-                    <div class="flex-shrink-0 w-16 h-16 rounded-2xl bg-slate-800/80 border border-slate-700 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/50 group-hover:bg-cyan-900/30 transition-all duration-500">
-                        <span class="material-symbols-outlined text-3xl text-cyan-500 group-hover:text-cyan-400 transition-colors">hub</span>
-                    </div>
-                    <div>
-                        <h4 class="text-lg md:text-xl font-bold text-slate-200 mb-1 group-hover:text-white transition-colors">High-Impact</h4>
-                        <p class="text-sm text-slate-400 font-light">Strategic Networking</p>
-                    </div>
+            <!-- Card 3: Logistics Providers -->
+            <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
+                <div class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden bg-slate-900 border border-white/5 shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
+                    <img src="{{ asset('images/attendees/logistics_v2.png') }}" alt="Logistics Providers" class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent"></div>
+                </div>
+                <div class="mt-8 px-4">
+                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-3">Logistics Providers</h4>
+                    <p class="text-slate-400 text-base md:text-lg font-light leading-relaxed">
+                        Architects of global supply chains, optimizing transit from mill to port.
+                    </p>
                 </div>
             </div>
+
+            <!-- Card 4: Financial Institutions -->
+            <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
+                <div class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden bg-slate-900 border border-white/5 shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
+                    <img src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?q=80&w=2000&auto=format&fit=crop" alt="Financial Institutions" class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent"></div>
+                </div>
+                <div class="mt-8 px-4">
+                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-3">Financial Institutions</h4>
+                    <p class="text-slate-400 text-base md:text-lg font-light leading-relaxed">
+                        Key investment partners fueling the green steel transition and trade finance.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 5: Technology Providers -->
+            <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
+                <div class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden bg-slate-900 border border-white/5 shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2000&auto=format&fit=crop" alt="Technology Providers" class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent"></div>
+                </div>
+                <div class="mt-8 px-4">
+                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-3">Technology Providers</h4>
+                    <p class="text-slate-400 text-base md:text-lg font-light leading-relaxed">
+                        Innovative AI and engineering firms transforming manufacturing standards.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 6: Government Departments -->
+            <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
+                <div class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden bg-slate-900 border border-white/5 shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
+                    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2000&auto=format&fit=crop" alt="Government & Institutions" class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent"></div>
+                </div>
+                <div class="mt-8 px-4">
+                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-3">Gov & Institutions</h4>
+                    <p class="text-slate-400 text-base md:text-lg font-light leading-relaxed">
+                        Policymakers and trade associations shaping international trade regulations.
+                    </p>
+                </div>
+            </div>
+
         </div>
 
-        <!-- Premium Glow CTA Button -->
-        <div class="relative inline-block group w-full sm:w-auto">
-            <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
-            <button @click="modalOpen = true" class="relative flex w-full sm:w-auto items-center justify-center px-10 md:px-14 py-5 bg-slate-900 border border-slate-700/50 text-white font-extrabold tracking-[0.2em] text-sm md:text-lg rounded-2xl hover:bg-slate-800 active:scale-95 transition-all duration-300 uppercase">
-                <span class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-blue-300">Click Here To Register</span>
-                <span class="material-symbols-outlined ml-3 text-cyan-400 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span>
-            </button>
+        <!-- Slider Progress Indicator (Optional but nice for Apple feel) -->
+        <div class="max-w-7xl mx-auto px-6 flex justify-end">
+             <div class="flex space-x-2">
+                 <div class="w-12 h-1 bg-white/20 rounded-full overflow-hidden">
+                     <div class="w-1/3 h-full bg-slate-400"></div>
+                 </div>
+             </div>
         </div>
     </div>
 </section>
 
-    <section class="py-24 bg-slate-950 px-6 border-t border-white/5" id="sponsorship">
-        <div class="max-w-6xl mx-auto text-center">
-            <h2 class="text-4xl md:text-5xl font-serif font-bold text-gradient-platinum uppercase tracking-widest mb-12">Sponsorship</h2>
+<!-- BEGIN: Sponsorship -->
+<section class="py-32 bg-slate-950 overflow-hidden" id="sponsorship" x-data="{ activeTab: 'packages', showForm: false }">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="mb-20 text-center animate-fade-in text-visible">
+            <span class="text-cyan-500 font-sans tracking-[0.2em] uppercase text-xs mb-4 block font-bold">Partnership Opportunity</span>
+            <h2 class="text-5xl md:text-8xl font-serif font-bold text-white mb-8 leading-tight">
+                Why Become a <br class="hidden md:block" />
+                <span class="text-slate-500 italic">Sponsor?</span>
+            </h2>
+            <p class="text-slate-400 text-xl md:text-2xl font-light max-w-3xl mx-auto font-sans leading-relaxed">
+                Beyond making your brand visible in the global steel industry, it positions you among the key players shaping the sector.
+            </p>
+        </div>
+
+        <!-- Strategic Points: Apple Dark Style Cards -->
+        <div class="grid md:grid-cols-3 gap-8 mb-32">
             
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
-                <a href="#our-sponsors" class="w-full sm:w-auto px-10 py-5 glass hover:bg-white/10 text-white font-bold tracking-wider uppercase rounded-xl transition duration-300">Our Sponsors</a>
-                <a href="#sponsorship-packages" class="w-full sm:w-auto px-10 py-5 bg-gradient-to-r from-slate-200 to-slate-400 text-slate-950 hover:scale-105 active:scale-95 font-bold tracking-wider uppercase rounded-xl transition-all duration-300">Sponsorship Packages</a>
+            <!-- Card 1: Strategic Positioning -->
+            <div class="relative p-12 rounded-[2.5rem] bg-slate-900/50 border border-white/5 hover:border-blue-500/30 shadow-2xl transition-all duration-700 group flex flex-col h-full overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                <div class="relative z-10">
+                    <div class="mb-12">
+                        <span class="material-symbols-outlined text-4xl text-blue-500 group-hover:scale-110 transition-transform duration-500">public</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h4 class="text-3xl md:text-4xl font-bold text-white leading-[1.15] mb-4">
+                            Strategic <span class="text-blue-500">Positioning</span> in the market.
+                        </h4>
+                        <p class="text-slate-400 text-lg font-light">In the International Steel Industry</p>
+                    </div>
+                    <div class="mt-12 flex justify-end">
+                        <button class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-slate-950 group-hover:bg-blue-500 group-hover:text-white transition-all duration-300">
+                            <span class="material-symbols-outlined text-xl font-bold">add</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Target Audience -->
+            <div class="relative p-12 rounded-[2.5rem] bg-slate-900/50 border border-white/5 hover:border-orange-500/30 shadow-2xl transition-all duration-700 group flex flex-col h-full overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                <div class="relative z-10">
+                    <div class="mb-12">
+                        <span class="material-symbols-outlined text-4xl text-orange-500 group-hover:scale-110 transition-transform duration-500">track_changes</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h4 class="text-3xl md:text-4xl font-bold text-white leading-[1.15] mb-4">
+                            Direct <span class="text-orange-500">Engagement</span> with targets.
+                        </h4>
+                        <p class="text-slate-400 text-lg font-light">With High-Level Target Audience</p>
+                    </div>
+                    <div class="mt-12 flex justify-end">
+                        <button class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-slate-950 group-hover:bg-orange-500 group-hover:text-white transition-all duration-300">
+                            <span class="material-symbols-outlined text-xl font-bold">add</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Global Wealth -->
+            <div class="relative p-12 rounded-[2.5rem] bg-slate-900/50 border border-white/5 hover:border-purple-500/30 shadow-2xl transition-all duration-700 group flex flex-col h-full overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                <div class="relative z-10">
+                    <div class="mb-12">
+                        <span class="material-symbols-outlined text-4xl text-purple-500 group-hover:scale-110 transition-transform duration-500">account_balance</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h4 class="text-3xl md:text-4xl font-bold text-white leading-[1.15] mb-4">
+                            Global <span class="text-purple-500">Wealth Hub</span> access.
+                        </h4>
+                        <p class="text-slate-400 text-lg font-light">At the Heart of World Steel Industry</p>
+                    </div>
+                    <div class="mt-12 flex justify-end">
+                        <button class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-slate-950 group-hover:bg-purple-500 group-hover:text-white transition-all duration-300">
+                            <span class="material-symbols-outlined text-xl font-bold">add</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
+
+        <!-- Toggle Tabs -->
+        <div class="flex justify-center mb-16">
+            <div class="inline-flex bg-slate-900 p-1.5 rounded-2xl border border-white/5 shadow-sm">
+                <button @click="activeTab = 'sponsors'" :class="activeTab === 'sponsors' ? 'bg-white/10 text-white shadow-sm' : 'text-slate-500 hover:text-slate-300'" class="px-8 py-3 rounded-xl transition-all font-semibold text-sm tracking-tight">OUR SPONSORS</button>
+                <button @click="activeTab = 'packages'" :class="activeTab === 'packages' ? 'bg-white/10 text-white shadow-sm' : 'text-slate-500 hover:text-slate-300'" class="px-8 py-3 rounded-xl transition-all font-semibold text-sm tracking-tight">SPONSORSHIP PACKAGES</button>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="grid lg:grid-cols-2 gap-12 items-start mb-24">
+            <!-- Left: Subheading 1 -->
+            <div class="p-12 md:p-16 rounded-[3rem] bg-slate-900/40 border border-white/5 shadow-2xl animate-fade-in" x-show="activeTab === 'packages'">
+                <h3 class="text-3xl md:text-4xl font-serif font-bold text-white mb-8 leading-tight">Package <br/>Options</h3>
+                <div class="space-y-6">
+                    <p class="text-slate-400 text-lg leading-relaxed font-light">
+                        Steel Networking Summits offers its sponsors a range of sponsorship packages, providing tailored solutions to meet each brand’s specific needs.
+                    </p>
+                    <p class="text-slate-500 leading-relaxed font-light italic border-l-2 border-white/10 pl-6">
+                        These packages are designed in line with brand objectives and communication strategies. All sponsorship packages aim to deliver 360-degree visibility and engagement before, during, and after the conference.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Right: Subheading 2 -->
+            <div class="p-12 md:p-16 rounded-[3rem] bg-slate-900/40 border border-white/5 shadow-2xl animate-fade-in" x-show="activeTab === 'packages'">
+                <h3 class="text-3xl md:text-4xl font-serif font-bold text-white mb-8 leading-tight">Exclusive Benefits <br/>& Visibility</h3>
+                <div class="space-y-6">
+                    <p class="text-slate-400 text-lg leading-relaxed font-light">
+                        Sponsors will have the opportunity to be featured in all printed and digital promotional materials, on the official website, social media channels, and in-event visibility applications.
+                    </p>
+                    <p class="text-slate-300 text-lg leading-relaxed font-light font-semibold">
+                        Impact Senior Decision-Makers
+                    </p>
+                    <p class="text-slate-500 font-light leading-relaxed">
+                        In addition, they will gain the chance to engage directly with senior decision-makers and develop long-term business partnerships.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Placeholder for OUR SPONSORS tab -->
+            <div class="lg:col-span-2 text-center py-32 animate-fade-in" x-show="activeTab === 'sponsors'">
+                <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-8 animate-pulse text-slate-500">
+                    <span class="material-symbols-outlined text-3xl">upcoming</span>
+                </div>
+                <h3 class="text-2xl text-slate-500 italic font-serif">Sponsorship announcements coming soon.</h3>
+            </div>
+        </div>
+
+        <!-- CTA & Form Trigger -->
+        <div class="text-center pb-20">
+            <button @click="showForm = true" class="group relative px-12 py-6 bg-white text-slate-950 rounded-full font-bold text-xl transition-all shadow-[0_20px_50px_rgba(255,255,255,0.05)] hover:shadow-[0_30px_70px_rgba(255,255,255,0.1)] active:scale-95">
+                <span class="relative z-10">Become a Sponsor</span>
+                <div class="absolute inset-0 rounded-full bg-slate-900 opacity-0 group-hover:opacity-10 scale-0 group-hover:scale-100 transition-all duration-500"></div>
+            </button>
+            <p class="mt-8 text-slate-500 text-sm font-light">Join the industry leaders</p>
+        </div>
+    </div>
+
+    <!-- Sponsorship Application Form Modal (Back to Dark Mode) -->
+    <div x-show="showForm" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 transform scale-95"
+         x-transition:enter-end="opacity-100 transform scale-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 transform scale-100"
+         x-transition:leave-end="opacity-0 transform scale-95"
+         class="fixed inset-0 z-[100] flex items-center justify-center px-6 pointer-events-none"
+         x-cloak>
+        <div class="fixed inset-0 bg-slate-950/80 backdrop-blur-xl pointer-events-auto" @click="showForm = false"></div>
+        <div class="relative w-full max-w-xl bg-slate-900 border border-white/10 rounded-[3rem] shadow-2xl p-10 md:p-14 pointer-events-auto animate-fade-in">
+            <button @click="showForm = false" class="absolute top-10 right-10 text-white/40 hover:text-white transition-colors">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <h3 class="text-4xl font-serif font-bold text-white mb-3">Sponsorship Inquiry</h3>
+            <p class="text-slate-400 mb-10 font-light text-lg">Elevate your brand at Steel Summit 2026.</p>
+            
+            <form action="#" method="POST" class="space-y-8">
+                @csrf
+                <div class="space-y-2">
+                    <label class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold ml-1">Company Name</label>
+                    <input type="text" required name="company" class="w-full bg-white/5 border border-white/10 rounded-[1.25rem] py-5 px-8 text-white focus:outline-none focus:border-white/20 transition-all">
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="space-y-2">
+                        <label class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold ml-1">Work Email</label>
+                        <input type="email" required name="email" class="w-full bg-white/5 border border-white/10 rounded-[1.25rem] py-5 px-8 text-white focus:outline-none focus:border-white/20 transition-all">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold ml-1">Phone Number</label>
+                        <input type="tel" required name="phone" class="w-full bg-white/5 border border-white/10 rounded-[1.25rem] py-5 px-8 text-white focus:outline-none focus:border-white/20 transition-all">
+                    </div>
+                </div>
+                <button type="submit" class="w-full py-6 bg-white text-slate-950 rounded-[1.25rem] font-bold text-xl hover:bg-slate-200 transition-all active:scale-95 shadow-xl">
+                    Submit Application
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- BEGIN: Unique Value Proposition -->
+<section class="py-32 bg-slate-950 overflow-hidden" id="unique-value">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-20 items-center">
+            
+            <!-- Left Content -->
+            <div class="animate-fade-in text-visible">
+                <span class="text-blue-500 font-sans tracking-[0.2em] uppercase text-xs mb-6 block font-bold">The Difference</span>
+                <h2 class="text-5xl md:text-7xl font-serif font-bold text-white mb-12 leading-tight">
+                    What Makes the <br/>
+                    <span class="text-slate-500 italic">Conference Unique?</span>
+                </h2>
+                
+                <ul class="space-y-10">
+                    <li class="group flex items-start gap-6 transition-all duration-500 hover:translate-x-2">
+                        <div class="mt-1 flex-shrink-0 w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 group-hover:bg-blue-500 group-hover:border-transparent transition-all duration-500">
+                            <span class="material-symbols-outlined text-lg text-blue-500 group-hover:text-white transition-colors duration-500">check</span>
+                        </div>
+                        <div>
+                            <h4 class="text-xl md:text-2xl text-white font-semibold mb-2 leading-snug">Targeted and Results-Oriented Networking Model</h4>
+                            <p class="text-slate-500 font-light leading-relaxed">Precision-focused engagement for professional impact.</p>
+                        </div>
+                    </li>
+                    <li class="group flex items-start gap-6 transition-all duration-500 hover:translate-x-2">
+                        <div class="mt-1 flex-shrink-0 w-8 h-8 rounded-full bg-purple-500/10 flex items-center justify-center border border-purple-500/20 group-hover:bg-purple-500 group-hover:border-transparent transition-all duration-500">
+                            <span class="material-symbols-outlined text-lg text-purple-500 group-hover:text-white transition-colors duration-500">bolt</span>
+                        </div>
+                        <div>
+                            <h4 class="text-xl md:text-2xl text-white font-semibold mb-2 leading-snug">New Business Connections That Lead Directly to Trade</h4>
+                            <p class="text-slate-500 font-light leading-relaxed">Fostering high-value trade opportunities across borders.</p>
+                        </div>
+                    </li>
+                    <li class="group flex items-start gap-6 transition-all duration-500 hover:translate-x-2">
+                        <div class="mt-1 flex-shrink-0 w-8 h-8 rounded-full bg-orange-500/10 flex items-center justify-center border border-orange-500/20 group-hover:bg-orange-500 group-hover:border-transparent transition-all duration-500">
+                            <span class="material-symbols-outlined text-lg text-orange-500 group-hover:text-white transition-colors duration-500">hub</span>
+                        </div>
+                        <div>
+                            <h4 class="text-xl md:text-2xl text-white font-semibold mb-2 leading-snug">All Industry Power Hubs on a Single Platform</h4>
+                            <p class="text-slate-500 font-light leading-relaxed">The entire industry's ecosystem under one roof.</p>
+                        </div>
+                    </li>
+                    <li class="group flex items-start gap-6 transition-all duration-500 hover:translate-x-2">
+                        <div class="mt-1 flex-shrink-0 w-8 h-8 rounded-full bg-cyan-500/10 flex items-center justify-center border border-cyan-500/20 group-hover:bg-cyan-500 group-hover:border-transparent transition-all duration-500">
+                            <span class="material-symbols-outlined text-lg text-cyan-500 group-hover:text-white transition-colors duration-500">public</span>
+                        </div>
+                        <div>
+                            <h4 class="text-xl md:text-2xl text-white font-semibold mb-2 leading-snug">Truly Global Representation</h4>
+                            <p class="text-slate-500 font-light leading-relaxed">Worldwide delegates bridging global markets.</p>
+                        </div>
+                    </li>
+                    <li class="group flex items-start gap-6 transition-all duration-500 hover:translate-x-2">
+                        <div class="mt-1 flex-shrink-0 w-8 h-8 rounded-full bg-red-500/10 flex items-center justify-center border border-red-500/20 group-hover:bg-red-500 group-hover:border-transparent transition-all duration-500">
+                            <span class="material-symbols-outlined text-lg text-red-500 group-hover:text-white transition-colors duration-500">location_on</span>
+                        </div>
+                        <div>
+                            <h4 class="text-xl md:text-2xl text-white font-semibold mb-2 leading-snug">Istanbul’s Strategic and Geopolitical Advantage</h4>
+                            <p class="text-slate-500 font-light leading-relaxed">The world's bridge, serving as a central hub for trade.</p>
+                        </div>
+                    </li>
+                </ul>
+                
+                <div class="mt-16">
+                    <button @click="modalOpen = true" class="group relative px-12 py-5 bg-white text-slate-950 rounded-full font-bold text-lg transition-all shadow-[0_20px_50px_rgba(255,255,255,0.05)] hover:shadow-[0_30px_70px_rgba(255,255,255,0.1)] active:scale-95 overflow-hidden">
+                        <span class="relative z-10 transition-colors group-hover:text-blue-500">Register Now</span>
+                        <div class="absolute inset-x-0 bottom-0 h-0 bg-slate-50 group-hover:h-full transition-all duration-300"></div>
+                    </button>
+                </div>
+            </div>
+
+                <!-- Right Visual -->
+            <div class="relative group animate-fade-in">
+                <div class="absolute -inset-4 bg-gradient-to-tr from-blue-500/10 via-purple-500/10 to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+                <div class="relative aspect-[4/5] md:aspect-square rounded-[3rem] overflow-hidden border border-white/5 shadow-2xl">
+                    <img src="{{ asset('images/conference/unique.png') }}" alt="Conference Hall" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000">
+                    
+                    <!-- Overlay Info -->
+                    <div class="absolute bottom-0 inset-x-0 p-12 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent">
+                        <p class="text-white/60 text-sm font-light tracking-widest uppercase mb-2">Steel Summit 2026</p>
+                        <h4 class="text-2xl text-white font-serif italic">Networking the Future <br/>of Global Steel.</h4>
+                    </div>
+                </div>
+                
+                <!-- Floating Element: Moved to right to avoid overlap with left column text -->
+                <div class="absolute -bottom-8 -right-8 w-40 h-40 md:w-48 md:h-48 bg-slate-900/80 backdrop-blur-3xl rounded-[2.5rem] border border-white/10 p-8 hidden md:flex flex-col justify-end shadow-2xl animate-float group-hover:border-blue-500/30 transition-colors duration-500">
+                    <span class="text-4xl text-white font-serif italic mb-2">5+</span>
+                    <span class="text-[10px] md:text-xs text-slate-400 font-sans tracking-widest uppercase font-bold">Key Advantages</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
 
     <section class="py-24 bg-slate-950 px-6 border-t border-white/5" id="venue">
         <div class="max-w-7xl mx-auto">
@@ -875,11 +1172,6 @@
         </div>
     </section>
 
-    <section class="py-20 bg-slate-950 px-6 border-t border-white/5" id="more">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-4xl md:text-5xl font-serif font-bold text-gradient-platinum italic">More</h2>
-        </div>
-    </section>
 
     <div class="fixed inset-0 z-[100] flex items-center justify-center p-6 overflow-y-auto" x-cloak x-show="modalOpen">
         <div @click="modalOpen = false" class="fixed inset-0 bg-slate-950/95 backdrop-blur-xl"></div>
@@ -934,25 +1226,204 @@
 
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="relative z-0 w-full group">
-                        <select name="country" id="country" class="block py-3 px-0 w-full text-base text-white bg-transparent border-0 border-b border-white/20 appearance-none focus:outline-none focus:ring-0 focus:border-slate-400 peer" required>
+                        <select name="country" id="country" class="block py-3 px-0 w-full text-base text-white bg-transparent border-0 appearance-none focus:outline-none focus:ring-0 peer" required>
                             <option value="">Select Country</option>
-                            <option value="Turkey">Turkey</option>
-                            <option value="United States">United States</option>
-                            <option value="United Kingdom">United Kingdom</option>
-                            <option value="Germany">Germany</option>
-                            <option value="France">France</option>
-                            <option value="Italy">Italy</option>
-                            <option value="Spain">Spain</option>
-                            <option value="China">China</option>
-                            <option value="Japan">Japan</option>
-                            <option value="India">India</option>
-                            <option value="Brazil">Brazil</option>
-                            <option value="Canada">Canada</option>
+                            <option value="Afghanistan">Afghanistan</option>
+                            <option value="Albania">Albania</option>
+                            <option value="Algeria">Algeria</option>
+                            <option value="Andorra">Andorra</option>
+                            <option value="Angola">Angola</option>
+                            <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                            <option value="Argentina">Argentina</option>
+                            <option value="Armenia">Armenia</option>
                             <option value="Australia">Australia</option>
-                            <option value="South Korea">South Korea</option>
-                            <option value="United Arab Emirates">United Arab Emirates</option>
-                            <option value="Saudi Arabia">Saudi Arabia</option>
+                            <option value="Austria">Austria</option>
+                            <option value="Azerbaijan">Azerbaijan</option>
+                            <option value="Bahamas">Bahamas</option>
+                            <option value="Bahrain">Bahrain</option>
+                            <option value="Bangladesh">Bangladesh</option>
+                            <option value="Barbados">Barbados</option>
+                            <option value="Belarus">Belarus</option>
+                            <option value="Belgium">Belgium</option>
+                            <option value="Belize">Belize</option>
+                            <option value="Benin">Benin</option>
+                            <option value="Bhutan">Bhutan</option>
+                            <option value="Bolivia">Bolivia</option>
+                            <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                            <option value="Botswana">Botswana</option>
+                            <option value="Brazil">Brazil</option>
+                            <option value="Brunei">Brunei</option>
+                            <option value="Bulgaria">Bulgaria</option>
+                            <option value="Burkina Faso">Burkina Faso</option>
+                            <option value="Burundi">Burundi</option>
+                            <option value="Cabo Verde">Cabo Verde</option>
+                            <option value="Cambodia">Cambodia</option>
+                            <option value="Cameroon">Cameroon</option>
+                            <option value="Canada">Canada</option>
+                            <option value="Central African Republic">Central African Republic</option>
+                            <option value="Chad">Chad</option>
+                            <option value="Chile">Chile</option>
+                            <option value="China">China</option>
+                            <option value="Colombia">Colombia</option>
+                            <option value="Comoros">Comoros</option>
+                            <option value="Congo">Congo</option>
+                            <option value="Costa Rica">Costa Rica</option>
+                            <option value="Croatia">Croatia</option>
+                            <option value="Cuba">Cuba</option>
+                            <option value="Cyprus">Cyprus</option>
+                            <option value="Czechia">Czechia</option>
+                            <option value="Denmark">Denmark</option>
+                            <option value="Djibouti">Djibouti</option>
+                            <option value="Dominica">Dominica</option>
+                            <option value="Dominican Republic">Dominican Republic</option>
+                            <option value="Ecuador">Ecuador</option>
                             <option value="Egypt">Egypt</option>
+                            <option value="El Salvador">El Salvador</option>
+                            <option value="Equatorial Guinea">Equatorial Guinea</option>
+                            <option value="Eritrea">Eritrea</option>
+                            <option value="Estonia">Estonia</option>
+                            <option value="Eswatini">Eswatini</option>
+                            <option value="Ethiopia">Ethiopia</option>
+                            <option value="Fiji">Fiji</option>
+                            <option value="Finland">Finland</option>
+                            <option value="France">France</option>
+                            <option value="Gabon">Gabon</option>
+                            <option value="Gambia">Gambia</option>
+                            <option value="Georgia">Georgia</option>
+                            <option value="Germany">Germany</option>
+                            <option value="Ghana">Ghana</option>
+                            <option value="Greece">Greece</option>
+                            <option value="Grenada">Grenada</option>
+                            <option value="Guatemala">Guatemala</option>
+                            <option value="Guinea">Guinea</option>
+                            <option value="Guinea-Bissau">Guinea-Bissau</option>
+                            <option value="Guyana">Guyana</option>
+                            <option value="Haiti">Haiti</option>
+                            <option value="Honduras">Honduras</option>
+                            <option value="Hungary">Hungary</option>
+                            <option value="Iceland">Iceland</option>
+                            <option value="India">India</option>
+                            <option value="Indonesia">Indonesia</option>
+                            <option value="Iran">Iran</option>
+                            <option value="Iraq">Iraq</option>
+                            <option value="Ireland">Ireland</option>
+                            <option value="Israel">Israel</option>
+                            <option value="Italy">Italy</option>
+                            <option value="Jamaica">Jamaica</option>
+                            <option value="Japan">Japan</option>
+                            <option value="Jordan">Jordan</option>
+                            <option value="Kazakhstan">Kazakhstan</option>
+                            <option value="Kenya">Kenya</option>
+                            <option value="Kiribati">Kiribati</option>
+                            <option value="Korea, North">Korea, North</option>
+                            <option value="Korea, South">Korea, South</option>
+                            <option value="Kosovo">Kosovo</option>
+                            <option value="Kuwait">Kuwait</option>
+                            <option value="Kyrgyzstan">Kyrgyzstan</option>
+                            <option value="Laos">Laos</option>
+                            <option value="Latvia">Latvia</option>
+                            <option value="Lebanon">Lebanon</option>
+                            <option value="Lesotho">Lesotho</option>
+                            <option value="Liberia">Liberia</option>
+                            <option value="Libya">Libya</option>
+                            <option value="Liechtenstein">Liechtenstein</option>
+                            <option value="Lithuania">Lithuania</option>
+                            <option value="Luxembourg">Luxembourg</option>
+                            <option value="Madagascar">Madagascar</option>
+                            <option value="Malawi">Malawi</option>
+                            <option value="Malaysia">Malaysia</option>
+                            <option value="Maldives">Maldives</option>
+                            <option value="Mali">Mali</option>
+                            <option value="Malta">Malta</option>
+                            <option value="Marshall Islands">Marshall Islands</option>
+                            <option value="Mauritania">Mauritania</option>
+                            <option value="Mauritius">Mauritius</option>
+                            <option value="Mexico">Mexico</option>
+                            <option value="Micronesia">Micronesia</option>
+                            <option value="Moldova">Moldova</option>
+                            <option value="Monaco">Monaco</option>
+                            <option value="Mongolia">Mongolia</option>
+                            <option value="Montenegro">Montenegro</option>
+                            <option value="Morocco">Morocco</option>
+                            <option value="Mozambique">Mozambique</option>
+                            <option value="Myanmar">Myanmar</option>
+                            <option value="Namibia">Namibia</option>
+                            <option value="Nauru">Nauru</option>
+                            <option value="Nepal">Nepal</option>
+                            <option value="Netherlands">Netherlands</option>
+                            <option value="New Zealand">New Zealand</option>
+                            <option value="Nicaragua">Nicaragua</option>
+                            <option value="Niger">Niger</option>
+                            <option value="Nigeria">Nigeria</option>
+                            <option value="North Macedonia">North Macedonia</option>
+                            <option value="Norway">Norway</option>
+                            <option value="Oman">Oman</option>
+                            <option value="Pakistan">Pakistan</option>
+                            <option value="Palau">Palau</option>
+                            <option value="Palestine">Palestine</option>
+                            <option value="Panama">Panama</option>
+                            <option value="Papua New Guinea">Papua New Guinea</option>
+                            <option value="Paraguay">Paraguay</option>
+                            <option value="Peru">Peru</option>
+                            <option value="Philippines">Philippines</option>
+                            <option value="Poland">Poland</option>
+                            <option value="Portugal">Portugal</option>
+                            <option value="Qatar">Qatar</option>
+                            <option value="Romania">Romania</option>
+                            <option value="Russia">Russia</option>
+                            <option value="Rwanda">Rwanda</option>
+                            <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                            <option value="Saint Lucia">Saint Lucia</option>
+                            <option value="Saint Vincent">Saint Vincent</option>
+                            <option value="Samoa">Samoa</option>
+                            <option value="San Marino">San Marino</option>
+                            <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                            <option value="Saudi Arabia">Saudi Arabia</option>
+                            <option value="Senegal">Senegal</option>
+                            <option value="Serbia">Serbia</option>
+                            <option value="Seychelles">Seychelles</option>
+                            <option value="Sierra Leone">Sierra Leone</option>
+                            <option value="Singapore">Singapore</option>
+                            <option value="Slovakia">Slovakia</option>
+                            <option value="Slovenia">Slovenia</option>
+                            <option value="Solomon Islands">Solomon Islands</option>
+                            <option value="Somalia">Somalia</option>
+                            <option value="South Africa">South Africa</option>
+                            <option value="South Sudan">South Sudan</option>
+                            <option value="Spain">Spain</option>
+                            <option value="Sri Lanka">Sri Lanka</option>
+                            <option value="Sudan">Sudan</option>
+                            <option value="Suriname">Suriname</option>
+                            <option value="Sweden">Sweden</option>
+                            <option value="Switzerland">Switzerland</option>
+                            <option value="Syria">Syria</option>
+                            <option value="Taiwan">Taiwan</option>
+                            <option value="Tajikistan">Tajikistan</option>
+                            <option value="Tanzania">Tanzania</option>
+                            <option value="Thailand">Thailand</option>
+                            <option value="Timor-Leste">Timor-Leste</option>
+                            <option value="Togo">Togo</option>
+                            <option value="Tonga">Tonga</option>
+                            <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                            <option value="Tunisia">Tunisia</option>
+                            <option value="Turkey">Turkey</option>
+                            <option value="Türkiye">Türkiye</option>
+                            <option value="Turkmenistan">Turkmenistan</option>
+                            <option value="Tuvalu">Tuvalu</option>
+                            <option value="Uganda">Uganda</option>
+                            <option value="Ukraine">Ukraine</option>
+                            <option value="United Arab Emirates">United Arab Emirates</option>
+                            <option value="United Kingdom">United Kingdom</option>
+                            <option value="United States">United States</option>
+                            <option value="Uruguay">Uruguay</option>
+                            <option value="Uzbekistan">Uzbekistan</option>
+                            <option value="Vanuatu">Vanuatu</option>
+                            <option value="Vatican City">Vatican City</option>
+                            <option value="Venezuela">Venezuela</option>
+                            <option value="Vietnam">Vietnam</option>
+                            <option value="Yemen">Yemen</option>
+                            <option value="Zambia">Zambia</option>
+                            <option value="Zimbabwe">Zimbabwe</option>
                         </select>
                     </div>
 
@@ -964,11 +1435,11 @@
                 </div>
                 <!-- Some custom css to align intl-tel-input's input box with tailwind floating label -->
                 <style>
-                    .iti-wrapper .iti { width: 100%; border-bottom: 1px solid rgba(255,255,255,0.2); }
-                    .iti-wrapper .iti__tel-input { background: transparent !important; border: none !important; color: white !important; width: 100%; padding: 0.75rem 0 !important; }
+                    .iti-wrapper .iti { width: 100%; border-bottom: 1px solid rgba(255,255,255,0.2); transition: border-color 0.3s; }
+                    .iti-wrapper .iti__tel-input { background: transparent !important; border: none !important; color: white !important; width: 100%; padding-top: 0.75rem !important; padding-bottom: 0.75rem !important; }
                     .iti-wrapper .iti__tel-input:focus { outline: none !important; box-shadow: none !important; }
                     .iti-wrapper:focus-within .iti { border-bottom-color: #94a3b8; }
-                    .iti-wrapper .iti--allow-dropdown input { padding-left: 52px !important; }
+                    /* Allow intl-tel-input to handle padding when separateDialCode is used */
                 </style>
 
                 <label class="flex items-start space-x-3">
@@ -1041,42 +1512,144 @@
 
         // Floating label functionality for Tom Select and intl-tel-input
         document.addEventListener('DOMContentLoaded', function() {
-            // Tom Select for Country
-            if (document.getElementById('country')) {
-                new TomSelect('#country', {
+            const countrySelect = document.getElementById('country');
+            const phoneInput = document.querySelector("#phone_full");
+            let tomSelectInstance = null;
+            let iti = null;
+
+            // Tom Select Initialization
+            if (countrySelect) {
+                tomSelectInstance = new TomSelect('#country', {
                     create: false,
-                    sortField: {
-                        field: "text",
-                        direction: "asc"
-                    }
+                    sortField: { field: "text", direction: "asc" }
                 });
             }
 
+            // Populate Tom Select from ITI data
+            function populateCountryList() {
+                if (!tomSelectInstance) return;
+                
+                let countries = [];
+                if (window.intlTelInput && window.intlTelInput.getCountryData) {
+                    countries = window.intlTelInput.getCountryData();
+                } else if (window.intlTelInputGlobals && window.intlTelInputGlobals.getCountryData) {
+                    countries = window.intlTelInputGlobals.getCountryData();
+                }
+                
+                if (countries.length > 0) {
+                    const currentVal = tomSelectInstance.getValue();
+                    const existingValues = Object.values(tomSelectInstance.options).map(o => o.value);
+                    
+                    const newOptions = countries
+                        .map(c => c.name.split(' (')[0])
+                        .filter((v, i, a) => a.indexOf(v) === i) // unique names
+                        .filter(name => !existingValues.includes(name))
+                        .map(name => ({ value: name, text: name }));
+                    
+                    if (newOptions.length > 0) {
+                        tomSelectInstance.addOptions(newOptions);
+                        tomSelectInstance.refreshOptions(false);
+                    }
+                    
+                    if (currentVal) tomSelectInstance.setValue(currentVal);
+                }
+            }
+
+            // Sync Country with Phone
+            function syncCountryWithPhone(itiInstance) {
+                const countryData = itiInstance.getSelectedCountryData();
+                if (tomSelectInstance && countryData.name) {
+                    const cleanName = countryData.name.split(' (')[0];
+                    if (tomSelectInstance.getValue() !== cleanName) {
+                        tomSelectInstance.setValue(cleanName);
+                    }
+                }
+            }
+
             // Intl-Tel-Input for Phone
-            const phoneInput = document.querySelector("#phone_full");
             if (phoneInput) {
-                const iti = window.intlTelInput(phoneInput, {
+                iti = window.intlTelInput(phoneInput, {
                     initialCountry: "auto",
                     geoIpLookup: function(callback) {
                         fetch("https://ipapi.co/json/")
-                        .then(function(res) { return res.json(); })
-                        .then(function(data) { callback(data.country_code); })
-                        .catch(function() { callback("tr"); });
+                        .then(res => res.json())
+                        .then(data => { 
+                            callback(data.country_code);
+                            // Population sequence
+                            setTimeout(populateCountryList, 200);
+                            setTimeout(() => {
+                                if (tomSelectInstance && data.country_name) {
+                                    const cleanName = data.country_name.split(' (')[0];
+                                    tomSelectInstance.setValue(cleanName);
+                                }
+                            }, 1000);
+                        })
+                        .catch(() => { 
+                            callback("tr");
+                            setTimeout(populateCountryList, 500);
+                            if (tomSelectInstance) tomSelectInstance.setValue("Turkey");
+                        });
                     },
                     utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/23.0.4/js/utils.js",
                     separateDialCode: true,
                 });
 
-                // Update hidden fields before submit
-                const form = document.querySelector('#register-form');
-                if (form) {
-                    form.addEventListener('submit', function() {
+                // Sync Country Select with Phone Input
+                phoneInput.addEventListener("countrychange", function() {
+                    syncCountryWithPhone(iti);
+                });
+            }
+
+            // Update hidden fields before submit
+            const formSubmit = document.querySelector('#register-form');
+            if (formSubmit) {
+                formSubmit.addEventListener('submit', function() {
+                    if (iti) {
                         const countryData = iti.getSelectedCountryData();
-                        document.getElementById('phone_country_code').value = countryData ? '+' + countryData.dialCode : '';
-                        document.getElementById('phone_pure').value = phoneInput.value;
-                    });
+                        const countryCode = document.getElementById('phone_country_code');
+                        const phonePure = document.getElementById('phone_pure');
+                        if (countryCode) countryCode.value = countryData ? '+' + countryData.dialCode : '';
+                        if (phonePure) phonePure.value = phoneInput.value;
+                    }
+                });
+            }
+
+            // Continuous Label & Sync Check
+            function monitorForm() {
+                // Label float check
+                document.querySelectorAll('input').forEach(input => {
+                    const label = input.nextElementSibling;
+                    if (label && label.tagName === 'LABEL') {
+                        if (input.value || input.matches(':-webkit-autofill')) {
+                            label.classList.add('active-label');
+                        } else {
+                            label.classList.remove('active-label');
+                        }
+                    }
+                });
+                
+                // Sync sync (one-way country select -> ITI flag)
+                if (countrySelect && iti && tomSelectInstance) {
+                    const tsVal = tomSelectInstance.getValue();
+                    const itiVal = iti.getSelectedCountryData().name ? iti.getSelectedCountryData().name.split(' (')[0] : '';
+                    // Only sync if user changed TS and its different from ITI
+                    // We don't want an infinite loop, so we only sync if the active element is TS
+                    if (document.activeElement === countrySelect || document.activeElement.closest('.ts-control')) {
+                        if (tsVal && tsVal !== itiVal) {
+                            // Find ITI iso code
+                            const allCountries = window.intlTelInputGlobals ? window.intlTelInputGlobals.getCountryData() : [];
+                            const match = allCountries.find(c => c.name.split(' (')[0] === tsVal);
+                            if (match) {
+                                iti.setCountry(match.iso2);
+                            }
+                        }
+                    }
                 }
             }
+            setInterval(monitorForm, 1000);
+            
+            // Initial population attempt
+            populateCountryList();
         });
     </script>
 </body>
