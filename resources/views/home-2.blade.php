@@ -966,7 +966,8 @@
 
 
     <!-- BEGIN: Who Attends -->
-    <section class="py-32 bg-slate-950 overflow-hidden relative" id="who-attends" x-data="{ revealed: false }"
+    <section class="py-32 bg-slate-950 overflow-hidden relative" id="who-attends"
+        x-data="{ revealed: false, isDragging: false, startX: 0, scrollLeft: 0, scrollProgress: 0 }"
         x-intersect.once="revealed = true">
         <!-- Ambient Glow -->
         <div class="absolute -top-24 -left-24 w-96 h-96 bg-blue-600/5 blur-[120px] rounded-full pointer-events-none">
@@ -989,8 +990,13 @@
         <!-- Apple Style Slider -->
         <div class="relative group">
             <!-- Horizontal Scroll Container -->
-            <div
-                class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide space-x-5 px-[max(1.5rem,calc((100%-80rem)/2))] pb-12">
+            <div x-ref="slider"
+                @mousedown="isDragging = true; startX = $event.pageX - $el.offsetLeft; scrollLeft = $el.scrollLeft; $el.classList.add('cursor-grabbing'); $el.classList.remove('cursor-grab')"
+                @mousemove="if (!isDragging) return; $event.preventDefault(); const x = $event.pageX - $el.offsetLeft; const walk = (x - startX) * 2; $el.scrollLeft = scrollLeft - walk;"
+                @mouseup="isDragging = false; $el.classList.remove('cursor-grabbing'); $el.classList.add('cursor-grab')"
+                @mouseleave="isDragging = false; $el.classList.remove('cursor-grabbing'); $el.classList.add('cursor-grab')"
+                @scroll="scrollProgress = ($el.scrollLeft / ($el.scrollWidth - $el.clientWidth)) * 100"
+                class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide space-x-5 px-[max(1.5rem,calc((100%-80rem)/2))] pb-12 cursor-grab transition-all select-none">
 
                 <!-- Card 1: Producers -->
                 <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
@@ -1094,11 +1100,23 @@
             </div>
 
             <!-- Slider Progress Indicator (Optional but nice for Apple feel) -->
-            <div class="max-w-7xl mx-auto px-6 flex justify-end">
-                <div class="flex space-x-2">
-                    <div class="w-12 h-1 bg-white/20 rounded-full overflow-hidden">
-                        <div class="w-1/3 h-full bg-slate-400"></div>
-                    </div>
+            <div class="max-w-7xl mx-auto px-6 flex flex-col items-end gap-6 mt-4">
+                <!-- Progress Bar -->
+                <div class="w-24 h-1 bg-white/10 rounded-full overflow-hidden">
+                    <div class="h-full bg-slate-400 transition-all duration-200 ease-out"
+                        :style="`width: ${scrollProgress}%`" style="width: 0%"></div>
+                </div>
+
+                <!-- Navigation Controls -->
+                <div class="flex items-center gap-3">
+                    <button @click="$refs.slider.scrollBy({ left: -400, behavior: 'smooth' })"
+                        class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-all">
+                        <span class="material-symbols-outlined">chevron_left</span>
+                    </button>
+                    <button @click="$refs.slider.scrollBy({ left: 400, behavior: 'smooth' })"
+                        class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-all">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
                 </div>
             </div>
         </div>
