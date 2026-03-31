@@ -27,6 +27,7 @@
 
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
@@ -41,6 +42,16 @@
                 },
             },
         };
+    </script>
+
+    <script>
+        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia(
+                '(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
     </script>
 
     <style>
@@ -60,9 +71,21 @@
 
         .glass {
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .dark .glass {
+            background: rgba(15, 23, 42, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        html:not(.dark) .glass {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
         }
 
         .text-gradient-platinum {
@@ -71,7 +94,17 @@
             -webkit-text-fill-color: transparent;
         }
 
+        html:not(.dark) .text-gradient-platinum {
+            background: linear-gradient(to right, #1e293b, #334155, #64748b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
         .hero-gradient {
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.7) 50%, rgba(255, 255, 255, 1) 100%);
+        }
+
+        .dark .hero-gradient {
             background: linear-gradient(to bottom, rgba(2, 6, 23, 0.7) 0%, rgba(2, 6, 23, 0.5) 50%, rgba(2, 6, 23, 1) 100%);
         }
 
@@ -406,46 +439,107 @@
 </head>
 
 <body @scroll.window="scrolled = (window.pageYOffset > 20); showToTop = (window.pageYOffset > 420)"
-    class="bg-slate-950 text-slate-200 font-sans antialiased overflow-x-hidden"
-    x-data="{ mobileMenu: false, scrolled: false, showToTop: false, modalOpen: @js($errors->any() || session()->has('status')) }">
-  <nav :class="scrolled ? 'top-4' : 'top-6'" class="fixed left-1/2 -translate-x-1/2 w-[92%] max-w-7xl z-50 transition-all duration-500 ease-in-out">
-    
-    <div class="relative flex items-stretch justify-between w-full pr-6">
-        
-        <div class="absolute inset-y-0 right-0 left-[68px] md:left-20 glass rounded-2xl shadow-2xl pointer-events-none -z-10"></div>
+    class="bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-200 font-sans antialiased overflow-x-hidden min-h-screen"
+    x-data="{ 
+        mobileMenu: false, 
+        scrolled: false, 
+        showToTop: false, 
+        modalOpen: @js($errors->any() || session()->has('status')),
+        theme: localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'),
+        toggleTheme() {
+            this.theme = this.theme === 'dark' ? 'light' : 'dark';
+            localStorage.setItem('theme', this.theme);
+            if (this.theme === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
+    }">
+    <nav :class="scrolled ? 'top-4' : 'top-6'"
+        class="fixed left-1/2 -translate-x-1/2 w-[92%] max-w-7xl z-50 transition-all duration-500 ease-in-out">
 
-        <div class="relative z-10 flex items-center group cursor-pointer pl-0 md:-ml-2">
-            <img alt="Steel Summits Logo" class="h-[76px] md:h-[88px] w-auto object-contain transition-transform duration-300 hover:scale-105" src="{{ asset('images/steel-networking-logo-main.webp') }}">
+        <div class="relative flex items-stretch justify-between w-full pr-6">
+
+            <div
+                class="absolute inset-y-0 right-0 left-6 md:left-12 glass rounded-full shadow-2xl pointer-events-none -z-10">
+            </div>
+
+            <div class="relative z-10 flex items-center cursor-pointer pl-0 py-0">
+                <img alt="Steel Summits Logo"
+                    class="h-[64px] md:h-[72px] w-auto object-contain transition-transform duration-300"
+                    src="{{ asset('images/steel-networking-logo-main.webp') }}">
+            </div>
+
+            <div
+                class="relative z-10 hidden md:flex items-center space-x-8 text-[11px] font-bold tracking-[0.1em] uppercase py-4">
+                <a class="text-slate-700 dark:text-slate-200 hover:text-brand-teal dark:hover:text-white transition-all"
+                    href="#agenda">Agenda</a>
+                <a class="text-slate-700 dark:text-slate-200 hover:text-brand-teal dark:hover:text-white transition-all"
+                    href="#about">About Us</a>
+                <a class="text-slate-700 dark:text-slate-200 hover:text-brand-teal dark:hover:text-white transition-all"
+                    href="#who-attends">Who Attends</a>
+                <a class="text-slate-700 dark:text-slate-200 hover:text-brand-teal dark:hover:text-white transition-all"
+                    href="#keynote-speakers">Keynote Speakers</a>
+                <a class="text-slate-700 dark:text-slate-200 hover:text-brand-teal dark:hover:text-white transition-all"
+                    href="#sponsorship">Sponsorship</a>
+                <a class="text-slate-700 dark:text-slate-200 hover:text-brand-teal dark:hover:text-white transition-all"
+                    href="#venue">Venue</a>
+            </div>
+
+            <div class="relative z-10 flex items-center space-x-6 py-4">
+                <!-- Theme Toggle -->
+                <button @click="toggleTheme()"
+                    class="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-white/10 transition-all focus:outline-none">
+                    <span class="material-symbols-outlined text-[18px] md:text-[20px] leading-none block" x-show="theme === 'dark'">dark_mode</span>
+                    <span class="material-symbols-outlined text-[18px] md:text-[20px] leading-none block" x-show="theme === 'light'">light_mode</span>
+                </button>
+
+                <button @click="modalOpen = true"
+                    class="hidden sm:block border border-slate-500/40 dark:border-white/30 text-slate-900 dark:text-white text-[11px] font-bold px-6 py-2 rounded-full uppercase tracking-wider hover:bg-slate-900/10 dark:hover:bg-white/10 transition-all duration-300">
+                    Register Interest
+                </button>
+                <button @click="mobileMenu = !mobileMenu" class="md:hidden text-slate-900 dark:text-white pl-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" x-show="!mobileMenu">
+                        <path d="M4 8h16M4 16h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+                        </path>
+                    </svg>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" x-show="mobileMenu"
+                        style="display: none;">
+                        <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="1.5"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
 
-        <div class="relative z-10 hidden md:flex items-center space-x-8 text-[14px] font-bold tracking-[0.2em] uppercase py-4">
-            <a class="text-slate-300 hover:text-white transition-opacity" href="#agenda">Agenda</a>
-            <a class="text-slate-300 hover:text-white transition-opacity" href="#about">About Us</a>
-            <a class="text-slate-300 hover:text-white transition-opacity" href="#who-attends">Who Attends</a>
-            <a class="text-slate-300 hover:text-white transition-opacity" href="#keynote-speakers">Keynote Speakers</a>
-            <a class="text-slate-300 hover:text-white transition-opacity" href="#sponsorship">Sponsorship</a>
-            <a class="text-slate-300 hover:text-white transition-opacity" href="#venue">Venue</a>
+        <div class="md:hidden mt-4 glass rounded-2xl p-6 flex flex-col space-y-4 shadow-2xl" x-show="mobileMenu"
+            x-transition:enter="transition ease-out duration-300" x-transition:enter-end="opacity-100 scale-100"
+            x-transition:enter-start="opacity-0 scale-95" style="display: none;">
+            <a @click="mobileMenu = false"
+                class="text-lg font-serif font-bold text-slate-900 dark:text-white hover:text-slate-600 dark:hover:text-slate-300"
+                href="#agenda">Agenda</a>
+            <a @click="mobileMenu = false"
+                class="text-lg font-serif font-bold text-slate-900 dark:text-white hover:text-slate-600 dark:hover:text-slate-300"
+                href="#about">About Us</a>
+            <a @click="mobileMenu = false"
+                class="text-lg font-serif font-bold text-slate-900 dark:text-white hover:text-slate-600 dark:hover:text-slate-300"
+                href="#who-attends">Who Attends</a>
+            <a @click="mobileMenu = false"
+                class="text-lg font-serif font-bold text-slate-900 dark:text-white hover:text-slate-600 dark:hover:text-slate-300"
+                href="#keynote-speakers">Keynote
+                Speakers</a>
+            <a @click="mobileMenu = false"
+                class="text-lg font-serif font-bold text-slate-900 dark:text-white hover:text-slate-600 dark:hover:text-slate-300"
+                href="#sponsorship">Sponsorship</a>
+            <a @click="mobileMenu = false"
+                class="text-lg font-serif font-bold text-slate-900 dark:text-white hover:text-slate-600 dark:hover:text-slate-300"
+                href="#venue">Venue</a>
+            <button @click="modalOpen = true; mobileMenu = false"
+                class="w-full border border-slate-400/30 dark:border-slate-400/30 text-slate-900 dark:text-white font-bold py-4 rounded-xl hover:bg-slate-900/5 dark:hover:bg-white/5">Register
+                Interest</button>
         </div>
-        
-        <div class="relative z-10 flex items-center space-x-4 py-4">
-            <button @click="modalOpen = true" class="hidden sm:block border border-slate-400/30 text-white text-[13px] font-bold px-8 py-3 rounded-full uppercase tracking-wider hover:bg-white/5 transition-all duration-300">Register Interest</button>
-            <button @click="mobileMenu = !mobileMenu" class="md:hidden text-white p-2">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" x-show="!mobileMenu"><path d="M4 8h16M4 16h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" x-show="mobileMenu" style="display: none;"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
-            </button>
-        </div>
-    </div>
-
-    <div class="md:hidden mt-4 glass rounded-2xl p-6 flex flex-col space-y-4 shadow-2xl" x-show="mobileMenu" x-transition:enter="transition ease-out duration-300" x-transition:enter-end="opacity-100 scale-100" x-transition:enter-start="opacity-0 scale-95" style="display: none;">
-        <a @click="mobileMenu = false" class="text-lg font-serif font-bold" href="#agenda">Agenda</a>
-        <a @click="mobileMenu = false" class="text-lg font-serif font-bold" href="#about">About Us</a>
-        <a @click="mobileMenu = false" class="text-lg font-serif font-bold" href="#who-attends">Who Attends</a>
-        <a @click="mobileMenu = false" class="text-lg font-serif font-bold" href="#keynote-speakers">Keynote Speakers</a>
-        <a @click="mobileMenu = false" class="text-lg font-serif font-bold" href="#sponsorship">Sponsorship</a>
-        <a @click="mobileMenu = false" class="text-lg font-serif font-bold" href="#venue">Venue</a>
-        <button @click="modalOpen = true; mobileMenu = false" class="w-full border border-slate-400/30 text-white font-bold py-4 rounded-xl">Register Interest</button>
-    </div>
-</nav>
+    </nav>
     <section class="relative min-h-screen flex items-center justify-center overflow-hidden" id="main">
         <div class="absolute inset-0 z-0">
             <img alt="Istanbul Night" class="w-full h-full object-cover scale-110"
@@ -456,33 +550,33 @@
         <div class="relative z-10 text-center px-6 max-w-6xl mx-auto pt-20 md:pt-28 pb-16 md:pb-0">
 
             <div
-                class="inline-block px-4 md:px-5 py-1 md:py-1.5 border border-white/10 rounded-full mb-6 md:mb-8 mt-4 md:mt-8 glass">
+                class="inline-block px-4 md:px-5 py-1 md:py-1.5 border border-slate-300 dark:border-white/10 rounded-full mb-6 md:mb-8 mt-4 md:mt-8 glass">
                 <span
-                    class="text-slate-300 text-[9px] md:text-xs font-bold tracking-[0.2em] md:tracking-[0.3em] uppercase">Invitation
+                    class="text-slate-800 dark:text-slate-300 text-[9px] md:text-xs font-bold tracking-[0.2em] md:tracking-[0.3em] uppercase">Invitation
                     Only - Istanbul 2026</span>
             </div>
 
-            <h1 class="text-5xl md:text-8xl font-serif font-bold mb-6 md:mb-8 leading-[1.1] text-white">
+            <h1 class="text-5xl md:text-8xl font-serif font-bold mb-6 md:mb-8 leading-[1.1] text-slate-900 dark:text-white">
                 Istanbul <br />
                 <span
-                    class="bg-clip-text text-transparent bg-gradient-to-r from-slate-100 via-slate-300 to-slate-500 italic pb-2">Steel
+                    class="bg-clip-text text-transparent bg-gradient-to-r from-slate-600 via-slate-400 to-slate-800 dark:from-slate-100 dark:via-slate-300 dark:to-slate-500 italic pb-2">Steel
                     Summit</span> <br />
                 2026
             </h1>
 
-            <p class="text-base md:text-2xl text-slate-400 mb-8 md:mb-12 font-light max-w-3xl mx-auto leading-relaxed">
+            <p class="text-base md:text-2xl text-slate-700 dark:text-slate-400 mb-8 md:mb-12 font-light max-w-3xl mx-auto leading-relaxed">
                 The world's most exclusive assembly for steel industry titans.
                 <br class="hidden md:block" />
-                <span class="text-slate-300 font-medium">25 - 27 October 2026</span> | Swissotel Istanbul
+                <span class="text-slate-900 dark:text-slate-300 font-medium">25 - 27 October 2026</span> | Swissotel Istanbul
             </p>
 
             <div class="mx-auto mb-4 md:mb-16 flex w-full max-w-xl items-center justify-center"
                 x-data="countdownTimer()" x-init="start()">
                 <template x-for="(item, index) in remaining" :key="item.label">
-                    <div :class="index > 0 ? 'border-l border-white/10' : ''"
+                    <div :class="index > 0 ? 'border-l border-slate-300 dark:border-white/10' : ''"
                         class="flex w-1/4 min-w-0 flex-col items-center px-1 md:px-8">
                         <span
-                            class="text-3xl md:text-6xl font-serif font-light text-white mb-1 md:mb-2 tabular-nums w-[2.5ch] text-center"
+                            class="text-3xl md:text-6xl font-serif font-light text-slate-900 dark:text-white mb-1 md:mb-2 tabular-nums w-[2.5ch] text-center"
                             x-text="item.value">00</span>
                         <span class="text-[9px] md:text-[10px] uppercase tracking-[0.2em] text-slate-500 font-medium"
                             x-text="item.label">Days</span>
@@ -505,7 +599,7 @@
         </button>
     </div>
 
-    <section class="py-24 bg-slate-950 px-6 relative overflow-hidden" id="agenda"
+    <section class="py-24 bg-white dark:bg-slate-950 px-6 relative overflow-hidden transition-colors duration-500" id="agenda"
         x-data="{ activeTab: 1, revealed: false }" x-intersect.once="revealed = true">
         <!-- Ambient Glow -->
         <div class="absolute -top-24 -right-24 w-96 h-96 bg-blue-600/5 blur-[120px] rounded-full pointer-events-none">
@@ -514,141 +608,141 @@
         <div class="max-w-6xl mx-auto relative z-10 transition-all duration-1000 transform"
             :class="revealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'">
             <div class="mb-12 text-center">
-                <h2 class="text-4xl md:text-5xl font-serif font-bold text-gradient-platinum mb-4 italic">STEEL Summit
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-slate-900 dark:text-white mb-4 italic uppercase tracking-wider">STEEL Summit
                     Program</h2>
-                <p class="text-slate-400 text-sm md:text-base">25-27 October 2026 | Swissotel Istanbul</p>
+                <p class="text-slate-600 dark:text-slate-400 text-sm md:text-base font-medium">25-27 October 2026 | Swissotel Istanbul</p>
             </div>
 
-            <div class="flex overflow-x-auto pb-4 mb-8 border-b border-white/10">
+            <div class="flex overflow-x-auto pb-4 mb-8 border-b border-slate-200 dark:border-white/10">
                 <div class="flex space-x-6 md:space-x-12 mx-auto min-w-max">
                     <button
-                        :class="activeTab === 1 ? 'text-white border-b-2 border-slate-300' : 'text-slate-500 border-b-2 border-transparent'"
-                        @click="activeTab = 1" class="pb-4 text-xs md:text-sm font-bold tracking-[0.2em] uppercase">25
+                        :class="activeTab === 1 ? 'text-slate-900 dark:text-white border-b-2 border-slate-900 dark:border-slate-300' : 'text-slate-400 dark:text-slate-500 border-b-2 border-transparent hover:text-slate-600 dark:hover:text-slate-300'"
+                        @click="activeTab = 1" class="pb-4 text-xs md:text-sm font-bold tracking-[0.2em] uppercase transition-all">25
                         Oct | Sunday</button>
                     <button
-                        :class="activeTab === 2 ? 'text-white border-b-2 border-slate-300' : 'text-slate-500 border-b-2 border-transparent'"
-                        @click="activeTab = 2" class="pb-4 text-xs md:text-sm font-bold tracking-[0.2em] uppercase">26
+                        :class="activeTab === 2 ? 'text-slate-900 dark:text-white border-b-2 border-slate-900 dark:border-slate-300' : 'text-slate-400 dark:text-slate-500 border-b-2 border-transparent hover:text-slate-600 dark:hover:text-slate-300'"
+                        @click="activeTab = 2" class="pb-4 text-xs md:text-sm font-bold tracking-[0.2em] uppercase transition-all">26
                         Oct | Monday</button>
                     <button
-                        :class="activeTab === 3 ? 'text-white border-b-2 border-slate-300' : 'text-slate-500 border-b-2 border-transparent'"
-                        @click="activeTab = 3" class="pb-4 text-xs md:text-sm font-bold tracking-[0.2em] uppercase">27
+                        :class="activeTab === 3 ? 'text-slate-900 dark:text-white border-b-2 border-slate-900 dark:border-slate-300' : 'text-slate-400 dark:text-slate-500 border-b-2 border-transparent hover:text-slate-600 dark:hover:text-slate-300'"
+                        @click="activeTab = 3" class="pb-4 text-xs md:text-sm font-bold tracking-[0.2em] uppercase transition-all">27
                         Oct | Tuesday</button>
                 </div>
             </div>
 
             <div class="space-y-4" x-show="activeTab === 1">
-                <div class="glass rounded-xl p-6">
-                    <p class="text-slate-300 text-xs uppercase tracking-[0.2em] mb-2">18:00</p>
-                    <h4 class="text-lg md:text-xl font-semibold text-white tracking-wide">Networking on the Bosphorus
+                <div class="glass rounded-xl p-6 shadow-sm dark:shadow-none">
+                    <p class="text-slate-500 dark:text-slate-300 text-xs uppercase tracking-[0.2em] mb-2 font-bold">18:00</p>
+                    <h4 class="text-lg md:text-xl font-semibold text-slate-900 dark:text-white tracking-wide">Networking on the Bosphorus
                     </h4>
-                    <p class="text-slate-400 mt-2">Boat Tour and DJ Performance (Under the Sponsorship of X).</p>
+                    <p class="text-slate-600 dark:text-slate-400 mt-2 font-light">Boat Tour and DJ Performance (Under the Sponsorship of X).</p>
                 </div>
             </div>
 
             <div class="space-y-4" x-show="activeTab === 2">
-                <div class="glass rounded-xl p-6">
-                    <p class="text-slate-300 text-xs uppercase tracking-[0.2em] mb-2">09:00-09:30</p>
-                    <h4 class="text-lg md:text-xl font-semibold text-white tracking-wide">Registration</h4>
+                <div class="glass rounded-xl p-6 shadow-sm dark:shadow-none">
+                    <p class="text-slate-500 dark:text-slate-300 text-xs uppercase tracking-[0.2em] mb-2 font-bold">09:00-09:30</p>
+                    <h4 class="text-lg md:text-xl font-semibold text-slate-900 dark:text-white tracking-wide">Registration</h4>
                 </div>
-                <div class="glass rounded-xl p-6">
-                    <p class="text-slate-300 text-xs uppercase tracking-[0.2em] mb-2">09:30-10:00</p>
-                    <h4 class="text-lg md:text-xl font-semibold text-white tracking-wide">Opening Speeches</h4>
+                <div class="glass rounded-xl p-6 shadow-sm dark:shadow-none">
+                    <p class="text-slate-500 dark:text-slate-300 text-xs uppercase tracking-[0.2em] mb-2 font-bold">09:30-10:00</p>
+                    <h4 class="text-lg md:text-xl font-semibold text-slate-900 dark:text-white tracking-wide">Opening Speeches</h4>
                 </div>
-                <div class="glass rounded-xl p-6">
-                    <p class="text-slate-300 text-xs uppercase tracking-[0.2em] mb-2">10:00-11:30</p>
-                    <h4 class="text-lg md:text-xl font-semibold text-white tracking-wide">1st Session: World Economic
+                <div class="glass rounded-xl p-6 shadow-sm dark:shadow-none">
+                    <p class="text-slate-500 dark:text-slate-300 text-xs uppercase tracking-[0.2em] mb-2 font-bold">10:00-11:30</p>
+                    <h4 class="text-lg md:text-xl font-semibold text-slate-900 dark:text-white tracking-wide">1st Session: World Economic
                         Outlook and Steel Industry</h4>
-                    <p class="text-slate-400 mt-2">Participants: POSCO, BAOW, TATA Steel, Nippon Steel, Marcegaglia
+                    <p class="text-slate-600 dark:text-slate-400 mt-2 font-light">Participants: POSCO, BAOW, TATA Steel, Nippon Steel, Marcegaglia
                         Steel, EZZ Steel, HBIS, ArcelorMittal, World Steel Association.</p>
                 </div>
-                <div class="glass rounded-xl p-6">
-                    <p class="text-slate-300 text-xs uppercase tracking-[0.2em] mb-2">11:30-12:30</p>
-                    <h4 class="text-lg md:text-xl font-semibold text-white tracking-wide">2nd Session: Steel in a High
+                <div class="glass rounded-xl p-6 shadow-sm dark:shadow-none">
+                    <p class="text-slate-500 dark:text-slate-300 text-xs uppercase tracking-[0.2em] mb-2 font-bold">11:30-12:30</p>
+                    <h4 class="text-lg md:text-xl font-semibold text-slate-900 dark:text-white tracking-wide">2nd Session: Steel in a High
                         Inflation World: Cost Pressure, Investment Risks, Strategic Responses</h4>
-                    <p class="text-slate-400 mt-2">Participants: World Steel Dynamics Economist, Fastmarkets, Kallanish.
+                    <p class="text-slate-600 dark:text-slate-400 mt-2 font-light">Participants: World Steel Dynamics Economist, Fastmarkets, Kallanish.
                     </p>
                 </div>
-                <div class="glass rounded-xl p-6">
-                    <p class="text-slate-300 text-xs uppercase tracking-[0.2em] mb-2">12:30-14:00</p>
-                    <h4 class="text-lg md:text-xl font-semibold text-white tracking-wide">Lunch and Networking</h4>
-                    <p class="text-slate-400 mt-2">Under the Sponsorship of X.</p>
+                <div class="glass rounded-xl p-6 shadow-sm dark:shadow-none">
+                    <p class="text-slate-500 dark:text-slate-300 text-xs uppercase tracking-[0.2em] mb-2 font-bold">12:30-14:00</p>
+                    <h4 class="text-lg md:text-xl font-semibold text-slate-900 dark:text-white tracking-wide">Lunch and Networking</h4>
+                    <p class="text-slate-600 dark:text-slate-400 mt-2 font-light">Under the Sponsorship of X.</p>
                 </div>
-                <div class="glass rounded-xl p-6">
-                    <p class="text-slate-300 text-xs uppercase tracking-[0.2em] mb-2">14:00-15:30</p>
-                    <h4 class="text-lg md:text-xl font-semibold text-white tracking-wide">3rd Session: The Rise of the
+                <div class="glass rounded-xl p-6 shadow-sm dark:shadow-none">
+                    <p class="text-slate-500 dark:text-slate-300 text-xs uppercase tracking-[0.2em] mb-2 font-bold">14:00-15:30</p>
+                    <h4 class="text-lg md:text-xl font-semibold text-slate-900 dark:text-white tracking-wide">3rd Session: The Rise of the
                         Asian Steel Industry: Production, Trade and Market Dynamics</h4>
-                    <p class="text-slate-400 mt-2">Participants: ANN Steel, TATA Steel, SEAISI, BAOW, Nucor Steel,
+                    <p class="text-slate-600 dark:text-slate-400 mt-2 font-light">Participants: ANN Steel, TATA Steel, SEAISI, BAOW, Nucor Steel,
                         Jindal Steel, HBIS, ArcelorMittal, Krakatau.</p>
                 </div>
-                <div class="glass rounded-xl p-6">
-                    <p class="text-slate-300 text-xs uppercase tracking-[0.2em] mb-2">15:30-16:00</p>
-                    <h4 class="text-lg md:text-xl font-semibold text-white tracking-wide">Coffee Break</h4>
-                    <p class="text-slate-400 mt-2">Under the Sponsorship of X.</p>
+                <div class="glass rounded-xl p-6 shadow-sm dark:shadow-none">
+                    <p class="text-slate-500 dark:text-slate-300 text-xs uppercase tracking-[0.2em] mb-2 font-bold">15:30-16:00</p>
+                    <h4 class="text-lg md:text-xl font-semibold text-slate-900 dark:text-white tracking-wide">Coffee Break</h4>
+                    <p class="text-slate-600 dark:text-slate-400 mt-2 font-light">Under the Sponsorship of X.</p>
                 </div>
-                <div class="glass rounded-xl p-6">
-                    <p class="text-slate-300 text-xs uppercase tracking-[0.2em] mb-2">16:00-17:30</p>
-                    <h4 class="text-lg md:text-xl font-semibold text-white tracking-wide">4th Session: Steel
+                <div class="glass rounded-xl p-6 shadow-sm dark:shadow-none">
+                    <p class="text-slate-500 dark:text-slate-300 text-xs uppercase tracking-[0.2em] mb-2 font-bold">16:00-17:30</p>
+                    <h4 class="text-lg md:text-xl font-semibold text-slate-900 dark:text-white tracking-wide">4th Session: Steel
                         Opportunities in MENA Region: Growth, Investment and Trade</h4>
-                    <p class="text-slate-400 mt-2">Participants: Tosyalı Holding, Emirates Steel, Arab Iron and Steel
+                    <p class="text-slate-600 dark:text-slate-400 mt-2 font-light">Participants: Tosyalı Holding, Emirates Steel, Arab Iron and Steel
                         Union, Hadeed, EZZ Steel.</p>
                 </div>
-                <div class="glass rounded-xl p-6">
-                    <p class="text-slate-300 text-xs uppercase tracking-[0.2em] mb-2">19:00</p>
-                    <h4 class="text-lg md:text-xl font-semibold text-white tracking-wide">Gala Dinner and Networking
+                <div class="glass rounded-xl p-6 shadow-sm dark:shadow-none">
+                    <p class="text-slate-500 dark:text-slate-300 text-xs uppercase tracking-[0.2em] mb-2 font-bold">19:00</p>
+                    <h4 class="text-lg md:text-xl font-semibold text-slate-900 dark:text-white tracking-wide">Gala Dinner and Networking
                         Cocktail</h4>
-                    <p class="text-slate-400 mt-2">Under the Sponsorship of X.</p>
+                    <p class="text-slate-600 dark:text-slate-400 mt-2 font-light">Under the Sponsorship of X.</p>
                 </div>
             </div>
 
             <div class="space-y-4" x-show="activeTab === 3">
-                <div class="glass rounded-xl p-6">
-                    <p class="text-slate-300 text-xs uppercase tracking-[0.2em] mb-2">09:00-09:30</p>
-                    <h4 class="text-lg md:text-xl font-semibold text-white tracking-wide">Registration</h4>
+                <div class="glass rounded-xl p-6 shadow-sm dark:shadow-none">
+                    <p class="text-slate-500 dark:text-slate-300 text-xs uppercase tracking-[0.2em] mb-2 font-bold">09:00-09:30</p>
+                    <h4 class="text-lg md:text-xl font-semibold text-slate-900 dark:text-white tracking-wide">Registration</h4>
                 </div>
-                <div class="glass rounded-xl p-6">
-                    <p class="text-slate-300 text-xs uppercase tracking-[0.2em] mb-2">09:30-10:00</p>
-                    <h4 class="text-lg md:text-xl font-semibold text-white tracking-wide">Opening Speeches</h4>
+                <div class="glass rounded-xl p-6 shadow-sm dark:shadow-none">
+                    <p class="text-slate-500 dark:text-slate-300 text-xs uppercase tracking-[0.2em] mb-2 font-bold">09:30-10:00</p>
+                    <h4 class="text-lg md:text-xl font-semibold text-slate-900 dark:text-white tracking-wide">Opening Speeches</h4>
                 </div>
-                <div class="glass rounded-xl p-6">
-                    <p class="text-slate-300 text-xs uppercase tracking-[0.2em] mb-2">10:00-11:30</p>
-                    <h4 class="text-lg md:text-xl font-semibold text-white tracking-wide">1st Session: Steel Market
+                <div class="glass rounded-xl p-6 shadow-sm dark:shadow-none">
+                    <p class="text-slate-500 dark:text-slate-300 text-xs uppercase tracking-[0.2em] mb-2 font-bold">10:00-11:30</p>
+                    <h4 class="text-lg md:text-xl font-semibold text-slate-900 dark:text-white tracking-wide">1st Session: Steel Market
                         Across America: Diverging Paths and Common Challenges</h4>
-                    <p class="text-slate-400 mt-2">Participants: Nucor Corporation, Steelco, Cleveland-Cliffs, CAP
+                    <p class="text-slate-600 dark:text-slate-400 mt-2 font-light">Participants: Nucor Corporation, Steelco, Cleveland-Cliffs, CAP
                         Acero, Ternium Argentina.</p>
                 </div>
-                <div class="glass rounded-xl p-6">
-                    <p class="text-slate-300 text-xs uppercase tracking-[0.2em] mb-2">11:30-12:30</p>
-                    <h4 class="text-lg md:text-xl font-semibold text-white tracking-wide">2nd Session: Navigating the
+                <div class="glass rounded-xl p-6 shadow-sm dark:shadow-none">
+                    <p class="text-slate-500 dark:text-slate-300 text-xs uppercase tracking-[0.2em] mb-2 font-bold">11:30-12:30</p>
+                    <h4 class="text-lg md:text-xl font-semibold text-slate-900 dark:text-white tracking-wide">2nd Session: Navigating the
                         World Steel Trade: Trade Remedies, Protectionism, and the Future of Fair Competition</h4>
-                    <p class="text-slate-400 mt-2">Participants: ArentFox, World Steel Dynamics, WTO, Fastmarkets.</p>
+                    <p class="text-slate-600 dark:text-slate-400 mt-2 font-light">Participants: ArentFox, World Steel Dynamics, WTO, Fastmarkets.</p>
                 </div>
-                <div class="glass rounded-xl p-6">
-                    <p class="text-slate-300 text-xs uppercase tracking-[0.2em] mb-2">12:30-14:00</p>
-                    <h4 class="text-lg md:text-xl font-semibold text-white tracking-wide">Lunch and Networking</h4>
-                    <p class="text-slate-400 mt-2">Under the Sponsorship of X.</p>
+                <div class="glass rounded-xl p-6 shadow-sm dark:shadow-none">
+                    <p class="text-slate-500 dark:text-slate-300 text-xs uppercase tracking-[0.2em] mb-2 font-bold">12:30-14:00</p>
+                    <h4 class="text-lg md:text-xl font-semibold text-slate-900 dark:text-white tracking-wide">Lunch and Networking</h4>
+                    <p class="text-slate-600 dark:text-slate-400 mt-2 font-light">Under the Sponsorship of X.</p>
                 </div>
-                <div class="glass rounded-xl p-6">
-                    <p class="text-slate-300 text-xs uppercase tracking-[0.2em] mb-2">14:00-15:30</p>
-                    <h4 class="text-lg md:text-xl font-semibold text-white tracking-wide">3rd Session: Future of Steel
+                <div class="glass rounded-xl p-6 shadow-sm dark:shadow-none">
+                    <p class="text-slate-500 dark:text-slate-300 text-xs uppercase tracking-[0.2em] mb-2 font-bold">14:00-15:30</p>
+                    <h4 class="text-lg md:text-xl font-semibold text-slate-900 dark:text-white tracking-wide">3rd Session: Future of Steel
                         in Europe: Global Competition, Safeguard and Industrial Strategy</h4>
-                    <p class="text-slate-400 mt-2">Participants: EUROFER, Marcegaglia Steel, Danieli, Metinvest, CELSA.
+                    <p class="text-slate-600 dark:text-slate-400 mt-2 font-light">Participants: EUROFER, Marcegaglia Steel, Danieli, Metinvest, CELSA.
                     </p>
                 </div>
-                <div class="glass rounded-xl p-6">
-                    <p class="text-slate-300 text-xs uppercase tracking-[0.2em] mb-2">15:30-17:00</p>
-                    <h4 class="text-lg md:text-xl font-semibold text-white tracking-wide">4th Session: Steel in the New
+                <div class="glass rounded-xl p-6 shadow-sm dark:shadow-none">
+                    <p class="text-slate-500 dark:text-slate-300 text-xs uppercase tracking-[0.2em] mb-2 font-bold">15:30-17:00</p>
+                    <h4 class="text-lg md:text-xl font-semibold text-slate-900 dark:text-white tracking-wide">4th Session: Steel in the New
                         Era: Green Transition and Intelligent Industry</h4>
-                    <p class="text-slate-400 mt-2">Participants: McKinsey, SSAB, SMS Group, Primetals Technologies,
+                    <p class="text-slate-600 dark:text-slate-400 mt-2 font-light">Participants: McKinsey, SSAB, SMS Group, Primetals Technologies,
                         Danieli.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-24 bg-slate-950 px-6 border-t border-white/5 relative overflow-hidden" id="about"
+    <section class="py-32 bg-white dark:bg-slate-950 px-6 border-t border-slate-100 dark:border-white/5 relative overflow-hidden transition-colors duration-500" id="about"
         x-data="{ revealed: false }" x-intersect.once="revealed = true">
         <!-- Ambient Glow -->
-        <div class="absolute top-1/2 -left-24 w-80 h-80 bg-brand-teal/10 blur-[100px] rounded-full pointer-events-none">
+        <div class="absolute top-1/2 -left-24 w-80 h-80 bg-brand-teal/5 dark:bg-brand-teal/10 blur-[100px] rounded-full pointer-events-none">
         </div>
 
         <div class="max-w-7xl mx-auto relative z-10 transition-all duration-1000 transform"
@@ -659,31 +753,31 @@
                 <div class="space-y-8">
                     <div>
                         <span
-                            class="text-[10px] md:text-xs uppercase tracking-[0.3em] text-brand-teal-light font-bold mb-4 block">About
+                            class="text-[10px] md:text-xs uppercase tracking-[0.3em] text-cyan-600 dark:text-brand-teal-light font-bold mb-4 block">About
                             Us</span>
-                        <h2 class="text-4xl md:text-6xl font-serif font-bold text-white uppercase tracking-wider mb-6">
+                        <h2 class="text-4xl md:text-6xl font-serif font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-6">
                             Legacy of <br />
                             <span class="text-slate-500 italic">Excellence.</span>
                         </h2>
-                        <p class="text-slate-400 text-lg md:text-xl font-light leading-relaxed">
+                        <p class="text-slate-600 dark:text-slate-400 text-lg md:text-xl font-light leading-relaxed">
                             Steel Networking Summits was created to meet the need for a truly global networking
                             conference that brings together all stakeholders across the international steel trade.
                         </p>
                     </div>
 
                     <div class="space-y-6">
-                        <p class="text-lg text-slate-300 italic border-l-4 border-brand-teal pl-6 py-2">
+                        <p class="text-lg text-slate-700 dark:text-slate-300 italic border-l-4 border-brand-teal pl-6 py-2">
                             To create a truly global and integrated steel networking platform connecting producers,
                             traders, and logistics providers.
                         </p>
 
-                        <div class="grid grid-cols-2 gap-8 pt-8 border-t border-white/5">
+                        <div class="grid grid-cols-2 gap-8 pt-8 border-t border-slate-100 dark:border-white/5">
                             <div class="space-y-1">
-                                <div class="text-3xl font-serif font-bold text-white">12+</div>
+                                <div class="text-3xl font-serif font-bold text-slate-900 dark:text-white">12+</div>
                                 <div class="text-[10px] uppercase tracking-widest text-slate-500">Years Leadership</div>
                             </div>
                             <div class="space-y-1">
-                                <div class="text-3xl font-serif font-bold text-white">500+</div>
+                                <div class="text-3xl font-serif font-bold text-slate-900 dark:text-white">500+</div>
                                 <div class="text-[10px] uppercase tracking-widest text-slate-500">Global Delegates</div>
                             </div>
                         </div>
@@ -693,12 +787,12 @@
                 <!-- Right Content: Premium Image -->
                 <div class="relative group">
                     <div
-                        class="absolute -inset-1 bg-gradient-to-r from-brand-teal/20 to-purple-500/20 rounded-[2rem] blur opacity-25 group-hover:opacity-50 transition duration-1000">
+                        class="absolute -inset-1 bg-gradient-to-r from-brand-teal/10 to-purple-500/10 dark:from-brand-teal/20 dark:to-purple-500/20 rounded-[2rem] blur opacity-25 group-hover:opacity-50 transition duration-1000">
                     </div>
-                    <div class="relative aspect-square rounded-[2rem] overflow-hidden border border-white/10">
+                    <div class="relative aspect-square rounded-[2rem] overflow-hidden border border-slate-200 dark:border-white/10">
                         <img src="{{ asset('images/about/steel-legacy.png') }}" alt="Steel Legacy"
                             class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-100">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/20 dark:from-slate-950/60 to-transparent"></div>
                     </div>
                 </div>
 
@@ -707,8 +801,7 @@
     </section>
 
     <!-- NEW: What to Expect Section -->
-    <section class="py-32 bg-slate-950 px-6 border-t border-white/5 overflow-hidden relative"
-        x-data="{ revealed: false }" x-intersect.once="revealed = true">
+    <section class="py-32 bg-slate-50 dark:bg-slate-950 px-6 border-t border-slate-100 dark:border-white/5 overflow-hidden relative transition-colors duration-500">
         <div class="max-w-7xl mx-auto relative z-10 transition-all duration-1000 transform"
             :class="revealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -716,9 +809,9 @@
                 <!-- Left: Image -->
                 <div class="relative group order-1">
                     <div
-                        class="absolute -inset-1 bg-gradient-to-r from-brand-teal/20 to-purple-500/20 rounded-[2rem] blur opacity-25 group-hover:opacity-50 transition duration-1000">
+                        class="absolute -inset-1 bg-gradient-to-r from-brand-teal/10 to-purple-500/10 dark:from-brand-teal/20 dark:to-purple-500/20 rounded-[2rem] blur opacity-25 group-hover:opacity-50 transition duration-1000">
                     </div>
-                    <div class="relative aspect-[4/5] rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl">
+                    <div class="relative aspect-[4/5] rounded-[2rem] overflow-hidden border border-slate-200 dark:border-white/10 shadow-2xl">
                         <img src="{{ asset('images/about/summit-experience.png') }}" alt="Conference Hall"
                             class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-100">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent">
@@ -732,10 +825,10 @@
                 <!-- Right: Content -->
                 <div class="space-y-10 order-2">
                     <span
-                        class="text-[10px] md:text-xs uppercase tracking-[0.3em] text-brand-teal-light font-bold mb-4 block">Conference
+                        class="text-[10px] md:text-xs uppercase tracking-[0.3em] text-cyan-600 dark:text-brand-teal-light font-bold mb-4 block">Conference
                         Experience</span>
 
-                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-white tracking-tight">
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-slate-900 dark:text-white tracking-tight">
                         What to <span class="text-gradient-platinum">Expect?</span>
                     </h2>
 
@@ -743,12 +836,12 @@
                         <!-- Feature 1 -->
                         <div class="flex items-start gap-6 group">
                             <div
-                                class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-brand-teal/20 transition-colors duration-500">
+                                class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center group-hover:bg-brand-teal/20 transition-colors duration-500 shadow-sm dark:shadow-none">
                                 <span class="material-symbols-outlined text-brand-teal-light">groups</span>
                             </div>
                             <div class="flex-1">
-                                <h4 class="text-xl font-bold text-white mb-2">Industry Leaders</h4>
-                                <p class="text-slate-300 font-light leading-relaxed">Leading companies, decision-makers,
+                                <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Industry Leaders</h4>
+                                <p class="text-slate-600 dark:text-slate-300 font-light leading-relaxed">Leading companies, decision-makers,
                                     and opinion leaders shaping the industry from around the world will participate.</p>
                             </div>
                         </div>
@@ -756,12 +849,12 @@
                         <!-- Feature 2 -->
                         <div class="flex items-start gap-6 group">
                             <div
-                                class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-brand-teal/20 transition-colors duration-500">
+                                class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center group-hover:bg-brand-teal/20 transition-colors duration-500 shadow-sm dark:shadow-none">
                                 <span class="material-symbols-outlined text-brand-teal-light">public</span>
                             </div>
                             <div class="flex-1">
-                                <h4 class="text-xl font-bold text-white mb-2">Global Markets</h4>
-                                <p class="text-slate-300 font-light leading-relaxed">Up-to-date and in-depth insights
+                                <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Global Markets</h4>
+                                <p class="text-slate-600 dark:text-slate-300 font-light leading-relaxed">Up-to-date and in-depth insights
                                     into steel markets across all regions with a comprehensive view of the future.</p>
                             </div>
                         </div>
@@ -771,7 +864,7 @@
         </div>
     </section>
 
-    <section class="py-32 bg-slate-950 px-6 border-t border-white/5 relative overflow-hidden" id="keynote-speakers"
+    <section class="py-32 bg-slate-50 dark:bg-slate-950 px-6 border-t border-slate-100 dark:border-white/5 relative overflow-hidden transition-colors duration-500" id="keynote-speakers"
         x-data="{ revealed: false }" x-intersect.once="revealed = true">
         <!-- Ambient Glow -->
         <div
@@ -782,9 +875,9 @@
             :class="revealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'">
             <div class="mb-20 text-center">
                 <span
-                    class="text-[10px] md:text-xs uppercase tracking-[0.3em] text-brand-teal-light font-bold mb-4 block">Keynote
+                    class="text-[10px] md:text-xs uppercase tracking-[0.3em] text-cyan-600 dark:text-brand-teal-light font-bold mb-4 block">Keynote
                     Speakers</span>
-                <h2 class="text-4xl md:text-6xl font-serif font-bold text-white max-w-4xl mx-auto leading-tight italic">
+                <h2 class="text-4xl md:text-6xl font-serif font-bold text-slate-900 dark:text-white max-w-4xl mx-auto leading-tight italic">
                     Industry Leaders <br class="hidden md:block" />
                     <span class="text-slate-500"> Shaping the Future</span>
                 </h2>
@@ -792,77 +885,77 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div
-                    class="bg-white/5 backdrop-blur-md border border-slate-600/30 rounded-2xl p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start hover:bg-white/10 transition duration-300 group">
+                    class="glass p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start hover:bg-slate-900/5 dark:hover:bg-white/10 transition duration-300 group shadow-sm dark:shadow-none">
                     <div
-                        class="w-28 h-28 flex-shrink-0 rounded-full border-2 border-slate-500/50 group-hover:border-slate-300 transition-colors overflow-hidden bg-slate-800 flex items-center justify-center grayscale">
+                        class="w-28 h-28 flex-shrink-0 rounded-full border-2 border-slate-200 dark:border-slate-500/50 group-hover:border-slate-400 dark:group-hover:border-slate-300 transition-colors overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center grayscale">
                         <img alt="Keynote speaker portrait" class="w-full h-full object-cover"
                             src="{{ asset('images/speaker-dalbeler.webp') }}" />
                     </div>
                     <div class="flex-1 text-center sm:text-left">
-                        <h3 class="text-xl font-bold text-white font-sans">Ugur Dalbeler</h3>
-                        <p class="text-slate-300 text-sm font-medium mb-3">CEO, Colakoglu Metalurji</p>
-                        <p class="text-slate-400 text-sm leading-relaxed line-clamp-3">A distinguished leader in the
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white font-sans">Ugur Dalbeler</h3>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm font-medium mb-3">CEO, Colakoglu Metalurji</p>
+                        <p class="text-slate-700 dark:text-slate-400 text-sm leading-relaxed line-clamp-3">A distinguished leader in the
                             Turkish steel industry, driving strategic growth and sustainable production initiatives at
                             one of the nation's largest steel producers.</p>
                         <span
-                            class="text-slate-300 text-xs hover:text-white mt-3 inline-block font-semibold tracking-wide cursor-pointer transition-colors">Read
+                            class="text-cyan-700 dark:text-slate-300 text-xs hover:text-slate-900 dark:hover:text-white mt-3 inline-block font-semibold tracking-wide cursor-pointer transition-colors">Read
                             Full Bio -&gt;</span>
                     </div>
                 </div>
 
                 <div
-                    class="bg-white/5 backdrop-blur-md border border-slate-600/30 rounded-2xl p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start hover:bg-white/10 transition duration-300 group">
+                    class="glass p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start hover:bg-slate-900/5 dark:hover:bg-white/10 transition duration-300 group shadow-sm dark:shadow-none">
                     <div
-                        class="w-28 h-28 flex-shrink-0 rounded-full border-2 border-slate-500/50 group-hover:border-slate-300 transition-colors overflow-hidden bg-slate-800 flex items-center justify-center grayscale">
+                        class="w-28 h-28 flex-shrink-0 rounded-full border-2 border-slate-200 dark:border-slate-500/50 group-hover:border-slate-400 dark:group-hover:border-slate-300 transition-colors overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center grayscale">
                         <img alt="Keynote speaker portrait" class="w-full h-full object-cover"
                             src="{{ asset('images/speaker-dalbeler.webp') }}" />
                     </div>
                     <div class="flex-1 text-center sm:text-left">
-                        <h3 class="text-xl font-bold text-white font-sans">Ugur Dalbeler</h3>
-                        <p class="text-slate-300 text-sm font-medium mb-3">CEO, Colakoglu Metalurji</p>
-                        <p class="text-slate-400 text-sm leading-relaxed line-clamp-3">Pioneering the integration of
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white font-sans">Ugur Dalbeler</h3>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm font-medium mb-3">CEO, Colakoglu Metalurji</p>
+                        <p class="text-slate-700 dark:text-slate-400 text-sm leading-relaxed line-clamp-3">Pioneering the integration of
                             advanced automation and eco-friendly technologies within heavy industrial manufacturing to
                             meet global decarbonization targets.</p>
                         <span
-                            class="text-slate-300 text-xs hover:text-white mt-3 inline-block font-semibold tracking-wide cursor-pointer transition-colors">Read
+                            class="text-cyan-700 dark:text-slate-300 text-xs hover:text-slate-900 dark:hover:text-white mt-3 inline-block font-semibold tracking-wide cursor-pointer transition-colors">Read
                             Full Bio -&gt;</span>
                     </div>
                 </div>
 
                 <div
-                    class="bg-white/5 backdrop-blur-md border border-slate-600/30 rounded-2xl p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start hover:bg-white/10 transition duration-300 group">
+                    class="glass p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start hover:bg-slate-900/5 dark:hover:bg-white/10 transition duration-300 group shadow-sm dark:shadow-none">
                     <div
-                        class="w-28 h-28 flex-shrink-0 rounded-full border-2 border-slate-500/50 group-hover:border-slate-300 transition-colors overflow-hidden bg-slate-800 flex items-center justify-center grayscale">
+                        class="w-28 h-28 flex-shrink-0 rounded-full border-2 border-slate-200 dark:border-slate-500/50 group-hover:border-slate-400 dark:group-hover:border-slate-300 transition-colors overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center grayscale">
                         <img alt="Keynote speaker portrait" class="w-full h-full object-cover"
                             src="{{ asset('images/speaker-dalbeler.webp') }}" />
                     </div>
                     <div class="flex-1 text-center sm:text-left">
-                        <h3 class="text-xl font-bold text-white font-sans">Ugur Dalbeler</h3>
-                        <p class="text-slate-300 text-sm font-medium mb-3">CEO, Colakoglu Metalurji</p>
-                        <p class="text-slate-400 text-sm leading-relaxed line-clamp-3">Strategizing the future of
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white font-sans">Ugur Dalbeler</h3>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm font-medium mb-3">CEO, Colakoglu Metalurji</p>
+                        <p class="text-slate-700 dark:text-slate-400 text-sm leading-relaxed line-clamp-3">Strategizing the future of
                             metallurgical supply chains, focusing on resilience and innovation in the face of shifting
                             geopolitical dynamics across Eurasia.</p>
                         <span
-                            class="text-slate-300 text-xs hover:text-white mt-3 inline-block font-semibold tracking-wide cursor-pointer transition-colors">Read
+                            class="text-cyan-700 dark:text-slate-300 text-xs hover:text-slate-900 dark:hover:text-white mt-3 inline-block font-semibold tracking-wide cursor-pointer transition-colors">Read
                             Full Bio -&gt;</span>
                     </div>
                 </div>
 
                 <div
-                    class="bg-white/5 backdrop-blur-md border border-slate-600/30 rounded-2xl p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start hover:bg-white/10 transition duration-300 group">
+                    class="glass p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start hover:bg-slate-900/5 dark:hover:bg-white/10 transition duration-300 group shadow-sm dark:shadow-none">
                     <div
-                        class="w-28 h-28 flex-shrink-0 rounded-full border-2 border-slate-500/50 group-hover:border-slate-300 transition-colors overflow-hidden bg-slate-800 flex items-center justify-center grayscale">
+                        class="w-28 h-28 flex-shrink-0 rounded-full border-2 border-slate-200 dark:border-slate-500/50 group-hover:border-slate-400 dark:group-hover:border-slate-300 transition-colors overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center grayscale">
                         <img alt="Keynote speaker portrait" class="w-full h-full object-cover"
                             src="{{ asset('images/speaker-dalbeler.webp') }}" />
                     </div>
                     <div class="flex-1 text-center sm:text-left">
-                        <h3 class="text-xl font-bold text-white font-sans">Ugur Dalbeler</h3>
-                        <p class="text-slate-300 text-sm font-medium mb-3">CEO, Colakoglu Metalurji</p>
-                        <p class="text-slate-400 text-sm leading-relaxed line-clamp-3">Advocating for digital
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white font-sans">Ugur Dalbeler</h3>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm font-medium mb-3">CEO, Colakoglu Metalurji</p>
+                        <p class="text-slate-700 dark:text-slate-400 text-sm leading-relaxed line-clamp-3">Advocating for digital
                             transformation and smart factory solutions to enhance operational efficiency and global
                             competitiveness in the steel sector.</p>
                         <span
-                            class="text-slate-300 text-xs hover:text-white mt-3 inline-block font-semibold tracking-wide cursor-pointer transition-colors">Read
+                            class="text-cyan-700 dark:text-slate-300 text-xs hover:text-slate-900 dark:hover:text-white mt-3 inline-block font-semibold tracking-wide cursor-pointer transition-colors">Read
                             Full Bio -&gt;</span>
                     </div>
                 </div>
@@ -966,8 +1059,8 @@
 
 
     <!-- BEGIN: Who Attends -->
-    <section class="py-32 bg-slate-950 overflow-hidden relative" id="who-attends"
-        x-data="{ revealed: false, isDragging: false, startX: 0, scrollLeft: 0, scrollProgress: 0 }"
+    <section class="py-32 bg-white dark:bg-slate-950 overflow-hidden relative transition-colors duration-500"
+        id="who-attends" x-data="{ revealed: false, isDragging: false, startX: 0, scrollLeft: 0, scrollProgress: 0 }"
         x-intersect.once="revealed = true">
         <!-- Ambient Glow -->
         <div class="absolute -top-24 -left-24 w-96 h-96 bg-blue-600/5 blur-[120px] rounded-full pointer-events-none">
@@ -976,13 +1069,13 @@
         <div class="max-w-7xl mx-auto px-6 mb-16 transition-all duration-1000 transform"
             :class="revealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'">
             <span
-                class="text-[10px] md:text-xs uppercase tracking-[0.3em] text-brand-teal-light font-bold mb-4 block">Networking
+                class="text-[10px] md:text-xs uppercase tracking-[0.3em] text-cyan-600 dark:text-brand-teal-light font-bold mb-4 block">Networking
                 Pool</span>
-            <h2 class="text-4xl md:text-7xl font-serif font-bold text-white mb-6 leading-tight">
+            <h2 class="text-4xl md:text-7xl font-serif font-bold text-slate-900 dark:text-white mb-6 leading-tight">
                 Who <br class="hidden md:block" />
                 <span class="text-slate-500 italic">Attends?</span>
             </h2>
-            <p class="text-slate-400 text-lg md:text-2xl font-light max-w-2xl font-sans leading-relaxed">
+            <p class="text-slate-600 dark:text-slate-400 text-lg md:text-2xl font-light max-w-2xl font-sans leading-relaxed">
                 A cross-disciplinary assembly of the global steel industry's primary stakeholders.
             </p>
         </div>
@@ -1007,8 +1100,8 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent"></div>
                     </div>
                     <div class="mt-8 px-4">
-                        <h4 class="text-2xl md:text-3xl font-bold text-white mb-3">Steel Producers</h4>
-                        <p class="text-slate-400 text-base md:text-lg font-light leading-relaxed">
+                        <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Steel Producers</h4>
+                        <p class="text-slate-600 dark:text-slate-400 text-base md:text-lg font-light leading-relaxed">
                             Global manufacturers driving the industry forward with next-gen production tech.
                         </p>
                     </div>
@@ -1023,8 +1116,8 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent"></div>
                     </div>
                     <div class="mt-8 px-4">
-                        <h4 class="text-2xl md:text-3xl font-bold text-white mb-3">International Traders</h4>
-                        <p class="text-slate-400 text-base md:text-lg font-light leading-relaxed">
+                        <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">International Traders</h4>
+                        <p class="text-slate-600 dark:text-slate-400 text-base md:text-lg font-light leading-relaxed">
                             Strategic networkers connecting supply with demand across global corridors.
                         </p>
                     </div>
@@ -1039,8 +1132,8 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent"></div>
                     </div>
                     <div class="mt-8 px-4">
-                        <h4 class="text-2xl md:text-3xl font-bold text-white mb-3">Logistics Providers</h4>
-                        <p class="text-slate-400 text-base md:text-lg font-light leading-relaxed">
+                        <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Logistics Providers</h4>
+                        <p class="text-slate-600 dark:text-slate-400 text-base md:text-lg font-light leading-relaxed">
                             Architects of global supply chains, optimizing transit from mill to port.
                         </p>
                     </div>
@@ -1056,8 +1149,8 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent"></div>
                     </div>
                     <div class="mt-8 px-4">
-                        <h4 class="text-2xl md:text-3xl font-bold text-white mb-3">Financial Institutions</h4>
-                        <p class="text-slate-400 text-base md:text-lg font-light leading-relaxed">
+                        <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Financial Institutions</h4>
+                        <p class="text-slate-600 dark:text-slate-400 text-base md:text-lg font-light leading-relaxed">
                             Key investment partners fueling the green steel transition and trade finance.
                         </p>
                     </div>
@@ -1073,8 +1166,8 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent"></div>
                     </div>
                     <div class="mt-8 px-4">
-                        <h4 class="text-2xl md:text-3xl font-bold text-white mb-3">Technology Providers</h4>
-                        <p class="text-slate-400 text-base md:text-lg font-light leading-relaxed">
+                        <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Technology Providers</h4>
+                        <p class="text-slate-600 dark:text-slate-400 text-base md:text-lg font-light leading-relaxed">
                             Innovative AI and engineering firms transforming manufacturing standards.
                         </p>
                     </div>
@@ -1090,8 +1183,8 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent"></div>
                     </div>
                     <div class="mt-8 px-4">
-                        <h4 class="text-2xl md:text-3xl font-bold text-white mb-3">Gov & Institutions</h4>
-                        <p class="text-slate-400 text-base md:text-lg font-light leading-relaxed">
+                        <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Gov & Institutions</h4>
+                        <p class="text-slate-600 dark:text-slate-400 text-base md:text-lg font-light leading-relaxed">
                             Policymakers and trade associations shaping international trade regulations.
                         </p>
                     </div>
@@ -1110,11 +1203,11 @@
                 <!-- Navigation Controls -->
                 <div class="flex items-center gap-3">
                     <button @click="$refs.slider.scrollBy({ left: -400, behavior: 'smooth' })"
-                        class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-all">
+                        class="w-12 h-12 rounded-full border border-slate-300 dark:border-white/20 flex items-center justify-center text-slate-900 dark:text-white hover:bg-slate-900/5 dark:hover:bg-white/10 transition-all">
                         <span class="material-symbols-outlined">chevron_left</span>
                     </button>
                     <button @click="$refs.slider.scrollBy({ left: 400, behavior: 'smooth' })"
-                        class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-all">
+                        class="w-12 h-12 rounded-full border border-slate-300 dark:border-white/20 flex items-center justify-center text-slate-900 dark:text-white hover:bg-slate-900/5 dark:hover:bg-white/10 transition-all">
                         <span class="material-symbols-outlined">chevron_right</span>
                     </button>
                 </div>
@@ -1124,7 +1217,7 @@
 
 
     <!-- BEGIN: Sponsorship -->
-    <section class="py-32 bg-slate-950 relative overflow-hidden" id="sponsorship"
+    <section class="py-32 bg-slate-50 dark:bg-slate-950 relative overflow-hidden transition-colors duration-500" id="sponsorship"
         x-data="{ activeTab: 'packages', showForm: false, revealed: false }" x-intersect:enter="revealed = true">
         <!-- Ambient Background Depth -->
         <div
@@ -1138,13 +1231,13 @@
             <div class="mb-20 text-center transition-all duration-1000 transform"
                 :class="revealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'">
                 <span
-                    class="text-[11px] md:text-xs uppercase tracking-[0.4em] text-brand-teal-light font-bold mb-4 block opacity-80">Strategic
+                    class="text-[11px] md:text-xs uppercase tracking-[0.4em] text-cyan-600 dark:text-brand-teal-light font-bold mb-4 block opacity-80">Strategic
                     Partnerships</span>
-                <h2 class="text-5xl md:text-8xl font-serif font-bold text-white mb-8 leading-tight">
+                <h2 class="text-5xl md:text-8xl font-serif font-bold text-slate-900 dark:text-white mb-8 leading-tight">
                     Why Become a <br class="hidden md:block" />
                     <span class="text-slate-500 italic">Sponsor?</span>
                 </h2>
-                <p class="text-slate-400 text-xl md:text-2xl font-light max-w-3xl mx-auto font-sans leading-relaxed">
+                <p class="text-slate-600 dark:text-slate-400 text-xl md:text-2xl font-light max-w-3xl mx-auto font-sans leading-relaxed">
                     Beyond making your brand visible in the global steel industry, it positions you among the key
                     players shaping the sector.
                 </p>
@@ -1155,7 +1248,7 @@
 
                 <!-- Card 1: Strategic Positioning -->
                 <div
-                    class="relative p-12 rounded-[2.5rem] bg-slate-900/50 border border-white/5 hover:border-blue-500/30 shadow-2xl transition-all duration-700 group flex flex-col h-full overflow-hidden">
+                    class="relative p-12 rounded-[2.5rem] glass dark:bg-slate-900/50 border border-slate-200 dark:border-white/5 hover:border-blue-500/30 shadow-sm dark:shadow-2xl transition-all duration-700 group flex flex-col h-full overflow-hidden">
                     <div
                         class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                     </div>
@@ -1165,14 +1258,14 @@
                                 class="material-symbols-outlined text-4xl text-blue-500 group-hover:scale-110 transition-transform duration-500">public</span>
                         </div>
                         <div class="flex-grow">
-                            <h4 class="text-3xl md:text-4xl font-bold text-white leading-[1.15] mb-4">
+                            <h4 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white leading-[1.15] mb-4">
                                 Strategic <span class="text-blue-500">Positioning</span> in the market.
                             </h4>
-                            <p class="text-slate-400 text-lg font-light">In the International Steel Industry</p>
+                            <p class="text-slate-600 dark:text-slate-400 text-lg font-light">In the International Steel Industry</p>
                         </div>
                         <div class="mt-12 flex justify-end">
                             <button
-                                class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-slate-950 group-hover:bg-blue-500 group-hover:text-white transition-all duration-300">
+                                class="w-10 h-10 rounded-full bg-slate-900 dark:bg-white flex items-center justify-center text-white dark:text-slate-950 group-hover:bg-blue-500 group-hover:text-white transition-all duration-300">
                                 <span class="material-symbols-outlined text-xl font-bold">add</span>
                             </button>
                         </div>
@@ -1181,7 +1274,7 @@
 
                 <!-- Card 2: Target Audience -->
                 <div
-                    class="relative p-12 rounded-[2.5rem] bg-slate-900/50 border border-white/5 hover:border-orange-500/30 shadow-2xl transition-all duration-700 group flex flex-col h-full overflow-hidden">
+                    class="relative p-12 rounded-[2.5rem] glass dark:bg-slate-900/50 border border-slate-200 dark:border-white/5 hover:border-orange-500/30 shadow-sm dark:shadow-2xl transition-all duration-700 group flex flex-col h-full overflow-hidden">
                     <div
                         class="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                     </div>
@@ -1191,14 +1284,14 @@
                                 class="material-symbols-outlined text-4xl text-orange-500 group-hover:scale-110 transition-transform duration-500">track_changes</span>
                         </div>
                         <div class="flex-grow">
-                            <h4 class="text-3xl md:text-4xl font-bold text-white leading-[1.15] mb-4">
+                            <h4 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white leading-[1.15] mb-4">
                                 Direct <span class="text-orange-500">Engagement</span> with targets.
                             </h4>
-                            <p class="text-slate-400 text-lg font-light">With High-Level Target Audience</p>
+                            <p class="text-slate-600 dark:text-slate-400 text-lg font-light">With High-Level Target Audience</p>
                         </div>
                         <div class="mt-12 flex justify-end">
                             <button
-                                class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-slate-950 group-hover:bg-orange-500 group-hover:text-white transition-all duration-300">
+                                class="w-10 h-10 rounded-full bg-slate-900 dark:bg-white flex items-center justify-center text-white dark:text-slate-950 group-hover:bg-orange-500 group-hover:text-white transition-all duration-300">
                                 <span class="material-symbols-outlined text-xl font-bold">add</span>
                             </button>
                         </div>
@@ -1207,7 +1300,7 @@
 
                 <!-- Card 3: Global Wealth -->
                 <div
-                    class="relative p-12 rounded-[2.5rem] bg-slate-900/50 border border-white/5 hover:border-purple-500/30 shadow-2xl transition-all duration-700 group flex flex-col h-full overflow-hidden">
+                    class="relative p-12 rounded-[2.5rem] glass dark:bg-slate-900/50 border border-slate-200 dark:border-white/5 hover:border-purple-500/30 shadow-sm dark:shadow-2xl transition-all duration-700 group flex flex-col h-full overflow-hidden">
                     <div
                         class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                     </div>
@@ -1217,14 +1310,14 @@
                                 class="material-symbols-outlined text-4xl text-purple-500 group-hover:scale-110 transition-transform duration-500">account_balance</span>
                         </div>
                         <div class="flex-grow">
-                            <h4 class="text-3xl md:text-4xl font-bold text-white leading-[1.15] mb-4">
+                            <h4 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white leading-[1.15] mb-4">
                                 Global <span class="text-purple-500">Wealth Hub</span> access.
                             </h4>
-                            <p class="text-slate-400 text-lg font-light">At the Heart of World Steel Industry</p>
+                            <p class="text-slate-600 dark:text-slate-400 text-lg font-light">At the Heart of World Steel Industry</p>
                         </div>
                         <div class="mt-12 flex justify-end">
                             <button
-                                class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-slate-950 group-hover:bg-purple-500 group-hover:text-white transition-all duration-300">
+                                class="w-10 h-10 rounded-full bg-slate-900 dark:bg-white flex items-center justify-center text-white dark:text-slate-950 group-hover:bg-purple-500 group-hover:text-white transition-all duration-300">
                                 <span class="material-symbols-outlined text-xl font-bold">add</span>
                             </button>
                         </div>
@@ -1234,14 +1327,14 @@
 
             <!-- Toggle Tabs -->
             <div class="flex justify-center mb-16">
-                <div class="inline-flex bg-slate-900 p-1.5 rounded-2xl border border-white/5 shadow-sm">
+                <div class="inline-flex bg-slate-200 dark:bg-slate-900 p-1.5 rounded-2xl border border-slate-300 dark:border-white/5 shadow-sm">
                     <button @click="activeTab = 'sponsors'"
-                        :class="activeTab === 'sponsors' ? 'bg-white/10 text-white shadow-sm' : 'text-slate-500 hover:text-slate-300'"
-                        class="px-8 py-3 rounded-xl transition-all font-semibold text-sm tracking-tight">OUR
+                        :class="activeTab === 'sponsors' ? 'bg-white dark:bg-white/10 text-slate-900 dark:text-white shadow-sm' : 'text-slate-500 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'"
+                        class="px-8 py-3 rounded-xl transition-all font-semibold text-sm tracking-tight uppercase">OUR
                         SPONSORS</button>
                     <button @click="activeTab = 'packages'"
-                        :class="activeTab === 'packages' ? 'bg-white/10 text-white shadow-sm' : 'text-slate-500 hover:text-slate-300'"
-                        class="px-8 py-3 rounded-xl transition-all font-semibold text-sm tracking-tight">SPONSORSHIP
+                        :class="activeTab === 'packages' ? 'bg-white dark:bg-white/10 text-slate-900 dark:text-white shadow-sm' : 'text-slate-500 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'"
+                        class="px-8 py-3 rounded-xl transition-all font-semibold text-sm tracking-tight uppercase">SPONSORSHIP
                         PACKAGES</button>
                 </div>
             </div>
@@ -1249,16 +1342,17 @@
             <!-- Content Area -->
             <div class="grid lg:grid-cols-2 gap-12 items-start mb-24">
                 <!-- Left: Subheading 1 -->
-                <div class="p-12 md:p-16 rounded-[3rem] bg-slate-900/40 border border-white/5 shadow-2xl animate-fade-in"
+                <div class="p-12 md:p-16 rounded-[3rem] glass dark:bg-slate-900/40 border border-slate-200 dark:border-white/5 shadow-sm dark:shadow-2xl animate-fade-in"
                     x-show="activeTab === 'packages'">
-                    <h3 class="text-3xl md:text-4xl font-serif font-bold text-white mb-8 leading-tight">Package
-                        <br />Options</h3>
+                    <h3 class="text-3xl md:text-4xl font-serif font-bold text-slate-900 dark:text-white mb-8 leading-tight">Package
+                        <br />Options
+                    </h3>
                     <div class="space-y-6">
-                        <p class="text-slate-400 text-lg leading-relaxed font-light">
+                        <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed font-light">
                             Steel Networking Summits offers its sponsors a range of sponsorship packages, providing
                             tailored solutions to meet each brand’s specific needs.
                         </p>
-                        <p class="text-slate-500 leading-relaxed font-light italic border-l-2 border-white/10 pl-6">
+                        <p class="text-slate-500 leading-relaxed font-light italic border-l-2 border-slate-200 dark:border-white/10 pl-6">
                             These packages are designed in line with brand objectives and communication strategies. All
                             sponsorship packages aim to deliver 360-degree visibility and engagement before, during, and
                             after the conference.
@@ -1267,17 +1361,17 @@
                 </div>
 
                 <!-- Right: Subheading 2 -->
-                <div class="p-12 md:p-16 rounded-[3rem] bg-slate-900/40 border border-white/5 shadow-2xl animate-fade-in"
+                <div class="p-12 md:p-16 rounded-[3rem] glass dark:bg-slate-900/40 border border-slate-200 dark:border-white/5 shadow-sm dark:shadow-2xl animate-fade-in"
                     x-show="activeTab === 'packages'">
-                    <h3 class="text-3xl md:text-4xl font-serif font-bold text-white mb-8 leading-tight">Exclusive
+                    <h3 class="text-3xl md:text-4xl font-serif font-bold text-slate-900 dark:text-white mb-8 leading-tight">Exclusive
                         Benefits <br />& Visibility</h3>
                     <div class="space-y-6">
-                        <p class="text-slate-400 text-lg leading-relaxed font-light">
+                        <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed font-light">
                             Sponsors will have the opportunity to be featured in all printed and digital promotional
                             materials, on the official website, social media channels, and in-event visibility
                             applications.
                         </p>
-                        <p class="text-slate-300 text-lg leading-relaxed font-light font-semibold">
+                        <p class="text-slate-900 dark:text-slate-300 text-lg leading-relaxed font-light font-semibold">
                             Impact Senior Decision-Makers
                         </p>
                         <p class="text-slate-500 font-light leading-relaxed">
@@ -1300,10 +1394,10 @@
             <!-- CTA & Form Trigger -->
             <div class="text-center pb-20">
                 <button @click="showForm = true"
-                    class="group relative px-12 py-6 bg-white text-slate-950 rounded-full font-bold text-xl transition-all shadow-[0_20px_50px_rgba(255,255,255,0.05)] hover:shadow-[0_30px_70px_rgba(255,255,255,0.1)] active:scale-95">
+                    class="group relative px-12 py-6 bg-slate-900 dark:bg-white text-white dark:text-slate-950 rounded-full font-bold text-xl transition-all shadow-xl hover:shadow-2xl active:scale-95">
                     <span class="relative z-10">Become a Sponsor</span>
                     <div
-                        class="absolute inset-0 rounded-full bg-slate-900 opacity-0 group-hover:opacity-10 scale-0 group-hover:scale-100 transition-all duration-500">
+                        class="absolute inset-0 rounded-full bg-white dark:bg-slate-900 opacity-0 group-hover:opacity-10 scale-0 group-hover:scale-100 transition-all duration-500">
                     </div>
                 </button>
                 <p class="mt-8 text-slate-500 text-sm font-light">Join the industry leaders</p>
@@ -1318,16 +1412,16 @@
             x-transition:leave-start="opacity-100 transform scale-100"
             x-transition:leave-end="opacity-0 transform scale-95"
             class="fixed inset-0 z-[100] flex items-center justify-center px-6 pointer-events-none" x-cloak>
-            <div class="fixed inset-0 bg-slate-950/80 backdrop-blur-xl pointer-events-auto" @click="showForm = false">
+            <div class="fixed inset-0 bg-slate-900/60 dark:bg-slate-950/80 backdrop-blur-xl pointer-events-auto" @click="showForm = false">
             </div>
             <div
-                class="relative w-full max-w-xl bg-slate-900 border border-white/10 rounded-[3rem] shadow-2xl p-10 md:p-14 pointer-events-auto animate-fade-in">
+                class="relative w-full max-w-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-[3rem] shadow-2xl p-10 md:p-14 pointer-events-auto animate-fade-in transition-colors duration-500">
                 <button @click="showForm = false"
-                    class="absolute top-10 right-10 text-white/40 hover:text-white transition-colors">
+                    class="absolute top-10 right-10 text-slate-400 hover:text-slate-900 dark:text-white/40 dark:hover:text-white transition-colors">
                     <span class="material-symbols-outlined">close</span>
                 </button>
-                <h3 class="text-4xl font-serif font-bold text-white mb-3">Sponsorship Inquiry</h3>
-                <p class="text-slate-400 mb-10 font-light text-lg">Elevate your brand at Steel Summit 2026.</p>
+                <h3 class="text-4xl font-serif font-bold text-slate-900 dark:text-white mb-3">Sponsorship Inquiry</h3>
+                <p class="text-slate-600 dark:text-slate-400 mb-10 font-light text-lg">Elevate your brand at Steel Summit 2026.</p>
 
                 <form action="#" method="POST" class="space-y-8">
                     @csrf
@@ -1335,24 +1429,24 @@
                         <label class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold ml-1">Company
                             Name</label>
                         <input type="text" required name="company"
-                            class="w-full bg-white/5 border border-white/10 rounded-[1.25rem] py-5 px-8 text-white focus:outline-none focus:border-white/20 transition-all">
+                            class="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-[1.25rem] py-5 px-8 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 dark:focus:border-white/20 transition-all">
                     </div>
                     <div class="grid md:grid-cols-2 gap-8">
                         <div class="space-y-2">
                             <label class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold ml-1">Work
                                 Email</label>
                             <input type="email" required name="email"
-                                class="w-full bg-white/5 border border-white/10 rounded-[1.25rem] py-5 px-8 text-white focus:outline-none focus:border-white/20 transition-all">
+                                class="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-[1.25rem] py-5 px-8 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 dark:focus:border-white/20 transition-all">
                         </div>
                         <div class="space-y-2">
                             <label class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold ml-1">Phone
                                 Number</label>
                             <input type="tel" required name="phone"
-                                class="w-full bg-white/5 border border-white/10 rounded-[1.25rem] py-5 px-8 text-white focus:outline-none focus:border-white/20 transition-all">
+                                class="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-[1.25rem] py-5 px-8 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 dark:focus:border-white/20 transition-all">
                         </div>
                     </div>
                     <button type="submit"
-                        class="w-full py-6 bg-white text-slate-950 rounded-[1.25rem] font-bold text-xl hover:bg-slate-200 transition-all active:scale-95 shadow-xl">
+                        class="w-full py-6 bg-slate-900 dark:bg-white text-white dark:text-slate-950 rounded-[1.25rem] font-bold text-xl hover:bg-black dark:hover:bg-slate-200 transition-all active:scale-95 shadow-xl">
                         Submit Application
                     </button>
                 </form>
@@ -1361,7 +1455,7 @@
     </section>
 
     <!-- BEGIN: Unique Value Proposition -->
-    <section class="py-32 bg-slate-950 overflow-hidden relative" id="unique-value" x-data="{ revealed: false }"
+    <section class="py-32 bg-white dark:bg-slate-950 overflow-hidden relative transition-colors duration-500" id="unique-value" x-data="{ revealed: false }"
         x-intersect.once="revealed = true">
         <!-- Ambient Glow -->
         <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-red-600/5 blur-[120px] rounded-full pointer-events-none">
@@ -1374,9 +1468,9 @@
                 <!-- Left Content -->
                 <div class="animate-fade-in text-visible">
                     <span
-                        class="text-[10px] md:text-xs uppercase tracking-[0.3em] text-brand-teal-light font-bold mb-4 block">The
+                        class="text-[10px] md:text-xs uppercase tracking-[0.3em] text-cyan-600 dark:text-brand-teal-light font-bold mb-4 block">The
                         Difference</span>
-                    <h2 class="text-4xl md:text-6xl font-serif font-bold text-white mb-10 leading-[1.1]">
+                    <h2 class="text-4xl md:text-6xl font-serif font-bold text-slate-900 dark:text-white mb-10 leading-[1.1]">
                         What Makes the <br />
                         <span class="text-slate-500 italic">Conference Unique?</span>
                     </h2>
@@ -1389,9 +1483,9 @@
                                     class="material-symbols-outlined text-lg text-blue-500 group-hover:text-white transition-colors duration-500">check</span>
                             </div>
                             <div>
-                                <h4 class="text-xl md:text-2xl text-white font-semibold mb-2 leading-snug">Targeted and
+                                <h4 class="text-xl md:text-2xl text-slate-900 dark:text-white font-semibold mb-2 leading-snug">Targeted and
                                     Results-Oriented Networking Model</h4>
-                                <p class="text-slate-500 font-light leading-relaxed">Precision-focused engagement for
+                                <p class="text-slate-600 dark:text-slate-500 font-light leading-relaxed">Precision-focused engagement for
                                     professional impact.</p>
                             </div>
                         </li>
@@ -1402,9 +1496,9 @@
                                     class="material-symbols-outlined text-lg text-purple-500 group-hover:text-white transition-colors duration-500">bolt</span>
                             </div>
                             <div>
-                                <h4 class="text-xl md:text-2xl text-white font-semibold mb-2 leading-snug">New Business
+                                <h4 class="text-xl md:text-2xl text-slate-900 dark:text-white font-semibold mb-2 leading-snug">New Business
                                     Connections That Lead Directly to Trade</h4>
-                                <p class="text-slate-500 font-light leading-relaxed">Fostering high-value trade
+                                <p class="text-slate-600 dark:text-slate-500 font-light leading-relaxed">Fostering high-value trade
                                     opportunities across borders.</p>
                             </div>
                         </li>
@@ -1415,9 +1509,9 @@
                                     class="material-symbols-outlined text-lg text-orange-500 group-hover:text-white transition-colors duration-500">hub</span>
                             </div>
                             <div>
-                                <h4 class="text-xl md:text-2xl text-white font-semibold mb-2 leading-snug">All Industry
+                                <h4 class="text-xl md:text-2xl text-slate-900 dark:text-white font-semibold mb-2 leading-snug">All Industry
                                     Power Hubs on a Single Platform</h4>
-                                <p class="text-slate-500 font-light leading-relaxed">The entire industry's ecosystem
+                                <p class="text-slate-600 dark:text-slate-500 font-light leading-relaxed">The entire industry's ecosystem
                                     under one roof.</p>
                             </div>
                         </li>
@@ -1428,9 +1522,9 @@
                                     class="material-symbols-outlined text-lg text-cyan-500 group-hover:text-white transition-colors duration-500">public</span>
                             </div>
                             <div>
-                                <h4 class="text-xl md:text-2xl text-white font-semibold mb-2 leading-snug">Truly Global
+                                <h4 class="text-xl md:text-2xl text-slate-900 dark:text-white font-semibold mb-2 leading-snug">Truly Global
                                     Representation</h4>
-                                <p class="text-slate-500 font-light leading-relaxed">Worldwide delegates bridging global
+                                <p class="text-slate-600 dark:text-slate-500 font-light leading-relaxed">Worldwide delegates bridging global
                                     markets.</p>
                             </div>
                         </li>
@@ -1441,9 +1535,9 @@
                                     class="material-symbols-outlined text-lg text-red-500 group-hover:text-white transition-colors duration-500">location_on</span>
                             </div>
                             <div>
-                                <h4 class="text-xl md:text-2xl text-white font-semibold mb-2 leading-snug">Istanbul’s
+                                <h4 class="text-xl md:text-2xl text-slate-900 dark:text-white font-semibold mb-2 leading-snug">Istanbul’s
                                     Strategic and Geopolitical Advantage</h4>
-                                <p class="text-slate-500 font-light leading-relaxed">The world's bridge, serving as a
+                                <p class="text-slate-600 dark:text-slate-500 font-light leading-relaxed">The world's bridge, serving as a
                                     central hub for trade.</p>
                             </div>
                         </li>
@@ -1451,10 +1545,10 @@
 
                     <div class="mt-16">
                         <button @click="modalOpen = true"
-                            class="group relative px-12 py-5 bg-white text-slate-950 rounded-full font-bold text-lg transition-all shadow-[0_20px_50px_rgba(255,255,255,0.05)] hover:shadow-[0_30px_70px_rgba(255,255,255,0.1)] active:scale-95 overflow-hidden">
-                            <span class="relative z-10 transition-colors group-hover:text-blue-500">Register Now</span>
+                            class="group relative px-12 py-5 bg-slate-900 dark:bg-white text-white dark:text-slate-950 rounded-full font-bold text-lg transition-all shadow-xl hover:shadow-2xl active:scale-95 overflow-hidden">
+                            <span class="relative z-10 transition-colors group-hover:text-cyan-500 dark:group-hover:text-blue-500">Register Now</span>
                             <div
-                                class="absolute inset-x-0 bottom-0 h-0 bg-slate-50 group-hover:h-full transition-all duration-300">
+                                class="absolute inset-x-0 bottom-0 h-0 bg-slate-50 dark:bg-white group-hover:h-full transition-all duration-300">
                             </div>
                         </button>
                     </div>
@@ -1495,7 +1589,7 @@
     </section>
 
 
-    <section class="py-24 bg-slate-950 px-6 border-t border-white/5 relative overflow-hidden" id="venue"
+    <section class="py-24 bg-slate-50 dark:bg-slate-950 px-6 border-t border-slate-100 dark:border-white/5 relative overflow-hidden transition-colors duration-500" id="venue"
         x-data="{ revealed: false }" x-intersect.once="revealed = true">
         <!-- Ambient Glow -->
         <div
@@ -1506,9 +1600,9 @@
             :class="revealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'">
             <div class="mb-12">
                 <span
-                    class="text-[10px] md:text-xs uppercase tracking-[0.3em] text-brand-teal-light font-bold mb-4 block">Event
+                    class="text-[10px] md:text-xs uppercase tracking-[0.3em] text-cyan-600 dark:text-brand-teal-light font-bold mb-4 block">Event
                     Location</span>
-                <h2 class="text-4xl md:text-7xl font-serif font-bold text-white mb-6">The <span
+                <h2 class="text-4xl md:text-7xl font-serif font-bold text-slate-900 dark:text-white mb-6">The <span
                         class="text-slate-500 italic">Venue.</span></h2>
             </div>
             <div class="relative w-full h-[560px] md:h-[680px] rounded-3xl overflow-hidden shadow-2xl">
@@ -1516,9 +1610,9 @@
                     src="{{ asset('images/venue-swissotel.webp') }}" />
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
                 <div
-                    class="absolute bottom-10 left-6 md:left-12 bg-slate-900/80 backdrop-blur-xl border border-slate-500/30 p-8 rounded-2xl max-w-lg">
-                    <h3 class="text-3xl font-serif font-bold text-gradient-platinum italic mb-2">Swissotel Istanbul</h3>
-                    <p class="text-slate-400">Experience unmatched Turkish hospitality at the crossroads of Europe and
+                    class="absolute bottom-10 left-6 md:left-12 bg-white/90 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200 dark:border-slate-500/30 p-8 rounded-2xl max-w-lg shadow-xl">
+                    <h3 class="text-3xl font-serif font-bold text-slate-900 dark:text-gradient-platinum italic mb-2">Swissotel Istanbul</h3>
+                    <p class="text-slate-600 dark:text-slate-400">Experience unmatched Turkish hospitality at the crossroads of Europe and
                         Asia.</p>
                 </div>
             </div>
@@ -1528,13 +1622,13 @@
 
     <div class="fixed inset-0 z-[100] flex items-center justify-center p-6 overflow-y-auto" x-cloak x-show="modalOpen">
         <div @click="modalOpen = false" class="fixed inset-0 bg-slate-950/95 backdrop-blur-xl"></div>
-        <div class="relative glass max-w-2xl w-full rounded-[2rem] p-10 md:p-14 shadow-2xl overflow-hidden"
+        <div class="relative glass max-w-2xl w-full rounded-[2rem] p-10 md:p-14 shadow-2xl overflow-hidden transition-all duration-500"
             x-show="modalOpen" x-transition>
-            <button @click="modalOpen = false" class="absolute top-6 right-6 text-slate-500 hover:text-white"
+            <button @click="modalOpen = false" class="absolute top-6 right-6 text-slate-400 hover:text-slate-900 dark:text-slate-500 dark:hover:text-white transition-colors"
                 aria-label="Close">×</button>
             <div class="text-center mb-8">
-                <h3 class="text-3xl md:text-4xl font-serif font-bold text-white mb-3">VIP Registration Request</h3>
-                <p class="text-slate-400 font-light italic">Submit your credentials for an exclusive delegation
+                <h3 class="text-3xl md:text-4xl font-serif font-bold text-slate-900 dark:text-white mb-3">VIP Registration Request</h3>
+                <p class="text-slate-600 dark:text-slate-400 font-light italic">Submit your credentials for an exclusive delegation
                     invitation.</p>
             </div>
 
@@ -1562,42 +1656,42 @@
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="relative z-0 w-full group">
                         <input type="text" name="first_name" id="first_name"
-                            class="block py-3 px-0 w-full text-base text-white bg-transparent border-0 border-b border-white/20 appearance-none focus:outline-none focus:ring-0 focus:border-slate-400 peer"
+                            class="block py-3 px-0 w-full text-base text-slate-900 dark:text-white bg-transparent border-0 border-b border-slate-200 dark:border-white/20 appearance-none focus:outline-none focus:ring-0 focus:border-blue-500 dark:focus:border-slate-400 peer"
                             placeholder=" " value="{{ old('first_name') }}" required />
                         <label for="first_name"
-                            class="peer-focus:font-medium absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-slate-300 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Name</label>
+                            class="peer-focus:font-medium absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 dark:peer-focus:text-slate-300 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Name</label>
                     </div>
                     <div class="relative z-0 w-full group">
                         <input type="text" name="last_name" id="last_name"
-                            class="block py-3 px-0 w-full text-base text-white bg-transparent border-0 border-b border-white/20 appearance-none focus:outline-none focus:ring-0 focus:border-slate-400 peer"
+                            class="block py-3 px-0 w-full text-base text-slate-900 dark:text-white bg-transparent border-0 border-b border-slate-200 dark:border-white/20 appearance-none focus:outline-none focus:ring-0 focus:border-blue-500 dark:focus:border-slate-400 peer"
                             placeholder=" " value="{{ old('last_name') }}" required />
                         <label for="last_name"
-                            class="peer-focus:font-medium absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-slate-300 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Surname</label>
+                            class="peer-focus:font-medium absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 dark:peer-focus:text-slate-300 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Surname</label>
                     </div>
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="relative z-0 w-full group">
                         <input type="email" name="email" id="email"
-                            class="block py-3 px-0 w-full text-base text-white bg-transparent border-0 border-b border-white/20 appearance-none focus:outline-none focus:ring-0 focus:border-slate-400 peer"
+                            class="block py-3 px-0 w-full text-base text-slate-900 dark:text-white bg-transparent border-0 border-b border-slate-200 dark:border-white/20 appearance-none focus:outline-none focus:ring-0 focus:border-blue-500 dark:focus:border-slate-400 peer"
                             placeholder=" " value="{{ old('email') }}" required />
                         <label for="email"
-                            class="peer-focus:font-medium absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-slate-300 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Business
+                            class="peer-focus:font-medium absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 dark:peer-focus:text-slate-300 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Business
                             Email</label>
                     </div>
                     <div class="relative z-0 w-full group">
                         <input type="text" name="company_name" id="company_name"
-                            class="block py-3 px-0 w-full text-base text-white bg-transparent border-0 border-b border-white/20 appearance-none focus:outline-none focus:ring-0 focus:border-slate-400 peer"
+                            class="block py-3 px-0 w-full text-base text-slate-900 dark:text-white bg-transparent border-0 border-b border-slate-200 dark:border-white/20 appearance-none focus:outline-none focus:ring-0 focus:border-blue-500 dark:focus:border-slate-400 peer"
                             placeholder=" " value="{{ old('company_name') }}" required />
                         <label for="company_name"
-                            class="peer-focus:font-medium absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-slate-300 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Organization/Company</label>
+                            class="peer-focus:font-medium absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 dark:peer-focus:text-slate-300 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Organization/Company</label>
                     </div>
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="relative z-0 w-full group">
                         <select name="country" id="country"
-                            class="block py-3 px-0 w-full text-base text-white bg-transparent border-0 appearance-none focus:outline-none focus:ring-0 peer"
+                            class="block py-3 px-0 w-full text-base text-slate-900 dark:text-white bg-transparent border-0 appearance-none focus:outline-none focus:ring-0 peer"
                             required>
                             <option value="">Select Country</option>
                             <option value="Afghanistan">Afghanistan</option>
@@ -1801,7 +1895,7 @@
 
                     <div class="relative z-0 w-full group iti-wrapper">
                         <input type="tel" name="phone_full" id="phone_full"
-                            class="block py-3 px-0 w-full text-base text-white bg-transparent border-0 border-b border-white/20 appearance-none focus:outline-none focus:ring-0 focus:border-slate-400 peer"
+                            class="block py-3 px-0 w-full text-base text-slate-900 dark:text-white bg-transparent border-0 border-b border-slate-200 dark:border-white/20 appearance-none focus:outline-none focus:ring-0 focus:border-blue-500 dark:focus:border-slate-400 peer"
                             placeholder=" " value="{{ old('phone_full') }}" required />
                         <input type="hidden" name="phone_country_code" id="phone_country_code" />
                         <input type="hidden" name="phone" id="phone_pure" />
@@ -1811,17 +1905,24 @@
                 <style>
                     .iti-wrapper .iti {
                         width: 100%;
-                        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+                        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
                         transition: border-color 0.3s;
+                    }
+                    .dark .iti-wrapper .iti {
+                        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
                     }
 
                     .iti-wrapper .iti__tel-input {
                         background: transparent !important;
                         border: none !important;
-                        color: white !important;
+                        color: #0f172a !important;
                         width: 100%;
                         padding-top: 0.75rem !important;
                         padding-bottom: 0.75rem !important;
+                    }
+                    
+                    .dark .iti-wrapper .iti__tel-input {
+                        color: white !important;
                     }
 
                     .iti-wrapper .iti__tel-input:focus {
@@ -1830,60 +1931,66 @@
                     }
 
                     .iti-wrapper:focus-within .iti {
+                        border-bottom-color: #3b82f6;
+                    }
+                    .dark .iti-wrapper:focus-within .iti {
                         border-bottom-color: #94a3b8;
                     }
 
-                    /* Allow intl-tel-input to handle padding when separateDialCode is used */
+                    /* Tom Select overrides for light mode */
+                    .tom-select-light {
+                        color: #0f172a !important;
+                    }
                 </style>
 
-                <label class="flex items-start space-x-3">
+                <label class="flex items-start space-x-3 cursor-pointer">
                     <input
-                        class="w-5 h-5 rounded border-white/20 bg-transparent text-slate-400 focus:ring-slate-500/50 mt-0.5"
+                        class="w-5 h-5 rounded border-slate-300 dark:border-white/20 bg-transparent text-blue-600 dark:text-slate-400 focus:ring-blue-500/50 dark:focus:ring-slate-500/50 mt-0.5"
                         name="consent_approved" type="checkbox" value="1" @checked(old('consent_approved')) required />
-                    <span class="text-xs text-slate-500 leading-relaxed">I approve communication consent and confirm
+                    <span class="text-xs text-slate-600 dark:text-slate-500 leading-relaxed font-medium">I approve communication consent and confirm
                         that I have read and accepted the Privacy Notice regarding the processing and storage of my
                         personal data.</span>
                 </label>
 
                 <button
-                    class="w-full bg-gradient-to-r from-slate-200 to-slate-400 text-slate-950 font-bold py-4 rounded-xl uppercase tracking-widest text-sm"
+                    class="w-full bg-slate-900 dark:bg-gradient-to-r dark:from-slate-200 dark:to-slate-400 text-white dark:text-slate-950 font-bold py-4 rounded-xl uppercase tracking-widest text-sm hover:opacity-90 transition-all shadow-lg active:scale-[0.98]"
                     type="submit">Submit Formal Request</button>
             </form>
         </div>
     </div>
 
-    <footer class="bg-slate-950 pt-20 pb-12 px-6 border-t border-slate-800">
+    <footer class="bg-white dark:bg-slate-950 pt-20 pb-12 px-6 border-t border-slate-200 dark:border-slate-800 transition-colors duration-500">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
             <div>
-                <img alt="Steel Networking Summits" class="h-10 w-auto object-contain"
+                <img alt="Steel Networking Summits" class="h-10 w-auto object-contain transition-all"
                     src="{{ asset('images/steel-networking-logo-footer.webp') }}" />
-                <p class="text-slate-400 text-sm mt-4">The premier networking event for the global iron and steel
+                <p class="text-slate-600 dark:text-slate-400 text-sm mt-4">The premier networking event for the global iron and steel
                     community.</p>
             </div>
             <div>
-                <h4 class="text-white font-bold tracking-wider uppercase text-xs mb-4">Explore</h4>
+                <h4 class="text-slate-900 dark:text-white font-bold tracking-wider uppercase text-xs mb-4">Explore</h4>
                 <ul class="space-y-2">
-                    <li><a class="text-slate-400 hover:text-white text-sm" href="#main">Main</a></li>
-                    <li><a class="text-slate-400 hover:text-white text-sm" href="#agenda">Agenda</a></li>
-                    <li><a class="text-slate-400 hover:text-white text-sm" href="#about">About Us</a></li>
-                    <li><a class="text-slate-400 hover:text-white text-sm" href="#keynote-speakers">Keynote Speakers</a>
+                    <li><a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white text-sm transition-colors" href="#main">Main</a></li>
+                    <li><a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white text-sm transition-colors" href="#agenda">Agenda</a></li>
+                    <li><a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white text-sm transition-colors" href="#about">About Us</a></li>
+                    <li><a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white text-sm transition-colors" href="#keynote-speakers">Keynote Speakers</a>
                     </li>
-                    <li><a class="text-slate-400 hover:text-white text-sm" href="#sponsorship">Sponsorship</a></li>
-                    <li><a class="text-slate-400 hover:text-white text-sm" href="#venue">Venue</a></li>
+                    <li><a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white text-sm transition-colors" href="#sponsorship">Sponsorship</a></li>
+                    <li><a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white text-sm transition-colors" href="#venue">Venue</a></li>
                 </ul>
             </div>
             <div>
-                <h4 class="text-white font-bold tracking-wider uppercase text-xs mb-4">Legal</h4>
+                <h4 class="text-slate-900 dark:text-white font-bold tracking-wider uppercase text-xs mb-4">Legal</h4>
                 <ul class="space-y-2">
-                    <li><a class="text-slate-400 hover:text-white text-sm" href="#">Privacy Policy</a></li>
-                    <li><a class="text-slate-400 hover:text-white text-sm" href="#">Terms of Service</a></li>
-                    <li><a class="text-slate-400 hover:text-white text-sm" href="#">Data Protection</a></li>
+                    <li><a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white text-sm transition-colors" href="#">Privacy Policy</a></li>
+                    <li><a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white text-sm transition-colors" href="#">Terms of Service</a></li>
+                    <li><a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white text-sm transition-colors" href="#">Data Protection</a></li>
                 </ul>
             </div>
             <div>
-                <h4 class="text-white font-bold tracking-wider uppercase text-xs mb-4">Contact Us</h4>
-                <p class="text-slate-400 text-sm">info@steelsummits.com</p>
-                <p class="text-slate-400 text-sm mt-2">+1 (555) 123-4567</p>
+                <h4 class="text-slate-900 dark:text-white font-bold tracking-wider uppercase text-xs mb-4">Contact Us</h4>
+                <p class="text-slate-600 dark:text-slate-400 text-sm">info@steelsummits.com</p>
+                <p class="text-slate-600 dark:text-slate-400 text-sm mt-2">+1 (555) 123-4567</p>
             </div>
         </div>
         <div class="max-w-7xl mx-auto border-t border-slate-800/50 mt-10 pt-6 text-slate-500 text-xs">© 2026 Steel
@@ -1891,7 +1998,7 @@
     </footer>
 
     <button @click="window.scrollTo({ top: 0, behavior: 'smooth' })" aria-label="Yukari cik"
-        class="fixed bottom-6 right-6 z-[60] h-12 w-12 rounded-full glass border border-slate-400/30 text-slate-100 hover:text-white hover:border-slate-300/50 transition-all duration-300 shadow-xl"
+        class="fixed bottom-6 right-6 z-[60] h-12 w-12 rounded-full glass border border-slate-300 dark:border-slate-400/30 text-slate-600 dark:text-slate-100 hover:text-blue-600 dark:hover:text-white hover:border-blue-300 dark:hover:border-slate-300/50 transition-all duration-300 shadow-xl"
         type="button" x-cloak x-show="showToTop" x-transition.opacity.duration.300ms>
         <svg aria-hidden="true" class="mx-auto h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path d="M5 15l7-7 7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
