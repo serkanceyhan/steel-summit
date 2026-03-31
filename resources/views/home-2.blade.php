@@ -550,7 +550,7 @@
             <div class="absolute inset-0 bg-white/20 dark:bg-slate-950/30 mix-blend-overlay"></div>
         </div>
 
-        <div class="relative z-10 text-center px-6 max-w-6xl mx-auto pt-24 md:pt-40 pb-16 md:pb-0">
+        <div class="relative z-10 text-center px-6 max-w-6xl mx-auto pt-24 md:pt-40 pb-32 md:pb-0">
 
             <div
                 class="inline-block px-4 md:px-5 py-1 md:py-1.5 border border-slate-300 dark:border-white/10 rounded-full mb-6 md:mb-8 mt-4 md:mt-8 glass">
@@ -559,7 +559,7 @@
                     Only - Istanbul 2026</span>
             </div>
 
-            <h1 class="text-6xl md:text-8xl font-serif font-extrabold mb-6 md:mb-8 leading-tight text-slate-900 dark:text-white pb-2 md:pb-4">
+            <h1 class="text-5xl md:text-8xl font-serif font-extrabold mb-6 md:mb-8 leading-tight text-slate-900 dark:text-white pb-2 md:pb-4">
                 Istanbul <br />
                 <span
                     class="inline-block bg-clip-text text-transparent overflow-visible bg-gradient-to-r from-slate-600 via-slate-400 to-slate-800 dark:from-slate-100 dark:via-slate-300 dark:to-slate-500 italic pb-2 md:pb-6">Steel
