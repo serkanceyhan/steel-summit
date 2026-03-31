@@ -1623,7 +1623,7 @@
     </section>
 
 
-    <div class="fixed inset-0 z-[100] flex items-center justify-center p-6 overflow-y-auto" x-cloak x-show="modalOpen">
+    <div class="fixed inset-0 z-[100] flex items-start md:items-center justify-center p-4 md:p-6 overflow-y-auto pt-12 md:pt-6" x-cloak x-show="modalOpen">
         <div @click="modalOpen = false" class="fixed inset-0 bg-slate-200/60 dark:bg-slate-950/95 backdrop-blur-xl transition-all duration-500"></div>
         <div class="relative bg-white/95 dark:bg-[#123e4a] dark:border dark:border-white/10 max-w-2xl w-full rounded-[2rem] p-6 md:p-14 shadow-2xl overflow-hidden transition-all duration-500"
             x-show="modalOpen" x-transition>
@@ -1636,7 +1636,7 @@
             </div>
 
 
-            <form action="/register" method="POST" class="space-y-8" id="register-form">
+            <form action="/register" method="POST" class="space-y-6 md:space-y-8" id="register-form">
                 @csrf
 
                 @if (session('status'))
@@ -1679,8 +1679,7 @@
                             class="block py-3 px-0 w-full text-base text-slate-900 dark:text-white bg-transparent border-0 border-b border-slate-200 dark:border-white/20 appearance-none focus:outline-none focus:ring-0 focus:border-blue-500 dark:focus:border-slate-400 peer"
                             placeholder=" " value="{{ old('email') }}" required />
                         <label for="email"
-                            class="peer-focus:font-medium absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 dark:peer-focus:text-slate-300 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Business
-                            Email</label>
+                            class="peer-focus:font-medium absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 dark:peer-focus:text-slate-300 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Work Email</label>
                     </div>
                     <div class="relative z-0 w-full group">
                         <input type="text" name="company_name" id="company_name"
