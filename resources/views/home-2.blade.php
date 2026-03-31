@@ -78,7 +78,7 @@
         }
 
         .dark .glass {
-            background: rgba(15, 23, 42, 0.15);
+            background: #123e4a;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
@@ -462,7 +462,7 @@
         <div class="relative flex items-stretch justify-between w-full pr-6">
 
             <div
-                class="absolute inset-y-0 right-0 left-6 md:left-12 glass rounded-full shadow-2xl pointer-events-none -z-10">
+                class="absolute inset-y-0 right-0 left-6 md:left-12 glass dark:bg-slate-800/20 dark:border dark:border-white/5 rounded-full shadow-2xl pointer-events-none -z-10">
             </div>
 
             <div class="relative z-10 flex items-center cursor-pointer pl-0 py-0">
@@ -478,7 +478,7 @@
                 <a class="text-slate-700 dark:text-slate-200 hover:text-brand-teal dark:hover:text-white transition-all"
                     href="#about">About Us</a>
                 <a class="text-slate-700 dark:text-slate-200 hover:text-brand-teal dark:hover:text-white transition-all"
-                    href="#who-attends">Who Attends</a>
+                    href="#who-attends">Attendees</a>
                 <a class="text-slate-700 dark:text-slate-200 hover:text-brand-teal dark:hover:text-white transition-all"
                     href="#keynote-speakers">Keynote Speakers</a>
                 <a class="text-slate-700 dark:text-slate-200 hover:text-brand-teal dark:hover:text-white transition-all"
@@ -524,7 +524,7 @@
                 href="#about">About Us</a>
             <a @click="mobileMenu = false"
                 class="text-lg font-serif font-bold text-slate-900 dark:text-white hover:text-slate-600 dark:hover:text-slate-300"
-                href="#who-attends">Who Attends</a>
+                href="#who-attends">Attendees</a>
             <a @click="mobileMenu = false"
                 class="text-lg font-serif font-bold text-slate-900 dark:text-white hover:text-slate-600 dark:hover:text-slate-300"
                 href="#keynote-speakers">Keynote
@@ -541,25 +541,28 @@
         </div>
     </nav>
     <section class="relative min-h-screen flex items-center justify-center overflow-hidden" id="main">
-        <div class="absolute inset-0 z-0">
-            <img alt="Istanbul Night" class="w-full h-full object-cover scale-110"
-                src="{{ asset('images/hero-istanbul.webp') }}" />
-            <div class="absolute inset-0 hero-gradient"></div>
+        <div class="absolute inset-0 z-0 bg-slate-950">
+            <video autoplay loop muted playsinline class="w-full h-full object-cover opacity-80 dark:opacity-90 scale-105" poster="{{ asset('images/hero-istanbul.webp') }}">
+                <source src="{{ asset('video/istanbul.mp4') }}" type="video/mp4" />
+                <img alt="Istanbul Night" class="w-full h-full object-cover scale-110" src="{{ asset('images/hero-istanbul.webp') }}" />
+            </video>
+            <div class="absolute inset-0 hero-gradient opacity-90 dark:opacity-50"></div>
+            <div class="absolute inset-0 bg-white/20 dark:bg-slate-950/30 mix-blend-overlay"></div>
         </div>
 
-        <div class="relative z-10 text-center px-6 max-w-6xl mx-auto pt-20 md:pt-28 pb-16 md:pb-0">
+        <div class="relative z-10 text-center px-6 max-w-6xl mx-auto pt-24 md:pt-40 pb-16 md:pb-0">
 
             <div
                 class="inline-block px-4 md:px-5 py-1 md:py-1.5 border border-slate-300 dark:border-white/10 rounded-full mb-6 md:mb-8 mt-4 md:mt-8 glass">
                 <span
-                    class="text-slate-800 dark:text-slate-300 text-[9px] md:text-xs font-bold tracking-[0.2em] md:tracking-[0.3em] uppercase">Invitation
+                    class="text-slate-800 dark:text-slate-300 text-[9px] md:text-xs font-extra-bold tracking-[0.2em] md:tracking-[0.3em] uppercase">Invitation
                     Only - Istanbul 2026</span>
             </div>
 
-            <h1 class="text-5xl md:text-8xl font-serif font-bold mb-6 md:mb-8 leading-[1.1] text-slate-900 dark:text-white">
+            <h1 class="text-6xl md:text-8xl font-serif font-extrabold mb-6 md:mb-8 leading-tight text-slate-900 dark:text-white pb-2 md:pb-4">
                 Istanbul <br />
                 <span
-                    class="bg-clip-text text-transparent bg-gradient-to-r from-slate-600 via-slate-400 to-slate-800 dark:from-slate-100 dark:via-slate-300 dark:to-slate-500 italic pb-2">Steel
+                    class="inline-block bg-clip-text text-transparent overflow-visible bg-gradient-to-r from-slate-600 via-slate-400 to-slate-800 dark:from-slate-100 dark:via-slate-300 dark:to-slate-500 italic pb-2 md:pb-6">Steel
                     Summit</span> <br />
                 2026
             </h1>
@@ -608,7 +611,7 @@
         <div class="max-w-6xl mx-auto relative z-10 transition-all duration-1000 transform"
             :class="revealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'">
             <div class="mb-12 text-center">
-                <h2 class="text-4xl md:text-5xl font-serif font-bold text-slate-900 dark:text-white mb-4 italic uppercase tracking-wider">STEEL Summit
+                <h2 class="text-4xl md:text-6xl font-serif font-extrabold text-slate-900 dark:text-white mb-4 italic uppercase tracking-wider">STEEL Summit
                     Program</h2>
                 <p class="text-slate-600 dark:text-slate-400 text-sm md:text-base font-medium">25-27 October 2026 | Swissotel Istanbul</p>
             </div>
@@ -753,14 +756,14 @@
                 <div class="space-y-8">
                     <div>
                         <span
-                            class="text-[10px] md:text-xs uppercase tracking-[0.3em] text-cyan-600 dark:text-brand-teal-light font-bold mb-4 block">About
-                            Us</span>
-                        <h2 class="text-4xl md:text-6xl font-serif font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-6">
-                            Legacy of <br />
-                            <span class="text-slate-500 italic">Excellence.</span>
+                            class="text-[10px] md:text-xs uppercase tracking-[0.3em] text-cyan-600 dark:text-brand-teal-light font-bold mb-4 block">The
+                            Legacy</span>
+                        <h2 class="text-4xl md:text-6xl font-serif font-extrabold text-slate-900 dark:text-white uppercase tracking-wider mb-6">
+                            About <br />
+                            <span class="text-slate-500 italic">Us.</span>
                         </h2>
                         <p class="text-slate-600 dark:text-slate-400 text-lg md:text-xl font-light leading-relaxed">
-                            Steel Networking Summits was created to meet the need for a truly global networking
+                            The Steel Summits were created to meet the need for a truly global networking
                             conference that brings together all stakeholders across the international steel trade.
                         </p>
                     </div>
@@ -836,7 +839,7 @@
                         <!-- Feature 1 -->
                         <div class="flex items-start gap-6 group">
                             <div
-                                class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center group-hover:bg-brand-teal/20 transition-colors duration-500 shadow-sm dark:shadow-none">
+                                class="w-12 h-12 rounded-2xl glass flex items-center justify-center group-hover:bg-brand-teal/20 transition-colors duration-500 shadow-sm dark:shadow-none">
                                 <span class="material-symbols-outlined text-brand-teal-light">groups</span>
                             </div>
                             <div class="flex-1">
@@ -849,7 +852,7 @@
                         <!-- Feature 2 -->
                         <div class="flex items-start gap-6 group">
                             <div
-                                class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center group-hover:bg-brand-teal/20 transition-colors duration-500 shadow-sm dark:shadow-none">
+                                class="w-12 h-12 rounded-2xl glass flex items-center justify-center group-hover:bg-brand-teal/20 transition-colors duration-500 shadow-sm dark:shadow-none">
                                 <span class="material-symbols-outlined text-brand-teal-light">public</span>
                             </div>
                             <div class="flex-1">
@@ -885,7 +888,7 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div
-                    class="glass p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start hover:bg-slate-900/5 dark:hover:bg-white/10 transition duration-300 group shadow-sm dark:shadow-none">
+                    class="glass p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start hover:bg-slate-900/5 dark:hover:bg-white/10 transition duration-300 group shadow-sm dark:shadow-xl dark:rounded-3xl">
                     <div
                         class="w-28 h-28 flex-shrink-0 rounded-full border-2 border-slate-200 dark:border-slate-500/50 group-hover:border-slate-400 dark:group-hover:border-slate-300 transition-colors overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center grayscale">
                         <img alt="Keynote speaker portrait" class="w-full h-full object-cover"
@@ -904,7 +907,7 @@
                 </div>
 
                 <div
-                    class="glass p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start hover:bg-slate-900/5 dark:hover:bg-white/10 transition duration-300 group shadow-sm dark:shadow-none">
+                    class="glass p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start hover:bg-slate-900/5 dark:hover:bg-white/10 transition duration-300 group shadow-sm dark:shadow-xl dark:rounded-3xl">
                     <div
                         class="w-28 h-28 flex-shrink-0 rounded-full border-2 border-slate-200 dark:border-slate-500/50 group-hover:border-slate-400 dark:group-hover:border-slate-300 transition-colors overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center grayscale">
                         <img alt="Keynote speaker portrait" class="w-full h-full object-cover"
@@ -923,7 +926,7 @@
                 </div>
 
                 <div
-                    class="glass p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start hover:bg-slate-900/5 dark:hover:bg-white/10 transition duration-300 group shadow-sm dark:shadow-none">
+                    class="glass p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start hover:bg-slate-900/5 dark:hover:bg-white/10 transition duration-300 group shadow-sm dark:shadow-xl dark:rounded-3xl">
                     <div
                         class="w-28 h-28 flex-shrink-0 rounded-full border-2 border-slate-200 dark:border-slate-500/50 group-hover:border-slate-400 dark:group-hover:border-slate-300 transition-colors overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center grayscale">
                         <img alt="Keynote speaker portrait" class="w-full h-full object-cover"
@@ -942,7 +945,7 @@
                 </div>
 
                 <div
-                    class="glass p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start hover:bg-slate-900/5 dark:hover:bg-white/10 transition duration-300 group shadow-sm dark:shadow-none">
+                    class="glass p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start hover:bg-slate-900/5 dark:hover:bg-white/10 transition duration-300 group shadow-sm dark:shadow-xl dark:rounded-3xl">
                     <div
                         class="w-28 h-28 flex-shrink-0 rounded-full border-2 border-slate-200 dark:border-slate-500/50 group-hover:border-slate-400 dark:group-hover:border-slate-300 transition-colors overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center grayscale">
                         <img alt="Keynote speaker portrait" class="w-full h-full object-cover"
@@ -1069,11 +1072,11 @@
         <div class="max-w-7xl mx-auto px-6 mb-16 transition-all duration-1000 transform"
             :class="revealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'">
             <span
-                class="text-[10px] md:text-xs uppercase tracking-[0.3em] text-cyan-600 dark:text-brand-teal-light font-bold mb-4 block">Networking
+                class="text-[10px] md:text-xs uppercase tracking-[0.3em] text-cyan-600 dark:text-brand-teal-light font-bold mb-4 block">Global
                 Pool</span>
-            <h2 class="text-4xl md:text-7xl font-serif font-bold text-slate-900 dark:text-white mb-6 leading-tight">
-                Who <br class="hidden md:block" />
-                <span class="text-slate-500 italic">Attends?</span>
+            <h2 class="text-4xl md:text-7xl font-serif font-extrabold text-slate-900 dark:text-white mb-6 leading-tight">
+                Summit <br class="hidden md:block" />
+                <span class="text-slate-500 italic">Attendees</span>
             </h2>
             <p class="text-slate-600 dark:text-slate-400 text-lg md:text-2xl font-light max-w-2xl font-sans leading-relaxed">
                 A cross-disciplinary assembly of the global steel industry's primary stakeholders.
@@ -1094,7 +1097,7 @@
                 <!-- Card 1: Producers -->
                 <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
                     <div
-                        class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-white/5 shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
+                        class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden glass shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
                         <img src="{{ asset('images/attendees/producers_v2.png') }}" alt="Steel Producers"
                             class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
                         <div class="absolute inset-0 bg-gradient-to-t from-white/60 dark:from-slate-950/50 to-transparent"></div>
@@ -1110,7 +1113,7 @@
                 <!-- Card 2: International Traders -->
                 <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
                     <div
-                        class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-white/5 shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
+                        class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden glass shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
                         <img src="{{ asset('images/attendees/traders_v2.png') }}" alt="International Traders"
                             class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
                         <div class="absolute inset-0 bg-gradient-to-t from-white/60 dark:from-slate-950/50 to-transparent"></div>
@@ -1126,7 +1129,7 @@
                 <!-- Card 3: Logistics Providers -->
                 <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
                     <div
-                        class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-white/5 shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
+                        class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden glass shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
                         <img src="{{ asset('images/attendees/logistics_v2.png') }}" alt="Logistics Providers"
                             class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
                         <div class="absolute inset-0 bg-gradient-to-t from-white/60 dark:from-slate-950/50 to-transparent"></div>
@@ -1142,7 +1145,7 @@
                 <!-- Card 4: Financial Institutions -->
                 <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
                     <div
-                        class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-white/5 shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
+                        class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden glass shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
                         <img src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?q=80&w=2000&auto=format&fit=crop"
                             alt="Financial Institutions"
                             class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
@@ -1159,7 +1162,7 @@
                 <!-- Card 5: Technology Providers -->
                 <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
                     <div
-                        class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-white/5 shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
+                        class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden glass shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
                         <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2000&auto=format&fit=crop"
                             alt="Technology Providers"
                             class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
@@ -1176,7 +1179,7 @@
                 <!-- Card 6: Government Departments -->
                 <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
                     <div
-                        class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-white/5 shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
+                        class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden glass shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
                         <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2000&auto=format&fit=crop"
                             alt="Government & Institutions"
                             class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
@@ -1248,7 +1251,7 @@
 
                 <!-- Card 1: Strategic Positioning -->
                 <div
-                    class="relative p-12 rounded-[2.5rem] glass dark:bg-slate-900/50 border border-slate-200 dark:border-white/5 hover:border-blue-500/30 shadow-sm dark:shadow-2xl transition-all duration-700 group flex flex-col h-full overflow-hidden">
+                    class="relative p-12 rounded-[2.5rem] glass hover:border-blue-500/30 shadow-sm dark:shadow-2xl transition-all duration-700 group flex flex-col h-full overflow-hidden">
                     <div
                         class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                     </div>
@@ -1274,7 +1277,7 @@
 
                 <!-- Card 2: Target Audience -->
                 <div
-                    class="relative p-12 rounded-[2.5rem] glass dark:bg-slate-900/50 border border-slate-200 dark:border-white/5 hover:border-orange-500/30 shadow-sm dark:shadow-2xl transition-all duration-700 group flex flex-col h-full overflow-hidden">
+                    class="relative p-12 rounded-[2.5rem] glass hover:border-orange-500/30 shadow-sm dark:shadow-2xl transition-all duration-700 group flex flex-col h-full overflow-hidden">
                     <div
                         class="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                     </div>
@@ -1300,7 +1303,7 @@
 
                 <!-- Card 3: Global Wealth -->
                 <div
-                    class="relative p-12 rounded-[2.5rem] glass dark:bg-slate-900/50 border border-slate-200 dark:border-white/5 hover:border-purple-500/30 shadow-sm dark:shadow-2xl transition-all duration-700 group flex flex-col h-full overflow-hidden">
+                    class="relative p-12 rounded-[2.5rem] glass hover:border-purple-500/30 shadow-sm dark:shadow-2xl transition-all duration-700 group flex flex-col h-full overflow-hidden">
                     <div
                         class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                     </div>
@@ -1342,14 +1345,14 @@
             <!-- Content Area -->
             <div class="grid lg:grid-cols-2 gap-12 items-start mb-24">
                 <!-- Left: Subheading 1 -->
-                <div class="p-12 md:p-16 rounded-[3rem] glass dark:bg-slate-900/40 border border-slate-200 dark:border-white/5 shadow-sm dark:shadow-2xl animate-fade-in"
+                <div class="p-12 md:p-16 rounded-[3rem] glass shadow-sm dark:shadow-2xl animate-fade-in"
                     x-show="activeTab === 'packages'">
-                    <h3 class="text-3xl md:text-4xl font-serif font-bold text-slate-900 dark:text-white mb-8 leading-tight">Package
+                    <h3 class="text-3xl md:text-4xl font-serif font-extrabold text-slate-900 dark:text-white mb-8 leading-tight">Package
                         <br />Options
                     </h3>
                     <div class="space-y-6">
                         <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed font-light">
-                            Steel Networking Summits offers its sponsors a range of sponsorship packages, providing
+                            The Global Steel Summits offers its sponsors a range of sponsorship packages, providing
                             tailored solutions to meet each brand’s specific needs.
                         </p>
                         <p class="text-slate-500 leading-relaxed font-light italic border-l-2 border-slate-200 dark:border-white/10 pl-6">
@@ -1361,7 +1364,7 @@
                 </div>
 
                 <!-- Right: Subheading 2 -->
-                <div class="p-12 md:p-16 rounded-[3rem] glass dark:bg-slate-900/40 border border-slate-200 dark:border-white/5 shadow-sm dark:shadow-2xl animate-fade-in"
+                <div class="p-12 md:p-16 rounded-[3rem] glass shadow-sm dark:shadow-2xl animate-fade-in"
                     x-show="activeTab === 'packages'">
                     <h3 class="text-3xl md:text-4xl font-serif font-bold text-slate-900 dark:text-white mb-8 leading-tight">Exclusive
                         Benefits <br />& Visibility</h3>
@@ -1415,7 +1418,7 @@
             <div class="fixed inset-0 bg-slate-900/60 dark:bg-slate-950/80 backdrop-blur-xl pointer-events-auto" @click="showForm = false">
             </div>
             <div
-                class="relative w-full max-w-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-[3rem] shadow-2xl p-10 md:p-14 pointer-events-auto animate-fade-in transition-colors duration-500">
+                class="relative w-full max-w-xl glass rounded-[3rem] shadow-2xl p-10 md:p-14 pointer-events-auto animate-fade-in transition-colors duration-500">
                 <button @click="showForm = false"
                     class="absolute top-10 right-10 text-slate-400 hover:text-slate-900 dark:text-white/40 dark:hover:text-white transition-colors">
                     <span class="material-symbols-outlined">close</span>
@@ -1576,7 +1579,7 @@
 
                     <!-- Floating Element: Optimized position and styling -->
                     <div
-                        class="absolute -bottom-6 -right-6 w-36 h-36 md:w-44 md:h-44 bg-slate-900/90 backdrop-blur-2xl rounded-[2rem] border border-white/10 p-6 flex flex-col justify-end shadow-2xl animate-float group-hover:border-brand-teal-light/30 transition-all duration-500 z-20">
+                        class="absolute -bottom-6 -right-6 w-36 h-36 md:w-44 md:h-44 glass rounded-[2rem] p-6 flex flex-col justify-end shadow-2xl animate-float group-hover:border-brand-teal-light/30 transition-all duration-500 z-20">
                         <span class="text-4xl md:text-5xl text-white font-serif italic mb-1">5+</span>
                         <span
                             class="text-[9px] md:text-[10px] text-slate-400 font-sans tracking-[0.2em] uppercase font-bold leading-tight">Elite
@@ -1621,8 +1624,8 @@
 
 
     <div class="fixed inset-0 z-[100] flex items-center justify-center p-6 overflow-y-auto" x-cloak x-show="modalOpen">
-        <div @click="modalOpen = false" class="fixed inset-0 bg-slate-950/95 backdrop-blur-xl"></div>
-        <div class="relative glass max-w-2xl w-full rounded-[2rem] p-10 md:p-14 shadow-2xl overflow-hidden transition-all duration-500"
+        <div @click="modalOpen = false" class="fixed inset-0 bg-slate-200/60 dark:bg-slate-950/95 backdrop-blur-xl transition-all duration-500"></div>
+        <div class="relative bg-white/95 dark:glass max-w-2xl w-full rounded-[2rem] p-10 md:p-14 shadow-2xl overflow-hidden transition-all duration-500"
             x-show="modalOpen" x-transition>
             <button @click="modalOpen = false" class="absolute top-6 right-6 text-slate-400 hover:text-slate-900 dark:text-slate-500 dark:hover:text-white transition-colors"
                 aria-label="Close">×</button>
@@ -1689,208 +1692,35 @@
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-6">
-                    <div class="relative z-0 w-full group">
-                        <select name="country" id="country"
-                            class="block py-3 px-0 w-full text-base text-slate-900 dark:text-white bg-transparent border-0 appearance-none focus:outline-none focus:ring-0 peer"
-                            required>
-                            <option value="">Select Country</option>
-                            <option value="Afghanistan">Afghanistan</option>
-                            <option value="Albania">Albania</option>
-                            <option value="Algeria">Algeria</option>
-                            <option value="Andorra">Andorra</option>
-                            <option value="Angola">Angola</option>
-                            <option value="Antigua and Barbuda">Antigua and Barbuda</option>
-                            <option value="Argentina">Argentina</option>
-                            <option value="Armenia">Armenia</option>
-                            <option value="Australia">Australia</option>
-                            <option value="Austria">Austria</option>
-                            <option value="Azerbaijan">Azerbaijan</option>
-                            <option value="Bahamas">Bahamas</option>
-                            <option value="Bahrain">Bahrain</option>
-                            <option value="Bangladesh">Bangladesh</option>
-                            <option value="Barbados">Barbados</option>
-                            <option value="Belarus">Belarus</option>
-                            <option value="Belgium">Belgium</option>
-                            <option value="Belize">Belize</option>
-                            <option value="Benin">Benin</option>
-                            <option value="Bhutan">Bhutan</option>
-                            <option value="Bolivia">Bolivia</option>
-                            <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
-                            <option value="Botswana">Botswana</option>
-                            <option value="Brazil">Brazil</option>
-                            <option value="Brunei">Brunei</option>
-                            <option value="Bulgaria">Bulgaria</option>
-                            <option value="Burkina Faso">Burkina Faso</option>
-                            <option value="Burundi">Burundi</option>
-                            <option value="Cabo Verde">Cabo Verde</option>
-                            <option value="Cambodia">Cambodia</option>
-                            <option value="Cameroon">Cameroon</option>
-                            <option value="Canada">Canada</option>
-                            <option value="Central African Republic">Central African Republic</option>
-                            <option value="Chad">Chad</option>
-                            <option value="Chile">Chile</option>
-                            <option value="China">China</option>
-                            <option value="Colombia">Colombia</option>
-                            <option value="Comoros">Comoros</option>
-                            <option value="Congo">Congo</option>
-                            <option value="Costa Rica">Costa Rica</option>
-                            <option value="Croatia">Croatia</option>
-                            <option value="Cuba">Cuba</option>
-                            <option value="Cyprus">Cyprus</option>
-                            <option value="Czechia">Czechia</option>
-                            <option value="Denmark">Denmark</option>
-                            <option value="Djibouti">Djibouti</option>
-                            <option value="Dominica">Dominica</option>
-                            <option value="Dominican Republic">Dominican Republic</option>
-                            <option value="Ecuador">Ecuador</option>
-                            <option value="Egypt">Egypt</option>
-                            <option value="El Salvador">El Salvador</option>
-                            <option value="Equatorial Guinea">Equatorial Guinea</option>
-                            <option value="Eritrea">Eritrea</option>
-                            <option value="Estonia">Estonia</option>
-                            <option value="Eswatini">Eswatini</option>
-                            <option value="Ethiopia">Ethiopia</option>
-                            <option value="Fiji">Fiji</option>
-                            <option value="Finland">Finland</option>
-                            <option value="France">France</option>
-                            <option value="Gabon">Gabon</option>
-                            <option value="Gambia">Gambia</option>
-                            <option value="Georgia">Georgia</option>
-                            <option value="Germany">Germany</option>
-                            <option value="Ghana">Ghana</option>
-                            <option value="Greece">Greece</option>
-                            <option value="Grenada">Grenada</option>
-                            <option value="Guatemala">Guatemala</option>
-                            <option value="Guinea">Guinea</option>
-                            <option value="Guinea-Bissau">Guinea-Bissau</option>
-                            <option value="Guyana">Guyana</option>
-                            <option value="Haiti">Haiti</option>
-                            <option value="Honduras">Honduras</option>
-                            <option value="Hungary">Hungary</option>
-                            <option value="Iceland">Iceland</option>
-                            <option value="India">India</option>
-                            <option value="Indonesia">Indonesia</option>
-                            <option value="Iran">Iran</option>
-                            <option value="Iraq">Iraq</option>
-                            <option value="Ireland">Ireland</option>
-                            <option value="Israel">Israel</option>
-                            <option value="Italy">Italy</option>
-                            <option value="Jamaica">Jamaica</option>
-                            <option value="Japan">Japan</option>
-                            <option value="Jordan">Jordan</option>
-                            <option value="Kazakhstan">Kazakhstan</option>
-                            <option value="Kenya">Kenya</option>
-                            <option value="Kiribati">Kiribati</option>
-                            <option value="Korea, North">Korea, North</option>
-                            <option value="Korea, South">Korea, South</option>
-                            <option value="Kosovo">Kosovo</option>
-                            <option value="Kuwait">Kuwait</option>
-                            <option value="Kyrgyzstan">Kyrgyzstan</option>
-                            <option value="Laos">Laos</option>
-                            <option value="Latvia">Latvia</option>
-                            <option value="Lebanon">Lebanon</option>
-                            <option value="Lesotho">Lesotho</option>
-                            <option value="Liberia">Liberia</option>
-                            <option value="Libya">Libya</option>
-                            <option value="Liechtenstein">Liechtenstein</option>
-                            <option value="Lithuania">Lithuania</option>
-                            <option value="Luxembourg">Luxembourg</option>
-                            <option value="Madagascar">Madagascar</option>
-                            <option value="Malawi">Malawi</option>
-                            <option value="Malaysia">Malaysia</option>
-                            <option value="Maldives">Maldives</option>
-                            <option value="Mali">Mali</option>
-                            <option value="Malta">Malta</option>
-                            <option value="Marshall Islands">Marshall Islands</option>
-                            <option value="Mauritania">Mauritania</option>
-                            <option value="Mauritius">Mauritius</option>
-                            <option value="Mexico">Mexico</option>
-                            <option value="Micronesia">Micronesia</option>
-                            <option value="Moldova">Moldova</option>
-                            <option value="Monaco">Monaco</option>
-                            <option value="Mongolia">Mongolia</option>
-                            <option value="Montenegro">Montenegro</option>
-                            <option value="Morocco">Morocco</option>
-                            <option value="Mozambique">Mozambique</option>
-                            <option value="Myanmar">Myanmar</option>
-                            <option value="Namibia">Namibia</option>
-                            <option value="Nauru">Nauru</option>
-                            <option value="Nepal">Nepal</option>
-                            <option value="Netherlands">Netherlands</option>
-                            <option value="New Zealand">New Zealand</option>
-                            <option value="Nicaragua">Nicaragua</option>
-                            <option value="Niger">Niger</option>
-                            <option value="Nigeria">Nigeria</option>
-                            <option value="North Macedonia">North Macedonia</option>
-                            <option value="Norway">Norway</option>
-                            <option value="Oman">Oman</option>
-                            <option value="Pakistan">Pakistan</option>
-                            <option value="Palau">Palau</option>
-                            <option value="Palestine">Palestine</option>
-                            <option value="Panama">Panama</option>
-                            <option value="Papua New Guinea">Papua New Guinea</option>
-                            <option value="Paraguay">Paraguay</option>
-                            <option value="Peru">Peru</option>
-                            <option value="Philippines">Philippines</option>
-                            <option value="Poland">Poland</option>
-                            <option value="Portugal">Portugal</option>
-                            <option value="Qatar">Qatar</option>
-                            <option value="Romania">Romania</option>
-                            <option value="Russia">Russia</option>
-                            <option value="Rwanda">Rwanda</option>
-                            <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
-                            <option value="Saint Lucia">Saint Lucia</option>
-                            <option value="Saint Vincent">Saint Vincent</option>
-                            <option value="Samoa">Samoa</option>
-                            <option value="San Marino">San Marino</option>
-                            <option value="Sao Tome and Principe">Sao Tome and Principe</option>
-                            <option value="Saudi Arabia">Saudi Arabia</option>
-                            <option value="Senegal">Senegal</option>
-                            <option value="Serbia">Serbia</option>
-                            <option value="Seychelles">Seychelles</option>
-                            <option value="Sierra Leone">Sierra Leone</option>
-                            <option value="Singapore">Singapore</option>
-                            <option value="Slovakia">Slovakia</option>
-                            <option value="Slovenia">Slovenia</option>
-                            <option value="Solomon Islands">Solomon Islands</option>
-                            <option value="Somalia">Somalia</option>
-                            <option value="South Africa">South Africa</option>
-                            <option value="South Sudan">South Sudan</option>
-                            <option value="Spain">Spain</option>
-                            <option value="Sri Lanka">Sri Lanka</option>
-                            <option value="Sudan">Sudan</option>
-                            <option value="Suriname">Suriname</option>
-                            <option value="Sweden">Sweden</option>
-                            <option value="Switzerland">Switzerland</option>
-                            <option value="Syria">Syria</option>
-                            <option value="Taiwan">Taiwan</option>
-                            <option value="Tajikistan">Tajikistan</option>
-                            <option value="Tanzania">Tanzania</option>
-                            <option value="Thailand">Thailand</option>
-                            <option value="Timor-Leste">Timor-Leste</option>
-                            <option value="Togo">Togo</option>
-                            <option value="Tonga">Tonga</option>
-                            <option value="Trinidad and Tobago">Trinidad and Tobago</option>
-                            <option value="Tunisia">Tunisia</option>
-                            <option value="Turkey">Turkey</option>
-                            <option value="Türkiye">Türkiye</option>
-                            <option value="Turkmenistan">Turkmenistan</option>
-                            <option value="Tuvalu">Tuvalu</option>
-                            <option value="Uganda">Uganda</option>
-                            <option value="Ukraine">Ukraine</option>
-                            <option value="United Arab Emirates">United Arab Emirates</option>
-                            <option value="United Kingdom">United Kingdom</option>
-                            <option value="United States">United States</option>
-                            <option value="Uruguay">Uruguay</option>
-                            <option value="Uzbekistan">Uzbekistan</option>
-                            <option value="Vanuatu">Vanuatu</option>
-                            <option value="Vatican City">Vatican City</option>
-                            <option value="Venezuela">Venezuela</option>
-                            <option value="Vietnam">Vietnam</option>
-                            <option value="Yemen">Yemen</option>
-                            <option value="Zambia">Zambia</option>
-                            <option value="Zimbabwe">Zimbabwe</option>
-                        </select>
+                    <div class="relative z-[60] w-full group" x-data="countrySearch()" @click.away="open = false">
+                        <div @click="open = !open" 
+                            class="block py-3 px-0 w-full text-base border-0 border-b appearance-none focus:outline-none focus:ring-0 cursor-pointer flex justify-between items-center transition-colors duration-200"
+                            :class="open ? 'border-blue-500 dark:border-slate-400 text-slate-900 dark:text-white bg-transparent' : 'border-slate-200 dark:border-white/20 text-slate-900 dark:text-white bg-transparent'">
+                            <span x-text="selected || 'Select Country'" :class="{'text-slate-500 dark:text-slate-400': !selected}"></span>
+                            <svg class="w-4 h-4 text-slate-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" :class="{'rotate-180': open}">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <input type="hidden" name="country" :value="selected" required id="country_alpine">
+                        
+                        <!-- Dropdown Menu -->
+                        <div x-show="open" x-transition.opacity.duration.200ms
+                            class="absolute left-0 top-full mt-1 w-full max-h-64 overflow-y-auto bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-xl z-[70] custom-scrollbar">
+                            <div class="sticky top-0 bg-white dark:bg-slate-800 p-2 border-b border-slate-100 dark:border-slate-700 z-10">
+                                <input x-model="search" type="text" placeholder="Search country..." 
+                                    class="w-full text-sm bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded px-3 py-2 text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-blue-500" @click.stop>
+                            </div>
+                            <ul class="py-1">
+                                <template x-for="country in filteredCountries" :key="country">
+                                    <li @click="selectCountry(country)" 
+                                        class="px-4 py-2 cursor-pointer text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors" 
+                                        x-text="country"
+                                        :class="{'bg-blue-50 dark:bg-slate-700 text-blue-600 dark:text-blue-400 font-medium': selected === country}">
+                                    </li>
+                                </template>
+                                <li x-show="filteredCountries.length === 0" class="px-4 py-3 text-sm text-slate-500 text-center">No results found</li>
+                            </ul>
+                        </div>
                     </div>
 
                     <div class="relative z-0 w-full group iti-wrapper">
@@ -1899,17 +1729,40 @@
                             placeholder=" " value="{{ old('phone_full') }}" required />
                         <input type="hidden" name="phone_country_code" id="phone_country_code" />
                         <input type="hidden" name="phone" id="phone_pure" />
+                        <label for="phone_full"
+                            class="peer-focus:font-medium absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 dark:peer-focus:text-slate-300 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Phone Number</label>
                     </div>
                 </div>
-                <!-- Some custom css to align intl-tel-input's input box with tailwind floating label -->
+
                 <style>
+                    /* Custom Scrollbar for Country Dropdown */
+                    .custom-scrollbar::-webkit-scrollbar {
+                        width: 6px;
+                    }
+                    .custom-scrollbar::-webkit-scrollbar-track {
+                        background: rgba(0,0,0,0.02);
+                        border-radius: 8px;
+                    }
+                    .custom-scrollbar::-webkit-scrollbar-thumb {
+                        background: rgba(0,0,0,0.1);
+                        border-radius: 8px;
+                    }
+                    .dark .custom-scrollbar::-webkit-scrollbar-track {
+                        background: rgba(255,255,255,0.02);
+                    }
+                    .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+                        background: rgba(255,255,255,0.1);
+                    }
+
+                    /* Floating Label Support for ITI */
                     .iti-wrapper .iti {
                         width: 100%;
-                        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-                        transition: border-color 0.3s;
                     }
-                    .dark .iti-wrapper .iti {
-                        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+                    
+                    /* Ensures modal scroll doesn't affect list */
+                    .iti__country-list {
+                        z-index: 9999 !important; 
+                        max-width: 300px;
                     }
 
                     .iti-wrapper .iti__tel-input {
@@ -1930,16 +1783,9 @@
                         box-shadow: none !important;
                     }
 
-                    .iti-wrapper:focus-within .iti {
-                        border-bottom-color: #3b82f6;
-                    }
-                    .dark .iti-wrapper:focus-within .iti {
-                        border-bottom-color: #94a3b8;
-                    }
-
-                    /* Tom Select overrides for light mode */
-                    .tom-select-light {
-                        color: #0f172a !important;
+                    /* Align ITI country Select flag propery with float label */
+                    .iti__selected-flag {
+                        background-color: transparent !important;
                     }
                 </style>
 
@@ -2033,93 +1879,87 @@
             };
         }
 
-        // Floating label functionality for Tom Select and intl-tel-input
+        // Start Alpine Context for Searchable Country Select
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('countrySearch', () => ({
+                open: false,
+                search: '',
+                selected: '',
+                countries: [
+                    "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czechia", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, North", "Korea, South", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Türkiye", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+                ],
+                get filteredCountries() {
+                    if (this.search === '') {
+                        return this.countries;
+                    }
+                    return this.countries.filter(c => c.toLowerCase().includes(this.search.toLowerCase()));
+                },
+                selectCountry(country) {
+                    this.selected = country;
+                    this.open = false;
+                    this.search = '';
+                    
+                    // Dispatch event for phone ITI sync
+                    window.dispatchEvent(new CustomEvent('country-changed', { detail: country }));
+                }
+            }));
+        });
+
+        // Initialize Telephone input functionality
         document.addEventListener('DOMContentLoaded', function () {
-            const countrySelect = document.getElementById('country');
             const phoneInput = document.querySelector("#phone_full");
-            let tomSelectInstance = null;
             let iti = null;
-
-            // Tom Select Initialization
-            if (countrySelect) {
-                tomSelectInstance = new TomSelect('#country', {
-                    create: false,
-                    sortField: { field: "text", direction: "asc" }
-                });
-            }
-
-            // Populate Tom Select from ITI data
-            function populateCountryList() {
-                if (!tomSelectInstance) return;
-
-                let countries = [];
-                if (window.intlTelInput && window.intlTelInput.getCountryData) {
-                    countries = window.intlTelInput.getCountryData();
-                } else if (window.intlTelInputGlobals && window.intlTelInputGlobals.getCountryData) {
-                    countries = window.intlTelInputGlobals.getCountryData();
-                }
-
-                if (countries.length > 0) {
-                    const currentVal = tomSelectInstance.getValue();
-                    const existingValues = Object.values(tomSelectInstance.options).map(o => o.value);
-
-                    const newOptions = countries
-                        .map(c => c.name.split(' (')[0])
-                        .filter((v, i, a) => a.indexOf(v) === i) // unique names
-                        .filter(name => !existingValues.includes(name))
-                        .map(name => ({ value: name, text: name }));
-
-                    if (newOptions.length > 0) {
-                        tomSelectInstance.addOptions(newOptions);
-                        tomSelectInstance.refreshOptions(false);
-                    }
-
-                    if (currentVal) tomSelectInstance.setValue(currentVal);
-                }
-            }
-
-            // Sync Country with Phone
-            function syncCountryWithPhone(itiInstance) {
-                const countryData = itiInstance.getSelectedCountryData();
-                if (tomSelectInstance && countryData.name) {
-                    const cleanName = countryData.name.split(' (')[0];
-                    if (tomSelectInstance.getValue() !== cleanName) {
-                        tomSelectInstance.setValue(cleanName);
-                    }
-                }
-            }
 
             // Intl-Tel-Input for Phone
             if (phoneInput) {
                 iti = window.intlTelInput(phoneInput, {
                     initialCountry: "auto",
+                    dropdownContainer: document.body, // This is key to prevent clipping inside modals
                     geoIpLookup: function (callback) {
                         fetch("https://ipapi.co/json/")
                             .then(res => res.json())
                             .then(data => {
                                 callback(data.country_code);
-                                // Population sequence
-                                setTimeout(populateCountryList, 200);
+                                // Tell Alpine to select this country automatically if empty
                                 setTimeout(() => {
-                                    if (tomSelectInstance && data.country_name) {
-                                        const cleanName = data.country_name.split(' (')[0];
-                                        tomSelectInstance.setValue(cleanName);
+                                    if(data.country_name) {
+                                        window.dispatchEvent(new CustomEvent('country-changed', { detail: data.country_name }));
                                     }
-                                }, 1000);
+                                }, 500);
                             })
                             .catch(() => {
                                 callback("tr");
-                                setTimeout(populateCountryList, 500);
-                                if (tomSelectInstance) tomSelectInstance.setValue("Turkey");
                             });
                     },
                     utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/23.0.4/js/utils.js",
                     separateDialCode: true,
                 });
+            }
 
-                // Sync Country Select with Phone Input
+            // Sync Alpine Country Select to ITI (Only works best effort depending on exact name match)
+            window.addEventListener('country-changed', (e) => {
+                if (iti && e.detail) {
+                    const allCountries = window.intlTelInputGlobals ? window.intlTelInputGlobals.getCountryData() : [];
+                    const tsVal = e.detail;
+                    const match = allCountries.find(c => c.name.split(' (')[0].toLowerCase() === tsVal.toLowerCase());
+                    if (match) {
+                        iti.setCountry(match.iso2);
+                    }
+                    // For forms floating labels:
+                    monitorForm();
+                }
+            });
+
+            // Sync ITI flag selection to Alpine (Optional, but good UX)
+            if (phoneInput && iti) {
                 phoneInput.addEventListener("countrychange", function () {
-                    syncCountryWithPhone(iti);
+                    const countryData = iti.getSelectedCountryData();
+                    if(countryData && countryData.name) {
+                        const cleanName = countryData.name.split(' (')[0];
+                        // If you want robust 2 way bind, update the hidden input:
+                        const hiddenC = document.querySelector('#country_alpine');
+                        if(hiddenC && !hiddenC.value) hiddenC.value = cleanName; 
+                    }
                 });
             }
 
@@ -2137,9 +1977,8 @@
                 });
             }
 
-            // Continuous Label & Sync Check
+            // Continuous Label Check
             function monitorForm() {
-                // Label float check
                 document.querySelectorAll('input').forEach(input => {
                     const label = input.nextElementSibling;
                     if (label && label.tagName === 'LABEL') {
@@ -2150,29 +1989,8 @@
                         }
                     }
                 });
-
-                // Sync sync (one-way country select -> ITI flag)
-                if (countrySelect && iti && tomSelectInstance) {
-                    const tsVal = tomSelectInstance.getValue();
-                    const itiVal = iti.getSelectedCountryData().name ? iti.getSelectedCountryData().name.split(' (')[0] : '';
-                    // Only sync if user changed TS and its different from ITI
-                    // We don't want an infinite loop, so we only sync if the active element is TS
-                    if (document.activeElement === countrySelect || document.activeElement.closest('.ts-control')) {
-                        if (tsVal && tsVal !== itiVal) {
-                            // Find ITI iso code
-                            const allCountries = window.intlTelInputGlobals ? window.intlTelInputGlobals.getCountryData() : [];
-                            const match = allCountries.find(c => c.name.split(' (')[0] === tsVal);
-                            if (match) {
-                                iti.setCountry(match.iso2);
-                            }
-                        }
-                    }
-                }
             }
             setInterval(monitorForm, 1000);
-
-            // Initial population attempt
-            populateCountryList();
         });
     </script>
 </body>
