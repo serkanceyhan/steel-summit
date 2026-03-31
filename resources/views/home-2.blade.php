@@ -1625,12 +1625,12 @@
 
     <div class="fixed inset-0 z-[100] flex items-center justify-center p-6 overflow-y-auto" x-cloak x-show="modalOpen">
         <div @click="modalOpen = false" class="fixed inset-0 bg-slate-200/60 dark:bg-slate-950/95 backdrop-blur-xl transition-all duration-500"></div>
-        <div class="relative bg-white/95 dark:glass max-w-2xl w-full rounded-[2rem] p-10 md:p-14 shadow-2xl overflow-hidden transition-all duration-500"
+        <div class="relative bg-white/95 dark:bg-[#123e4a] dark:border dark:border-white/10 max-w-2xl w-full rounded-[2rem] p-6 md:p-14 shadow-2xl overflow-hidden transition-all duration-500"
             x-show="modalOpen" x-transition>
             <button @click="modalOpen = false" class="absolute top-6 right-6 text-slate-400 hover:text-slate-900 dark:text-slate-500 dark:hover:text-white transition-colors"
                 aria-label="Close">×</button>
             <div class="text-center mb-8">
-                <h3 class="text-3xl md:text-4xl font-serif font-bold text-slate-900 dark:text-white mb-3">VIP Registration Request</h3>
+                <h3 class="text-2xl md:text-4xl font-serif font-bold text-slate-900 dark:text-white mb-3">VIP Registration Request</h3>
                 <p class="text-slate-600 dark:text-slate-400 font-light italic">Submit your credentials for an exclusive delegation
                     invitation.</p>
             </div>
@@ -1723,14 +1723,13 @@
                         </div>
                     </div>
 
-                    <div class="relative z-0 w-full group iti-wrapper">
+                    <div class="space-y-2 iti-wrapper">
+                        <label for="phone_full" class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold ml-1">Phone Number</label>
                         <input type="tel" name="phone_full" id="phone_full"
-                            class="block py-3 px-0 w-full text-base text-slate-900 dark:text-white bg-transparent border-0 border-b border-slate-200 dark:border-white/20 appearance-none focus:outline-none focus:ring-0 focus:border-blue-500 dark:focus:border-slate-400 peer"
-                            placeholder=" " value="{{ old('phone_full') }}" required />
+                            class="block py-3 px-0 w-full text-base text-slate-900 dark:text-white bg-transparent border-0 border-b border-slate-200 dark:border-white/20 appearance-none focus:outline-none focus:ring-0 focus:border-blue-500 dark:focus:border-slate-400"
+                            value="{{ old('phone_full') }}" required />
                         <input type="hidden" name="phone_country_code" id="phone_country_code" />
                         <input type="hidden" name="phone" id="phone_pure" />
-                        <label for="phone_full"
-                            class="peer-focus:font-medium absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 dark:peer-focus:text-slate-300 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Phone Number</label>
                     </div>
                 </div>
 
