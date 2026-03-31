@@ -792,7 +792,7 @@
                     <div class="relative aspect-square rounded-[2rem] overflow-hidden border border-slate-200 dark:border-white/10">
                         <img src="{{ asset('images/about/steel-legacy.png') }}" alt="Steel Legacy"
                             class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-100">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/20 dark:from-slate-950/60 to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-white/60 dark:from-slate-950/60 to-transparent"></div>
                     </div>
                 </div>
 
@@ -814,10 +814,10 @@
                     <div class="relative aspect-[4/5] rounded-[2rem] overflow-hidden border border-slate-200 dark:border-white/10 shadow-2xl">
                         <img src="{{ asset('images/about/summit-experience.png') }}" alt="Conference Hall"
                             class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-100">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent">
+                        <div class="absolute inset-0 bg-gradient-to-t from-white/80 dark:from-slate-950/80 via-white/20 dark:via-transparent to-transparent">
                         </div>
                         <div class="absolute bottom-8 left-8">
-                            <p class="text-white font-serif italic text-xl">Reshaping Global Alliances</p>
+                            <p class="text-slate-900 dark:text-white font-serif italic text-xl">Reshaping Global Alliances</p>
                         </div>
                     </div>
                 </div>
@@ -1094,10 +1094,10 @@
                 <!-- Card 1: Producers -->
                 <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
                     <div
-                        class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden bg-slate-900 border border-white/5 shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
+                        class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-white/5 shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
                         <img src="{{ asset('images/attendees/producers_v2.png') }}" alt="Steel Producers"
                             class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-white/60 dark:from-slate-950/50 to-transparent"></div>
                     </div>
                     <div class="mt-8 px-4">
                         <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Steel Producers</h4>
@@ -1110,10 +1110,10 @@
                 <!-- Card 2: International Traders -->
                 <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
                     <div
-                        class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden bg-slate-900 border border-white/5 shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
+                        class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-white/5 shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
                         <img src="{{ asset('images/attendees/traders_v2.png') }}" alt="International Traders"
                             class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-white/60 dark:from-slate-950/50 to-transparent"></div>
                     </div>
                     <div class="mt-8 px-4">
                         <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">International Traders</h4>
@@ -1126,10 +1126,10 @@
                 <!-- Card 3: Logistics Providers -->
                 <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
                     <div
-                        class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden bg-slate-900 border border-white/5 shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
+                        class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-white/5 shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
                         <img src="{{ asset('images/attendees/logistics_v2.png') }}" alt="Logistics Providers"
                             class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-white/60 dark:from-slate-950/50 to-transparent"></div>
                     </div>
                     <div class="mt-8 px-4">
                         <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Logistics Providers</h4>
@@ -1142,11 +1142,11 @@
                 <!-- Card 4: Financial Institutions -->
                 <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
                     <div
-                        class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden bg-slate-900 border border-white/5 shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
+                        class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-white/5 shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
                         <img src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?q=80&w=2000&auto=format&fit=crop"
                             alt="Financial Institutions"
                             class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-white/60 dark:from-slate-950/50 to-transparent"></div>
                     </div>
                     <div class="mt-8 px-4">
                         <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Financial Institutions</h4>
@@ -1159,11 +1159,11 @@
                 <!-- Card 5: Technology Providers -->
                 <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
                     <div
-                        class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden bg-slate-900 border border-white/5 shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
+                        class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-white/5 shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
                         <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2000&auto=format&fit=crop"
                             alt="Technology Providers"
                             class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-white/60 dark:from-slate-950/50 to-transparent"></div>
                     </div>
                     <div class="mt-8 px-4">
                         <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Technology Providers</h4>
@@ -1176,11 +1176,11 @@
                 <!-- Card 6: Government Departments -->
                 <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
                     <div
-                        class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden bg-slate-900 border border-white/5 shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
+                        class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-white/5 shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
                         <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2000&auto=format&fit=crop"
                             alt="Government & Institutions"
                             class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-white/60 dark:from-slate-950/50 to-transparent"></div>
                     </div>
                     <div class="mt-8 px-4">
                         <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Gov & Institutions</h4>
