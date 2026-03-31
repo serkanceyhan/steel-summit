@@ -1656,7 +1656,7 @@
                     </div>
                 @endif
 
-                <div class="grid md:grid-cols-2 gap-6">
+                <div class="grid grid-cols-2 gap-4 md:gap-6">
                     <div class="relative z-0 w-full group">
                         <input type="text" name="first_name" id="first_name"
                             class="block py-3 px-0 w-full text-base text-slate-900 dark:text-white bg-transparent border-0 border-b border-slate-200 dark:border-white/20 appearance-none focus:outline-none focus:ring-0 focus:border-blue-500 dark:focus:border-slate-400 peer"
