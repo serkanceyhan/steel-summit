@@ -1178,7 +1178,7 @@
                 <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
                     <div
                         class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden glass shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
-                        <img src="https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=2000&auto=format&fit=crop" alt="Raw Material and Scrap Suppliers"
+                        <img src="https://images.unsplash.com/photo-1516724562728-afc824a36e84?q=80&w=2000&auto=format&fit=crop" alt="Raw Material and Scrap Suppliers"
                             class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
                         <div class="absolute inset-0 bg-gradient-to-t from-white/60 dark:from-slate-950/50 to-transparent"></div>
                     </div>
@@ -1194,7 +1194,7 @@
                 <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
                     <div
                         class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden glass shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
-                        <img src="https://images.unsplash.com/photo-1504917595217-d4dc5efa61df?q=80&w=2000&auto=format&fit=crop" alt="Machinery and Equipment Suppliers"
+                        <img src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?q=80&w=2000&auto=format&fit=crop" alt="Machinery and Equipment Suppliers"
                             class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
                         <div class="absolute inset-0 bg-gradient-to-t from-white/60 dark:from-slate-950/50 to-transparent"></div>
                     </div>
