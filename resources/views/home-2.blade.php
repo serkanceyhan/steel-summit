@@ -611,8 +611,7 @@
         <div class="max-w-6xl mx-auto relative z-10 transition-all duration-1000 transform"
             :class="revealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'">
             <div class="mb-12 text-center">
-                <h2 class="text-4xl md:text-6xl font-serif font-extrabold text-slate-900 dark:text-white mb-4 italic uppercase tracking-wider">STEEL Summit
-                    Program</h2>
+                <h2 class="text-4xl md:text-6xl font-serif font-extrabold text-slate-900 dark:text-white mb-4 italic uppercase tracking-wider">Program</h2>
                 <p class="text-slate-600 dark:text-slate-400 text-sm md:text-base font-medium">25-27 October 2026 | Swissotel Istanbul</p>
             </div>
 
@@ -763,12 +762,17 @@
                             <span class="text-slate-500 italic">Us.</span>
                         </h2>
                         <p class="text-slate-600 dark:text-slate-400 text-lg md:text-xl font-light leading-relaxed">
-                            The Steel Summits were created to meet the need for a truly global networking
-                            conference that brings together all stakeholders across the international steel trade.
+                            The Steel Networking Summits were created to meet the need for a truly global and integrated steel networking platform that brings together all stakeholders across the international steel trade.
                         </p>
                     </div>
 
                     <div class="space-y-6">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-brand-teal/10 flex items-center justify-center border border-brand-teal/20">
+                                <span class="material-symbols-outlined text-brand-teal">track_changes</span>
+                            </div>
+                            <h3 class="text-2xl font-serif font-bold text-slate-900 dark:text-white">Our Vision</h3>
+                        </div>
                         <p class="text-lg text-slate-700 dark:text-slate-300 italic border-l-4 border-brand-teal pl-6 py-2">
                             To create a truly global and integrated steel networking platform connecting producers,
                             traders, and logistics providers.
@@ -803,66 +807,126 @@
         </div>
     </section>
 
-    <!-- NEW: What to Expect Section -->
-    <section class="py-32 bg-slate-50 dark:bg-slate-950 px-6 border-t border-slate-100 dark:border-white/5 overflow-hidden relative transition-colors duration-500">
+    <!-- NEW: Why You Should Attend Section (Image B) -->
+    <section class="py-32 bg-white dark:bg-slate-950 px-6 border-t border-slate-100 dark:border-white/5 relative overflow-hidden transition-colors duration-500" id="why-attend"
+        x-data="{ revealed: false }" x-intersect.once="revealed = true">
+        
+        <!-- Ambient Glow -->
+        <div class="absolute top-1/4 right-0 w-80 h-80 bg-blue-600/5 blur-[100px] rounded-full pointer-events-none"></div>
+        <div class="absolute bottom-1/4 left-0 w-80 h-80 bg-purple-600/5 blur-[100px] rounded-full pointer-events-none"></div>
+
         <div class="max-w-7xl mx-auto relative z-10 transition-all duration-1000 transform"
             :class="revealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
-                <!-- Left: Image -->
-                <div class="relative group order-1">
-                    <div
-                        class="absolute -inset-1 bg-gradient-to-r from-brand-teal/10 to-purple-500/10 dark:from-brand-teal/20 dark:to-purple-500/20 rounded-[2rem] blur opacity-25 group-hover:opacity-50 transition duration-1000">
-                    </div>
-                    <div class="relative aspect-[4/5] rounded-[2rem] overflow-hidden border border-slate-200 dark:border-white/10 shadow-2xl">
-                        <img src="{{ asset('images/about/summit-experience.png') }}" alt="Conference Hall"
-                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-100">
-                        <div class="absolute inset-0 bg-gradient-to-t from-white/80 dark:from-slate-950/80 via-white/20 dark:via-transparent to-transparent">
-                        </div>
-                        <div class="absolute bottom-8 left-8">
-                            <p class="text-slate-900 dark:text-white font-serif italic text-xl">Reshaping Global Alliances</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right: Content -->
-                <div class="space-y-10 order-2">
-                    <span
-                        class="text-[10px] md:text-xs uppercase tracking-[0.3em] text-cyan-600 dark:text-brand-teal-light font-bold mb-4 block">Conference
-                        Experience</span>
-
-                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-slate-900 dark:text-white tracking-tight">
-                        What to <span class="text-gradient-platinum">Expect?</span>
+            
+            <div class="grid lg:grid-cols-2 gap-16 mb-20 items-start">
+                <div>
+                    <h2 class="text-5xl md:text-8xl font-serif font-extrabold text-slate-900 dark:text-white leading-tight uppercase tracking-tight">
+                        Why You <br />
+                        <span class="text-slate-500 italic">Should Attend?</span>
                     </h2>
+                </div>
+                <div class="lg:pt-6">
+                    <h3 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
+                        Direct Access to the <span class="text-brand-teal-light">Global Steel Ecosystem</span>
+                    </h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-lg md:text-xl font-light leading-relaxed">
+                        Opportunity to meet steel producers, traders, representatives of international organizations, and industry leaders from around the world on a single platform.
+                    </p>
+                </div>
+            </div>
 
-                    <div class="space-y-8">
-                        <!-- Feature 1 -->
-                        <div class="flex items-start gap-6 group">
-                            <div
-                                class="w-12 h-12 rounded-2xl glass flex items-center justify-center group-hover:bg-brand-teal/20 transition-colors duration-500 shadow-sm dark:shadow-none">
-                                <span class="material-symbols-outlined text-brand-teal-light">groups</span>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Industry Leaders</h4>
-                                <p class="text-slate-600 dark:text-slate-300 font-light leading-relaxed">Leading companies, decision-makers,
-                                    and opinion leaders shaping the industry from around the world will participate.</p>
-                            </div>
-                        </div>
-
-                        <!-- Feature 2 -->
-                        <div class="flex items-start gap-6 group">
-                            <div
-                                class="w-12 h-12 rounded-2xl glass flex items-center justify-center group-hover:bg-brand-teal/20 transition-colors duration-500 shadow-sm dark:shadow-none">
-                                <span class="material-symbols-outlined text-brand-teal-light">public</span>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Global Markets</h4>
-                                <p class="text-slate-600 dark:text-slate-300 font-light leading-relaxed">Up-to-date and in-depth insights
-                                    into steel markets across all regions with a comprehensive view of the future.</p>
-                            </div>
-                        </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1: Prestige -->
+                <div class="glass p-8 rounded-[2rem] border border-slate-200 dark:border-white/5 hover:border-blue-500/30 transition-all duration-500 group flex flex-col h-full bg-white/95 dark:bg-slate-900/40 shadow-sm dark:shadow-none mt-4 md:mt-0">
+                    <h4 class="text-xl font-extrabold text-slate-900 dark:text-white mb-6 leading-tight">Prestige <br/>& Visibility</h4>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm font-medium leading-relaxed mb-6">
+                        Participating in this event, which aims to make a global impact, strengthens your organization’s international presence and industry reputation.
+                    </p>
+                    <div class="mt-auto pt-6 border-t border-slate-900/5 dark:border-white/5">
+                        <span class="material-symbols-outlined text-blue-500 text-3xl opacity-50 group-hover:opacity-100 transition-opacity">verified</span>
                     </div>
                 </div>
+
+                <!-- Card 2: Perspective -->
+                <div class="glass p-8 rounded-[2rem] border border-slate-200 dark:border-white/5 hover:border-slate-500/30 transition-all duration-500 group flex flex-col h-full bg-white/95 dark:bg-slate-900/40 shadow-sm dark:shadow-none">
+                    <h4 class="text-xl font-extrabold text-slate-900 dark:text-white mb-6 leading-tight">Market Perspective <br/>& Global Outlook</h4>
+                    <div class="flex-grow">
+                        <p class="text-slate-600 dark:text-slate-300 text-sm font-medium leading-relaxed mb-4">Gain direct insights from decision-makers on:</p>
+                        <ul class="text-xs space-y-2 text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">
+                            <li class="flex items-center gap-2">
+                                <span class="w-1 h-1 rounded-full bg-slate-400"></span>
+                                Global market trends
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="w-1 h-1 rounded-full bg-slate-400"></span>
+                                Trade policies
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="w-1 h-1 rounded-full bg-slate-400"></span>
+                                Green transition
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="w-1 h-1 rounded-full bg-slate-400"></span>
+                                Carbon regulations
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="w-1 h-1 rounded-full bg-slate-400"></span>
+                                Emerging business models
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-auto pt-6 border-t border-slate-900/5 dark:border-white/5">
+                        <span class="material-symbols-outlined text-slate-400 text-3xl opacity-50 group-hover:opacity-100 transition-opacity">public</span>
+                    </div>
+                </div>
+
+                <!-- Card 3: Networking -->
+                <div class="glass p-8 rounded-[2rem] border border-slate-200 dark:border-white/5 hover:border-brand-teal/30 transition-all duration-500 group flex flex-col h-full bg-white/95 dark:bg-slate-900/40 shadow-sm dark:shadow-none">
+                    <h4 class="text-xl font-extrabold text-slate-900 dark:text-white mb-6 leading-tight">High-Impact <br/>Networking</h4>
+                    <div class="flex-grow">
+                        <p class="text-slate-600 dark:text-slate-300 text-sm font-medium leading-relaxed mb-4">Establishing real business connections through:</p>
+                        <ul class="text-xs space-y-2 text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">
+                            <li class="flex items-center gap-2">
+                                <span class="w-1 h-1 rounded-full bg-slate-400"></span>
+                                Pre-scheduled B2B meetings
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="w-1 h-1 rounded-full bg-slate-400"></span>
+                                Thematic networking areas
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="w-1 h-1 rounded-full bg-slate-400"></span>
+                                Hosted Buyer Event
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="w-1 h-1 rounded-full bg-slate-400"></span>
+                                Formal & informal points
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-auto pt-6 border-t border-slate-900/5 dark:border-white/5">
+                        <span class="material-symbols-outlined text-brand-teal text-3xl opacity-50 group-hover:opacity-100 transition-opacity">diversity_3</span>
+                    </div>
+                </div>
+
+                <!-- Card 4: Crossroads -->
+                <div class="glass p-8 rounded-[2rem] border border-slate-200 dark:border-white/5 hover:border-slate-500/30 transition-all duration-500 group flex flex-col h-full bg-white/95 dark:bg-slate-900/40 shadow-sm dark:shadow-none mb-4 md:mb-0">
+                    <h4 class="text-xl font-extrabold text-slate-900 dark:text-white mb-6 leading-tight">The Crossroads <br/>of Global Trade</h4>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm font-medium leading-relaxed mb-6">
+                        With Istanbul’s strategic location, the opportunity to engage directly with decision-makers from different regions simultaneously.
+                    </p>
+                    <div class="mt-auto pt-6 border-t border-slate-900/5 dark:border-white/5">
+                        <span class="material-symbols-outlined text-slate-700 dark:text-slate-400 text-3xl opacity-50 group-hover:opacity-100 transition-opacity">hub</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16 text-center">
+                <button @click="modalOpen = true"
+                    class="group relative inline-flex items-center gap-4 px-10 py-5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl font-bold text-lg transition-all shadow-xl hover:shadow-2xl active:scale-95 border-b-4 border-slate-950 dark:border-slate-300">
+                    <span class="material-symbols-outlined font-bold">arrow_forward</span>
+                    <span class="uppercase tracking-widest">Click here to register</span>
+                </button>
             </div>
         </div>
     </section>
@@ -1094,39 +1158,55 @@
                 @scroll="scrollProgress = ($el.scrollLeft / ($el.scrollWidth - $el.clientWidth)) * 100"
                 class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide space-x-5 px-[max(1.5rem,calc((100%-80rem)/2))] pb-12 cursor-grab transition-all select-none">
 
-                <!-- Card 1: Producers -->
+                <!-- Card 1: Producers & Traders -->
                 <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
                     <div
                         class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden glass shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
-                        <img src="{{ asset('images/attendees/producers_v2.png') }}" alt="Steel Producers"
+                        <img src="{{ asset('images/attendees/producers_v2.png') }}" alt="Steel Producers and Traders"
                             class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
                         <div class="absolute inset-0 bg-gradient-to-t from-white/60 dark:from-slate-950/50 to-transparent"></div>
                     </div>
                     <div class="mt-8 px-4">
-                        <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Steel Producers</h4>
+                        <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Steel Producers and Traders</h4>
                         <p class="text-slate-600 dark:text-slate-400 text-base md:text-lg font-light leading-relaxed">
-                            Global manufacturers driving the industry forward with next-gen production tech.
+                            Global manufacturers and strategic networkers connecting supply with demand across corridors.
                         </p>
                     </div>
                 </div>
 
-                <!-- Card 2: International Traders -->
+                <!-- Card 2: Scrap Suppliers -->
                 <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
                     <div
                         class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden glass shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
-                        <img src="{{ asset('images/attendees/traders_v2.png') }}" alt="International Traders"
+                        <img src="https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=2000&auto=format&fit=crop" alt="Raw Material and Scrap Suppliers"
                             class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
                         <div class="absolute inset-0 bg-gradient-to-t from-white/60 dark:from-slate-950/50 to-transparent"></div>
                     </div>
                     <div class="mt-8 px-4">
-                        <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">International Traders</h4>
+                        <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Raw Material and Scrap Suppliers</h4>
                         <p class="text-slate-600 dark:text-slate-400 text-base md:text-lg font-light leading-relaxed">
-                            Strategic networkers connecting supply with demand across global corridors.
+                            Essential suppliers of raw materials and recycling solutions powering sustainable steel.
                         </p>
                     </div>
                 </div>
 
-                <!-- Card 3: Logistics Providers -->
+                <!-- Card 3: Machinery & Tech -->
+                <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
+                    <div
+                        class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden glass shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
+                        <img src="https://images.unsplash.com/photo-1504917595217-d4dc5efa61df?q=80&w=2000&auto=format&fit=crop" alt="Machinery and Equipment Suppliers"
+                            class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-white/60 dark:from-slate-950/50 to-transparent"></div>
+                    </div>
+                    <div class="mt-8 px-4">
+                        <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Machinery & Equipment Suppliers</h4>
+                        <p class="text-slate-600 dark:text-slate-400 text-base md:text-lg font-light leading-relaxed">
+                            Providers of advanced machinery and production technology for precision manufacturing.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 4: Logistics -->
                 <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
                     <div
                         class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden glass shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
@@ -1135,60 +1215,60 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-white/60 dark:from-slate-950/50 to-transparent"></div>
                     </div>
                     <div class="mt-8 px-4">
-                        <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Logistics Providers</h4>
+                        <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Logistics & Service Providers</h4>
                         <p class="text-slate-600 dark:text-slate-400 text-base md:text-lg font-light leading-relaxed">
-                            Architects of global supply chains, optimizing transit from mill to port.
+                            Architects of supply chains, port services, and inspection optimization.
                         </p>
                     </div>
                 </div>
 
-                <!-- Card 4: Financial Institutions -->
-                <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
-                    <div
-                        class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden glass shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
-                        <img src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?q=80&w=2000&auto=format&fit=crop"
-                            alt="Financial Institutions"
-                            class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-white/60 dark:from-slate-950/50 to-transparent"></div>
-                    </div>
-                    <div class="mt-8 px-4">
-                        <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Financial Institutions</h4>
-                        <p class="text-slate-600 dark:text-slate-400 text-base md:text-lg font-light leading-relaxed">
-                            Key investment partners fueling the green steel transition and trade finance.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Card 5: Technology Providers -->
+                <!-- Card 5: High-Tech -->
                 <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
                     <div
                         class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden glass shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
                         <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2000&auto=format&fit=crop"
-                            alt="Technology Providers"
+                            alt="Digitalization and High-Tech"
                             class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
                         <div class="absolute inset-0 bg-gradient-to-t from-white/60 dark:from-slate-950/50 to-transparent"></div>
                     </div>
                     <div class="mt-8 px-4">
-                        <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Technology Providers</h4>
+                        <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Digitalization & High-Tech</h4>
                         <p class="text-slate-600 dark:text-slate-400 text-base md:text-lg font-light leading-relaxed">
-                            Innovative AI and engineering firms transforming manufacturing standards.
+                            Innovative AI and engineering firms transforming industry standards.
                         </p>
                     </div>
                 </div>
 
-                <!-- Card 6: Government Departments -->
+                <!-- Card 6: Banking & Financial -->
                 <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
                     <div
                         class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden glass shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
-                        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2000&auto=format&fit=crop"
-                            alt="Government & Institutions"
+                        <img src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?q=80&w=2000&auto=format&fit=crop"
+                            alt="Banking and Financial Institutions"
                             class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
                         <div class="absolute inset-0 bg-gradient-to-t from-white/60 dark:from-slate-950/50 to-transparent"></div>
                     </div>
                     <div class="mt-8 px-4">
-                        <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Gov & Institutions</h4>
+                        <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Banking & Financial</h4>
                         <p class="text-slate-600 dark:text-slate-400 text-base md:text-lg font-light leading-relaxed">
-                            Policymakers and trade associations shaping international trade regulations.
+                            Investment partners fueling green steel transition and trade finance.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 7: Industry Institutions -->
+                <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
+                    <div
+                        class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden glass shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
+                        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2000&auto=format&fit=crop"
+                            alt="Industry Institutions & Organizations"
+                            class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-white/60 dark:from-slate-950/50 to-transparent"></div>
+                    </div>
+                    <div class="mt-8 px-4">
+                        <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Industry Institutions</h4>
+                        <p class="text-slate-600 dark:text-slate-400 text-base md:text-lg font-light leading-relaxed">
+                            Policymakers and trade associations shaping international regulations.
                         </p>
                     </div>
                 </div>
