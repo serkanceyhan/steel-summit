@@ -555,7 +555,7 @@
         </a>
     </div>
 
-    <section class="py-32 bg-slate-950 px-6 relative overflow-hidden transition-colors duration-500" id="agenda"
+    <section class="py-32 bg-slate-900 px-6 relative overflow-hidden transition-colors duration-500" id="agenda"
         x-data="{ activeTab: 1, revealed: false }" x-intersect.once="revealed = true">
         <!-- Ambient Glow -->
         <div class="absolute -top-24 -right-24 w-96 h-96 bg-blue-600/5 blur-[120px] rounded-full pointer-events-none">
@@ -714,7 +714,7 @@
     </section>
 
     <section
-        class="py-32 bg-slate-950 px-6 border-t border-slate-100 dark:border-white/5 relative overflow-hidden transition-colors duration-500"
+        class="py-32 bg-slate-900 px-6 border-t border-slate-100 dark:border-white/5 relative overflow-hidden transition-colors duration-500"
         id="about" x-data="{ revealed: false }" x-intersect.once="revealed = true">
         <!-- Ambient Glow -->
         <div
@@ -811,7 +811,7 @@
     </section>
 
     <!-- BEGIN: Unique Value Proposition -->
-    <section class="py-32 bg-slate-950 overflow-hidden relative transition-colors duration-500" id="unique-value"
+    <section class="py-32 bg-slate-900 overflow-hidden relative transition-colors duration-500" id="unique-value"
         x-data="{ revealed: false }" x-intersect.once="revealed = true">
         <!-- Ambient Glow -->
         <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-red-600/5 blur-[120px] rounded-full pointer-events-none">
@@ -918,7 +918,7 @@
     </section>
 
     <!-- BEGIN: Who Attends -->
-    <section class="py-32 bg-slate-950 overflow-hidden relative transition-colors duration-500" id="who-attends"
+    <section class="py-32 bg-slate-900 overflow-hidden relative transition-colors duration-500" id="who-attends"
         x-data="{ revealed: false, isDragging: false, startX: 0, scrollLeft: 0, scrollProgress: 0 }"
         x-intersect.once="revealed = true">
         <!-- Ambient Glow -->
@@ -1125,7 +1125,7 @@
 
     <!-- NEW: Why You Should Attend Section (Image B) -->
     <section
-        class="py-32 bg-slate-950 px-6 border-t border-slate-100 dark:border-white/5 relative overflow-hidden transition-colors duration-500"
+        class="py-32 bg-slate-900 px-6 border-t border-slate-100 dark:border-white/5 relative overflow-hidden transition-colors duration-500"
         id="why-attend" x-data="{ revealed: false }" x-intersect.once="revealed = true">
 
         <!-- Ambient Glow -->
@@ -1298,7 +1298,7 @@
     </section>
 
     <section
-        class="py-32 bg-slate-950 px-6 border-t border-white/5 relative overflow-hidden transition-colors duration-500"
+        class="py-32 bg-slate-900 px-6 border-t border-white/5 relative overflow-hidden transition-colors duration-500"
         id="keynote-speakers" x-data="{ revealed: false }" x-intersect.once="revealed = true">
         <!-- Ambient Glow -->
         <div
@@ -1406,7 +1406,7 @@
 
     {{-- Orijinal 'Who Attends' ve 'Why You Should Attend' bölümleri, geri dönülebilmek adına gizlenmiştir.
     <!-- BEGIN: Who Attends -->
-    <section class="py-32 bg-slate-950 px-6 border-t border-white/5" id="who-attends">
+    <section class="py-32 bg-slate-900 px-6 border-t border-white/5" id="who-attends">
         <div class="max-w-7xl mx-auto">
             <div class="mb-20 text-center">
                 <h2 class="text-4xl md:text-5xl font-serif font-bold text-gradient-platinum mb-4 italic">Who Attends
@@ -1450,7 +1450,7 @@
     </section>
 
     <!-- BEGIN: Why You Should Attend -->
-    <section class="py-32 bg-slate-950 px-6 border-t border-white/5" id="why-attend">
+    <section class="py-32 bg-slate-900 px-6 border-t border-white/5" id="why-attend">
         <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
             <div class="lg:w-1/2 relative">
                 <div class="absolute -inset-4 bg-slate-500/10 blur-3xl rounded-full"></div>
@@ -1843,7 +1843,7 @@
 
     <!-- BEGIN: Pricing & Participation -->
     <section
-                class="py-32 bg-slate-950 px-6 border-t border-white/5 relative overflow-hidden transition-colors duration-500"
+                class="py-32 bg-slate-900 px-6 border-t border-white/5 relative overflow-hidden transition-colors duration-500"
                 id="pricing" x-data="{ revealed: false }" x-intersect.once="revealed = true">
 
                 <!-- Ambient Glow -->
@@ -2035,7 +2035,7 @@
     <!-- END: Pricing & Participation -->
 
     <section
-        class="py-32 bg-slate-950 px-6 border-t border-white/5 relative overflow-hidden transition-colors duration-500"
+        class="py-32 bg-slate-900 px-6 border-t border-white/5 relative overflow-hidden transition-colors duration-500"
         id="venue" x-data="{ revealed: false }" x-intersect.once="revealed = true">
         <!-- Ambient Glow -->
         <div
