@@ -497,7 +497,7 @@
                 <img alt="Istanbul Night" class="w-full h-full object-cover scale-110"
                     src="{{ asset('images/hero-istanbul.webp') }}" />
             </video>
-            <div class="absolute inset-0 hero-gradient opacity-50"></div>
+            <div class="absolute inset-0 hero-gradient opacity-30"></div>
             <div class="absolute inset-0 bg-slate-950/30 mix-blend-overlay"></div>
         </div>
 
