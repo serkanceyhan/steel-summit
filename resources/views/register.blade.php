@@ -416,11 +416,11 @@
 <body class="bg-brand-navy text-slate-100 min-h-screen font-sans">
     <nav class="sticky top-0 z-40 border-b border-white/10 bg-brand-navy/90 backdrop-blur-xl">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="{{ url('/home-2') }}" class="flex items-center">
+            <a href="{{ url('/') }}" class="flex items-center">
                 <img alt="Steel Networking Summits" class="h-12 w-auto object-contain"
                     src="{{ asset('images/steel-networking-logo-main.webp') }}" />
             </a>
-            <a href="{{ url('/home-2') }}"
+            <a href="{{ url('/') }}"
                 class="inline-flex items-center rounded-full border border-white/20 px-5 py-2 text-xs uppercase tracking-[0.2em] font-semibold hover:bg-white/10 transition-colors">
                 Back to Home
             </a>
@@ -838,9 +838,9 @@
             <div>
                 <h4 class="text-white font-bold tracking-wider uppercase text-xs mb-4">Explore</h4>
                 <ul class="space-y-2">
-                    <li><a class="text-slate-400 hover:text-white text-sm transition-colors" href="{{ url('/home-2#main') }}">Main</a></li>
-                    <li><a class="text-slate-400 hover:text-white text-sm transition-colors" href="{{ url('/home-2#agenda') }}">Agenda</a></li>
-                    <li><a class="text-slate-400 hover:text-white text-sm transition-colors" href="{{ url('/home-2#sponsorship') }}">Sponsorship</a></li>
+                    <li><a class="text-slate-400 hover:text-white text-sm transition-colors" href="{{ url('/#main') }}">Main</a></li>
+                    <li><a class="text-slate-400 hover:text-white text-sm transition-colors" href="{{ url('/#agenda') }}">Agenda</a></li>
+                    <li><a class="text-slate-400 hover:text-white text-sm transition-colors" href="{{ url('/#sponsorship') }}">Sponsorship</a></li>
                 </ul>
             </div>
             <div>

@@ -6,12 +6,10 @@ use App\Http\Controllers\StorePartialLeadController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/home-2', function () {
     return view('home-2');
 });
+
+Route::redirect('/home-2', '/');
 
 Route::get('/register', function () {
     return view('register');
