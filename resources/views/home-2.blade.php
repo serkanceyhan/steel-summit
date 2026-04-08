@@ -1868,15 +1868,20 @@
                         <!-- Individual -->
                         <div class="glass rounded-[2rem] p-10 flex flex-col relative group transition-all duration-500 hover:-translate-y-2 bg-slate-900/40 border border-white/10">
                             <div class="mb-8">
-                                <span class="text-[11px] text-brand-teal-light font-bold uppercase tracking-widest block mb-4">Standard Tier</span>
+                                <span class="text-[11px] text-brand-teal-light font-bold uppercase tracking-widest block mb-4">1 Participant</span>
                                 <h3 class="text-4xl font-serif text-white mb-2">Individual</h3>
                                 <p class="text-slate-500 text-sm italic">Single delegate access</p>
                             </div>
                             <div class="mb-10">
-                                <div class="flex items-baseline gap-2">
-                                    <span class="text-5xl font-bold text-white tracking-tighter">€1,599</span>
-                                    <span class="text-slate-500 text-sm">/ person</span>
+                                <div class="inline-flex items-center gap-2 mb-3 bg-brand-teal-light/10 border border-brand-teal-light/20 rounded-full px-3 py-1">
+                                    <span class="material-symbols-outlined text-brand-teal-light" style="font-size:14px;">bolt</span>
+                                    <span class="text-[11px] text-brand-teal-light font-bold uppercase tracking-widest">Early Bird — until 15 Jul 2026</span>
                                 </div>
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-5xl font-bold text-white tracking-tighter">€1,050</span>
+                                    <span class="text-slate-500 text-sm line-through">€1,200</span>
+                                </div>
+                                <p class="text-xs text-slate-500 mt-1">Standard fee: €1,200 / person</p>
                             </div>
                             <ul class="space-y-4 mb-12 flex-grow">
                                 <li class="flex items-center gap-3 text-sm text-slate-400">
@@ -1905,15 +1910,20 @@
                                 Most Popular
                             </div>
                             <div class="mb-8">
-                                <span class="text-[11px] text-brand-teal-light font-bold uppercase tracking-widest block mb-4">Professional Tier</span>
+                                <span class="text-[11px] text-brand-teal-light font-bold uppercase tracking-widest block mb-4">2–4 Participants</span>
                                 <h3 class="text-4xl font-serif text-white mb-2">Corporate</h3>
                                 <p class="text-slate-500 text-sm italic">2–4 delegate delegation</p>
                             </div>
                             <div class="mb-10">
-                                <div class="flex items-baseline gap-2">
-                                    <span class="text-5xl font-bold text-white tracking-tighter">€1,444</span>
-                                    <span class="text-slate-500 text-sm">/ person</span>
+                                <div class="inline-flex items-center gap-2 mb-3 bg-brand-teal-light/10 border border-brand-teal-light/20 rounded-full px-3 py-1">
+                                    <span class="material-symbols-outlined text-brand-teal-light" style="font-size:14px;">bolt</span>
+                                    <span class="text-[11px] text-brand-teal-light font-bold uppercase tracking-widest">Early Bird — until 15 Jul 2026</span>
                                 </div>
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-5xl font-bold text-white tracking-tighter">€950</span>
+                                    <span class="text-slate-500 text-sm line-through">€1,100</span>
+                                </div>
+                                <p class="text-xs text-slate-500 mt-1">Standard fee: €1,100 / person</p>
                             </div>
                             <ul class="space-y-4 mb-12 flex-grow">
                                 <li class="flex items-center gap-3 text-sm text-slate-400">
@@ -1943,15 +1953,20 @@
                         <!-- Global Group -->
                         <div class="glass rounded-[2rem] p-10 flex flex-col relative group transition-all duration-500 hover:-translate-y-2 bg-slate-900/40 border border-white/10">
                             <div class="mb-8">
-                                <span class="text-[11px] text-brand-teal-light font-bold uppercase tracking-widest block mb-4">Enterprise Tier</span>
+                                <span class="text-[11px] text-brand-teal-light font-bold uppercase tracking-widest block mb-4">5+ Participants</span>
                                 <h3 class="text-4xl font-serif text-white mb-2">Global Group</h3>
                                 <p class="text-slate-500 text-sm italic">5+ large delegation</p>
                             </div>
                             <div class="mb-10">
-                                <div class="flex items-baseline gap-2">
-                                    <span class="text-5xl font-bold text-white tracking-tighter">€1,249</span>
-                                    <span class="text-slate-500 text-sm">/ person</span>
+                                <div class="inline-flex items-center gap-2 mb-3 bg-brand-teal-light/10 border border-brand-teal-light/20 rounded-full px-3 py-1">
+                                    <span class="material-symbols-outlined text-brand-teal-light" style="font-size:14px;">bolt</span>
+                                    <span class="text-[11px] text-brand-teal-light font-bold uppercase tracking-widest">Early Bird — until 15 Jul 2026</span>
                                 </div>
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-5xl font-bold text-white tracking-tighter">€850</span>
+                                    <span class="text-slate-500 text-sm line-through">€1,000</span>
+                                </div>
+                                <p class="text-xs text-slate-500 mt-1">Standard fee: €1,000 / person</p>
                             </div>
                             <ul class="space-y-4 mb-12 flex-grow">
                                 <li class="flex items-center gap-3 text-sm text-slate-400">

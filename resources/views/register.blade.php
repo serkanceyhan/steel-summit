@@ -63,7 +63,8 @@
                     billingAddress: @js(old('billing_address', '')),
                     consentApproved: @js((bool) old('consent_approved')),
                 },
-                prices: { standard: 1599, vip: 1444, group: 1249, online: 150 },
+                prices: { standard: 1050, vip: 950, group: 850, online: 150 },
+                standardPrices: { standard: 1200, vip: 1100, group: 1000, online: 150 },
                 packageLabels: {
                     standard: 'Individual',
                     vip: 'Corporate',
@@ -662,13 +663,17 @@
                             <button type="button" class="text-left rounded-[2rem] p-7 border transition-all bg-brand-navy-soft"
                                 :class="formData.package === 'standard' ? 'border-[3px] border-brand-green bg-brand-green/10 shadow-[0_0_0_1px_rgba(45,212,191,0.35)] shadow-brand-green/20' : 'border-white/10 hover:border-white/20'"
                                 @click="formData.package = 'standard'">
-                                <span class="text-[11px] text-brand-green font-bold uppercase tracking-widest block mb-4">Standard Tier</span>
+                                <span class="text-[11px] text-brand-green font-bold uppercase tracking-widest block mb-4">1 Participant</span>
                                 <h3 class="text-4xl font-serif text-white mb-2">Individual</h3>
-                                <p class="text-slate-500 text-sm italic mb-8">Single delegate access</p>
-                                <div class="flex items-baseline gap-2 mb-8">
-                                    <span class="text-5xl font-bold text-white tracking-tighter">&#8364;<span x-text="prices.standard"></span></span>
-                                    <span class="text-slate-500 text-sm">/ person</span>
+                                <p class="text-slate-500 text-sm italic mb-4">Single delegate access</p>
+                                <div class="inline-flex items-center gap-1.5 mb-4 bg-brand-green/10 border border-brand-green/20 rounded-full px-3 py-1">
+                                    <span class="text-[10px] text-brand-green font-bold uppercase tracking-widest">Early Bird &mdash; until 15 Jul 2026</span>
                                 </div>
+                                <div class="flex items-baseline gap-2 mb-1">
+                                    <span class="text-5xl font-bold text-white tracking-tighter">&#8364;<span x-text="prices.standard"></span></span>
+                                    <span class="text-slate-500 text-sm line-through">&#8364;<span x-text="standardPrices.standard"></span></span>
+                                </div>
+                                <p class="text-xs text-slate-500 mb-8">Standard fee: &#8364;<span x-text="standardPrices.standard"></span> / person</p>
                                 <ul class="space-y-2 text-sm text-slate-400">
                                     <li>Full Summit Access</li>
                                     <li>Networking Sessions</li>
@@ -680,13 +685,17 @@
                                 :class="formData.package === 'vip' ? 'border-[3px] border-brand-green bg-brand-green/10 shadow-[0_0_0_1px_rgba(45,212,191,0.35)] shadow-brand-green/20' : 'border-[#123e4a]/60 hover:border-[#123e4a]'"
                                 @click="formData.package = 'vip'">
                                 <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#123e4a] text-white text-[10px] font-black uppercase tracking-wider px-4 py-1 rounded-full">Most Popular</span>
-                                <span class="text-[11px] text-brand-green font-bold uppercase tracking-widest block mb-4">Professional Tier</span>
+                                <span class="text-[11px] text-brand-green font-bold uppercase tracking-widest block mb-4">2&ndash;4 Participants</span>
                                 <h3 class="text-4xl font-serif text-white mb-2">Corporate</h3>
-                                <p class="text-slate-500 text-sm italic mb-8">2-4 delegate delegation</p>
-                                <div class="flex items-baseline gap-2 mb-8">
-                                    <span class="text-5xl font-bold text-white tracking-tighter">&#8364;<span x-text="prices.vip"></span></span>
-                                    <span class="text-slate-500 text-sm">/ person</span>
+                                <p class="text-slate-500 text-sm italic mb-4">2&ndash;4 delegate delegation</p>
+                                <div class="inline-flex items-center gap-1.5 mb-4 bg-brand-green/10 border border-brand-green/20 rounded-full px-3 py-1">
+                                    <span class="text-[10px] text-brand-green font-bold uppercase tracking-widest">Early Bird &mdash; until 15 Jul 2026</span>
                                 </div>
+                                <div class="flex items-baseline gap-2 mb-1">
+                                    <span class="text-5xl font-bold text-white tracking-tighter">&#8364;<span x-text="prices.vip"></span></span>
+                                    <span class="text-slate-500 text-sm line-through">&#8364;<span x-text="standardPrices.vip"></span></span>
+                                </div>
+                                <p class="text-xs text-slate-500 mb-8">Standard fee: &#8364;<span x-text="standardPrices.vip"></span> / person</p>
                                 <ul class="space-y-2 text-sm text-slate-400">
                                     <li>Priority Summit Access</li>
                                     <li>Concierge Support</li>
@@ -698,13 +707,17 @@
                             <button type="button" class="text-left rounded-[2rem] p-7 border transition-all bg-brand-navy-soft"
                                 :class="formData.package === 'group' ? 'border-[3px] border-brand-green bg-brand-green/10 shadow-[0_0_0_1px_rgba(45,212,191,0.35)] shadow-brand-green/20' : 'border-white/10 hover:border-white/20'"
                                 @click="formData.package = 'group'">
-                                <span class="text-[11px] text-brand-green font-bold uppercase tracking-widest block mb-4">Enterprise Tier</span>
+                                <span class="text-[11px] text-brand-green font-bold uppercase tracking-widest block mb-4">5+ Participants</span>
                                 <h3 class="text-4xl font-serif text-white mb-2">Global Group</h3>
-                                <p class="text-slate-500 text-sm italic mb-8">5+ large delegation</p>
-                                <div class="flex items-baseline gap-2 mb-8">
-                                    <span class="text-5xl font-bold text-white tracking-tighter">&#8364;<span x-text="prices.group"></span></span>
-                                    <span class="text-slate-500 text-sm">/ person</span>
+                                <p class="text-slate-500 text-sm italic mb-4">5+ large delegation</p>
+                                <div class="inline-flex items-center gap-1.5 mb-4 bg-brand-green/10 border border-brand-green/20 rounded-full px-3 py-1">
+                                    <span class="text-[10px] text-brand-green font-bold uppercase tracking-widest">Early Bird &mdash; until 15 Jul 2026</span>
                                 </div>
+                                <div class="flex items-baseline gap-2 mb-1">
+                                    <span class="text-5xl font-bold text-white tracking-tighter">&#8364;<span x-text="prices.group"></span></span>
+                                    <span class="text-slate-500 text-sm line-through">&#8364;<span x-text="standardPrices.group"></span></span>
+                                </div>
+                                <p class="text-xs text-slate-500 mb-8">Standard fee: &#8364;<span x-text="standardPrices.group"></span> / person</p>
                                 <ul class="space-y-2 text-sm text-slate-400">
                                     <li>VIP Reserved Seating</li>
                                     <li>Exclusive Lounge Access</li>
