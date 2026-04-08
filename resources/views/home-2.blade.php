@@ -1081,7 +1081,7 @@
                 <div class="flex-none w-[320px] md:w-[480px] snap-start group/card">
                     <div
                         class="relative aspect-[4/3] rounded-2xl md:rounded-[1.5rem] overflow-hidden glass shadow-2xl transition-transform duration-700 group-hover/card:scale-[1.02]">
-                        <img src="{{ asset('images/industry.webp') }}"
+                        <img src="{{ asset('images/Industry.webp') }}"
                             alt="Industry Institutions & Organizations"
                             class="absolute inset-0 w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
                         <div
