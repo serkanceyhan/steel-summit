@@ -555,7 +555,7 @@
         </a>
     </div>
 
-    <section class="py-24 bg-slate-950 px-6 relative overflow-hidden transition-colors duration-500" id="agenda"
+    <section class="py-32 bg-slate-950 px-6 relative overflow-hidden transition-colors duration-500" id="agenda"
         x-data="{ activeTab: 1, revealed: false }" x-intersect.once="revealed = true">
         <!-- Ambient Glow -->
         <div class="absolute -top-24 -right-24 w-96 h-96 bg-blue-600/5 blur-[120px] rounded-full pointer-events-none">
@@ -1140,7 +1140,7 @@
             <div class="grid lg:grid-cols-2 gap-16 mb-20 items-start">
                 <div>
                     <h2
-                        class="text-5xl md:text-8xl font-serif font-extrabold text-white leading-tight uppercase tracking-tight">
+                        class="text-4xl md:text-7xl font-serif font-extrabold text-white leading-tight uppercase tracking-tight">
                         Why You <br />
                         <span class="text-slate-400">Should Attend?</span>
                     </h2>
@@ -1159,10 +1159,10 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Card 1: Prestige -->
                 <div
-                    class="glass p-8 rounded-[2rem] border border-white/5 hover:border-blue-500/50 transition-all duration-700 group flex flex-col h-full bg-slate-900/40 shadow-none mt-4 md:mt-0 hover:-translate-y-2 relative overflow-hidden">
+                    class="glass p-8 rounded-[2rem] border border-white/5 hover:border-brand-teal-light/50 transition-all duration-700 group flex flex-col h-full bg-slate-900/40 shadow-none mt-4 md:mt-0 hover:-translate-y-2 relative overflow-hidden">
                     <!-- Glow Effect -->
                     <div
-                        class="absolute -bottom-12 -right-12 w-24 h-24 bg-blue-500/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                        class="absolute -bottom-12 -right-12 w-24 h-24 bg-brand-teal-light/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                     </div>
 
                     <h4 class="text-xl font-extrabold text-white mb-6 leading-tight relative z-10">Prestige
@@ -1174,16 +1174,16 @@
                     </p>
                     <div class="mt-auto pt-6 border-t border-white/5 relative z-10">
                         <span
-                            class="material-symbols-outlined text-blue-400 text-4xl opacity-80 group-hover:opacity-100 transition-all group-hover:scale-110">verified</span>
+                            class="material-symbols-outlined text-brand-teal-light text-4xl opacity-80 group-hover:opacity-100 transition-all group-hover:scale-110">verified</span>
                     </div>
                 </div>
 
                 <!-- Card 2: Perspective -->
                 <div
-                    class="glass p-8 rounded-[2rem] border border-white/5 hover:border-indigo-500/50 transition-all duration-700 group flex flex-col h-full bg-slate-900/40 shadow-none hover:-translate-y-2 relative overflow-hidden">
+                    class="glass p-8 rounded-[2rem] border border-white/5 hover:border-brand-teal-light/50 transition-all duration-700 group flex flex-col h-full bg-slate-900/40 shadow-none hover:-translate-y-2 relative overflow-hidden">
                     <!-- Glow Effect -->
                     <div
-                        class="absolute -bottom-12 -right-12 w-24 h-24 bg-indigo-500/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                        class="absolute -bottom-12 -right-12 w-24 h-24 bg-brand-teal-light/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                     </div>
 
                     <h4 class="text-xl font-extrabold text-white mb-6 leading-tight relative z-10">Market
@@ -1193,52 +1193,52 @@
                             direct insights from decision-makers on:</p>
                         <ul class="text-xs space-y-2 text-slate-300 font-bold tracking-wider">
                             <li class="flex items-center gap-2 group-hover:translate-x-1 transition-transform">
-                                <span class="w-1 h-1 rounded-full bg-indigo-400"></span>
+                                <span class="w-1 h-1 rounded-full bg-brand-teal-light"></span>
                                 Global market trends
                             </li>
                             <li class="flex items-center gap-2 group-hover:translate-x-1 transition-transform delay-75">
-                                <span class="w-1 h-1 rounded-full bg-indigo-400"></span>
+                                <span class="w-1 h-1 rounded-full bg-brand-teal-light"></span>
                                 Trade policies
                             </li>
                             <li
                                 class="flex items-center gap-2 group-hover:translate-x-1 transition-transform delay-100">
-                                <span class="w-1 h-1 rounded-full bg-indigo-400"></span>
+                                <span class="w-1 h-1 rounded-full bg-brand-teal-light"></span>
                                 Green transition
                             </li>
                             <li
                                 class="flex items-center gap-2 group-hover:translate-x-1 transition-transform delay-150">
-                                <span class="w-1 h-1 rounded-full bg-indigo-400"></span>
+                                <span class="w-1 h-1 rounded-full bg-brand-teal-light"></span>
                                 Carbon regulations
                             </li>
                             <li
                                 class="flex items-center gap-2 group-hover:translate-x-1 transition-transform delay-200">
-                                <span class="w-1 h-1 rounded-full bg-indigo-400"></span>
+                                <span class="w-1 h-1 rounded-full bg-brand-teal-light"></span>
                                 Emerging business models
                             </li>
                         </ul>
                     </div>
                     <div class="mt-auto pt-6 border-t border-slate-900/5 dark:border-white/5 relative z-10">
                         <span
-                            class="material-symbols-outlined text-indigo-400 text-4xl opacity-80 group-hover:opacity-100 transition-all group-hover:scale-110">public</span>
+                            class="material-symbols-outlined text-brand-teal-light text-4xl opacity-80 group-hover:opacity-100 transition-all group-hover:scale-110">public</span>
                     </div>
                 </div>
 
                 <!-- Card 3: Networking -->
                 <div
-                    class="glass p-8 rounded-[2rem] border border-slate-200 dark:border-white/5 hover:border-brand-teal-light/50 transition-all duration-700 group flex flex-col h-full bg-white/95 dark:bg-slate-900/40 shadow-sm dark:shadow-none hover:-translate-y-2 relative overflow-hidden">
+                    class="glass p-8 rounded-[2rem] border border-white/5 hover:border-brand-teal-light/50 transition-all duration-700 group flex flex-col h-full bg-slate-900/40 shadow-none hover:-translate-y-2 relative overflow-hidden">
                     <!-- Glow Effect -->
                     <div
                         class="absolute -bottom-12 -right-12 w-24 h-24 bg-brand-teal-light/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                     </div>
 
-                    <h4 class="text-xl font-extrabold text-slate-900 dark:text-white mb-6 leading-tight relative z-10">
+                    <h4 class="text-xl font-extrabold text-white mb-6 leading-tight relative z-10">
                         High-Impact
                         <br />Networking
                     </h4>
                     <div class="flex-grow relative z-10">
-                        <p class="text-slate-600 dark:text-slate-300 text-sm font-medium leading-relaxed mb-4">
+                        <p class="text-slate-300 text-sm font-medium leading-relaxed mb-4">
                             Establishing real business connections through:</p>
-                        <ul class="text-xs space-y-2 text-slate-500 dark:text-slate-300 font-bold tracking-wider">
+                        <ul class="text-xs space-y-2 text-slate-300 font-bold tracking-wider">
                             <li class="flex items-center gap-2 group-hover:translate-x-1 transition-transform">
                                 <span class="w-1 h-1 rounded-full bg-brand-teal-light"></span>
                                 Pre-scheduled B2B meetings
@@ -1259,7 +1259,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="mt-auto pt-6 border-t border-slate-900/5 dark:border-white/5 relative z-10">
+                    <div class="mt-auto pt-6 border-t border-white/5 relative z-10">
                         <span
                             class="material-symbols-outlined text-brand-teal-light text-4xl opacity-80 group-hover:opacity-100 transition-all group-hover:scale-110">diversity_3</span>
                     </div>
@@ -1267,10 +1267,10 @@
 
                 <!-- Card 4: Crossroads -->
                 <div
-                    class="glass p-8 rounded-[2rem] border border-white/5 hover:border-amber-500/50 transition-all duration-700 group flex flex-col h-full bg-slate-900/40 shadow-none mb-4 md:mb-0 hover:-translate-y-2 relative overflow-hidden">
+                    class="glass p-8 rounded-[2rem] border border-white/5 hover:border-brand-teal-light/50 transition-all duration-700 group flex flex-col h-full bg-slate-900/40 shadow-none mb-4 md:mb-0 hover:-translate-y-2 relative overflow-hidden">
                     <!-- Glow Effect -->
                     <div
-                        class="absolute -bottom-12 -right-12 w-24 h-24 bg-amber-500/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                        class="absolute -bottom-12 -right-12 w-24 h-24 bg-brand-teal-light/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                     </div>
 
                     <h4 class="text-xl font-extrabold text-white mb-6 leading-tight relative z-10">The Crossroads
@@ -1282,7 +1282,7 @@
                     </p>
                     <div class="mt-auto pt-6 border-t border-white/5 relative z-10">
                         <span
-                            class="material-symbols-outlined text-amber-500 text-4xl opacity-80 group-hover:opacity-100 transition-all group-hover:scale-110">hub</span>
+                            class="material-symbols-outlined text-brand-teal-light text-4xl opacity-80 group-hover:opacity-100 transition-all group-hover:scale-110">hub</span>
                     </div>
                 </div>
             </div>
@@ -1309,7 +1309,7 @@
             :class="revealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'">
             <div class="mb-20 text-center">
                 <h2 class="text-4xl md:text-6xl font-serif font-bold text-white max-w-4xl mx-auto leading-tight">
-                    KKEYNOTE SPEAKERS
+                    KEYNOTE SPEAKERS
                 </h2>
                 <p class="mt-8 text-slate-400 text-lg max-w-2xl mx-auto">
                     Speaker details will be announced soon.
@@ -1512,7 +1512,7 @@
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="mb-20 text-center transition-all duration-1000 transform"
                 :class="revealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'">
-                <h2 class="text-5xl md:text-8xl font-serif font-bold text-white mb-8 leading-tight">
+                <h2 class="text-4xl md:text-7xl font-serif font-bold text-white mb-8 leading-tight">
                     Why Become a <br class="hidden md:block" />
                     <span class="text-slate-400">Sponsor?</span>
                 </h2>
@@ -1856,7 +1856,7 @@
                     <!-- Section Header -->
                     <div class="mb-20 text-center relative">
                         <div class="absolute -top-12 left-1/2 -translate-x-1/2 text-[140px] md:text-[180px] font-serif opacity-[0.03] select-none pointer-events-none italic text-white whitespace-nowrap">Pricing</div>
-                        <h2 class="text-5xl md:text-7xl font-serif font-bold text-white mb-8 leading-tight">Pricing &amp; <span class="text-slate-400">Participation</span></h2>
+                        <h2 class="text-4xl md:text-7xl font-serif font-bold text-white mb-8 leading-tight">Pricing &amp; <span class="text-slate-400">Participation</span></h2>
                         <p class="text-slate-400 text-xl font-light max-w-2xl mx-auto leading-relaxed">
                             Secure your presence at the Steel Networking Summit. Choose from our curated participation packages designed for industry leadership and strategic growth.
                         </p>
@@ -1868,7 +1868,7 @@
                         <!-- Individual -->
                         <div class="glass rounded-[2rem] p-10 flex flex-col relative group transition-all duration-500 hover:-translate-y-2 bg-slate-900/40 border border-white/10">
                             <div class="mb-8">
-                                <span class="text-[11px] text-[#5bbfd4] font-bold uppercase tracking-widest block mb-4">Standard Tier</span>
+                                <span class="text-[11px] text-brand-teal-light font-bold uppercase tracking-widest block mb-4">Standard Tier</span>
                                 <h3 class="text-4xl font-serif text-white mb-2">Individual</h3>
                                 <p class="text-slate-500 text-sm italic">Single delegate access</p>
                             </div>
@@ -1880,20 +1880,20 @@
                             </div>
                             <ul class="space-y-4 mb-12 flex-grow">
                                 <li class="flex items-center gap-3 text-sm text-slate-400">
-                                    <span class="material-symbols-outlined text-[#5bbfd4] text-lg" style="font-size:18px;">check_circle</span>
+                                    <span class="material-symbols-outlined text-brand-teal-light text-lg" style="font-size:18px;">check_circle</span>
                                     Full Summit Access
                                 </li>
                                 <li class="flex items-center gap-3 text-sm text-slate-400">
-                                    <span class="material-symbols-outlined text-[#5bbfd4] text-lg" style="font-size:18px;">check_circle</span>
+                                    <span class="material-symbols-outlined text-brand-teal-light text-lg" style="font-size:18px;">check_circle</span>
                                     Networking Sessions
                                 </li>
                                 <li class="flex items-center gap-3 text-sm text-slate-400">
-                                    <span class="material-symbols-outlined text-[#5bbfd4] text-lg" style="font-size:18px;">check_circle</span>
+                                    <span class="material-symbols-outlined text-brand-teal-light text-lg" style="font-size:18px;">check_circle</span>
                                     Summit Documentation
                                 </li>
                             </ul>
                             <a href="{{ route('register.page') }}"
-                                class="inline-flex items-center justify-center gap-2 w-full py-4 rounded-2xl font-bold text-white border border-white/10 hover:bg-white/5 hover:border-[#5bbfd4]/40 transition-all duration-300 group-hover:shadow-lg">
+                                class="inline-flex items-center justify-center gap-2 w-full py-4 rounded-2xl font-bold text-white border border-white/10 hover:bg-white/5 hover:border-brand-teal-light/40 transition-all duration-300 group-hover:shadow-lg">
                                 Select Package
                                 <span class="material-symbols-outlined" style="font-size:20px;">arrow_forward</span>
                             </a>
@@ -1901,11 +1901,11 @@
 
                         <!-- Corporate (Most Popular) -->
                         <div class="glass rounded-[2rem] p-10 flex flex-col relative group transition-all duration-500 hover:-translate-y-2 md:scale-105 bg-slate-900/40 border-2 border-[#123e4a]">
-                            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#123e4a] text-white text-[10px] font-black uppercase tracking-tighter px-5 py-1.5 rounded-full shadow-lg whitespace-nowrap border border-[#5bbfd4]/20">
+                            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#123e4a] text-white text-[10px] font-black uppercase tracking-tighter px-5 py-1.5 rounded-full shadow-lg whitespace-nowrap border border-brand-teal-light/20">
                                 Most Popular
                             </div>
                             <div class="mb-8">
-                                <span class="text-[11px] text-[#5bbfd4] font-bold uppercase tracking-widest block mb-4">Professional Tier</span>
+                                <span class="text-[11px] text-brand-teal-light font-bold uppercase tracking-widest block mb-4">Professional Tier</span>
                                 <h3 class="text-4xl font-serif text-white mb-2">Corporate</h3>
                                 <p class="text-slate-500 text-sm italic">2–4 delegate delegation</p>
                             </div>
@@ -1917,24 +1917,24 @@
                             </div>
                             <ul class="space-y-4 mb-12 flex-grow">
                                 <li class="flex items-center gap-3 text-sm text-slate-400">
-                                    <span class="material-symbols-outlined text-[#5bbfd4]" style="font-size:18px;">check_circle</span>
+                                    <span class="material-symbols-outlined text-brand-teal-light" style="font-size:18px;">check_circle</span>
                                     Priority Summit Access
                                 </li>
                                 <li class="flex items-center gap-3 text-sm text-slate-400">
-                                    <span class="material-symbols-outlined text-[#5bbfd4]" style="font-size:18px;">check_circle</span>
+                                    <span class="material-symbols-outlined text-brand-teal-light" style="font-size:18px;">check_circle</span>
                                     Concierge Support
                                 </li>
                                 <li class="flex items-center gap-3 text-sm text-slate-400">
-                                    <span class="material-symbols-outlined text-[#5bbfd4]" style="font-size:18px;">check_circle</span>
+                                    <span class="material-symbols-outlined text-brand-teal-light" style="font-size:18px;">check_circle</span>
                                     B2B Matchmaking
                                 </li>
                                 <li class="flex items-center gap-3 text-sm text-slate-400">
-                                    <span class="material-symbols-outlined text-[#5bbfd4]" style="font-size:18px;">check_circle</span>
+                                    <span class="material-symbols-outlined text-brand-teal-light" style="font-size:18px;">check_circle</span>
                                     Gala Dinner Entry
                                 </li>
                             </ul>
                             <a href="{{ route('register.page') }}"
-                                class="inline-flex items-center justify-center gap-2 w-full py-4 rounded-2xl font-bold text-white border border-white/10 hover:bg-white/5 hover:border-[#5bbfd4]/40 transition-all duration-300 group-hover:shadow-lg">
+                                class="inline-flex items-center justify-center gap-2 w-full py-4 rounded-2xl font-bold text-white border border-white/10 hover:bg-white/5 hover:border-brand-teal-light/40 transition-all duration-300 group-hover:shadow-lg">
                                 Select Package
                                 <span class="material-symbols-outlined" style="font-size:20px;">arrow_forward</span>
                             </a>
@@ -1943,7 +1943,7 @@
                         <!-- Global Group -->
                         <div class="glass rounded-[2rem] p-10 flex flex-col relative group transition-all duration-500 hover:-translate-y-2 bg-slate-900/40 border border-white/10">
                             <div class="mb-8">
-                                <span class="text-[11px] text-[#5bbfd4] font-bold uppercase tracking-widest block mb-4">Enterprise Tier</span>
+                                <span class="text-[11px] text-brand-teal-light font-bold uppercase tracking-widest block mb-4">Enterprise Tier</span>
                                 <h3 class="text-4xl font-serif text-white mb-2">Global Group</h3>
                                 <p class="text-slate-500 text-sm italic">5+ large delegation</p>
                             </div>
@@ -1955,20 +1955,20 @@
                             </div>
                             <ul class="space-y-4 mb-12 flex-grow">
                                 <li class="flex items-center gap-3 text-sm text-slate-400">
-                                    <span class="material-symbols-outlined text-[#5bbfd4]" style="font-size:18px;">check_circle</span>
+                                    <span class="material-symbols-outlined text-brand-teal-light" style="font-size:18px;">check_circle</span>
                                     VIP Reserved Seating
                                 </li>
                                 <li class="flex items-center gap-3 text-sm text-slate-400">
-                                    <span class="material-symbols-outlined text-[#5bbfd4]" style="font-size:18px;">check_circle</span>
+                                    <span class="material-symbols-outlined text-brand-teal-light" style="font-size:18px;">check_circle</span>
                                     Exclusive Lounge Access
                                 </li>
                                 <li class="flex items-center gap-3 text-sm text-slate-400">
-                                    <span class="material-symbols-outlined text-[#5bbfd4]" style="font-size:18px;">check_circle</span>
+                                    <span class="material-symbols-outlined text-brand-teal-light" style="font-size:18px;">check_circle</span>
                                     Logo Recognition
                                 </li>
                             </ul>
                             <a href="{{ route('register.page') }}"
-                                class="inline-flex items-center justify-center gap-2 w-full py-4 rounded-2xl font-bold text-white border border-white/10 hover:bg-white/5 hover:border-[#5bbfd4]/40 transition-all duration-300 group-hover:shadow-lg">
+                                class="inline-flex items-center justify-center gap-2 w-full py-4 rounded-2xl font-bold text-white border border-white/10 hover:bg-white/5 hover:border-brand-teal-light/40 transition-all duration-300 group-hover:shadow-lg">
                                 Select Package
                                 <span class="material-symbols-outlined" style="font-size:20px;">arrow_forward</span>
                             </a>
@@ -1981,13 +1981,13 @@
                         <!-- Left: Financial Notes -->
                         <div class="space-y-10">
                             <div class="flex gap-6 items-start">
-                                <div class="h-12 w-12 rounded-xl bg-[#123e4a]/40 border border-[#5bbfd4]/10 flex items-center justify-center flex-shrink-0 text-[#5bbfd4]">
+                                <div class="h-12 w-12 rounded-xl bg-[#123e4a]/40 border border-brand-teal-light/10 flex items-center justify-center flex-shrink-0 text-brand-teal-light">
                                     <span class="material-symbols-outlined" style="font-size:22px;">payments</span>
                                 </div>
                                 <div>
                                     <h4 class="text-xl font-serif text-white mb-2 italic">Taxation &amp; Currency</h4>
                                     <p class="text-slate-400 text-sm leading-relaxed">
-                                        Prices exclude VAT. For Turkish companies, a mandatory <span class="text-[#5bbfd4] font-bold">20% VAT</span> will be added at checkout in accordance with local regulations. All international transactions must be processed in <span class="text-white font-medium">EUR</span>.
+                                        Prices exclude VAT. For Turkish companies, a mandatory <span class="text-brand-teal-light font-bold">20% VAT</span> will be added at checkout in accordance with local regulations. All international transactions must be processed in <span class="text-white font-medium">EUR</span>.
                                     </p>
                                 </div>
                             </div>
@@ -2007,7 +2007,7 @@
                         <!-- Right: Cancellation Policy -->
                         <div class="glass rounded-3xl p-8 lg:p-10 border-l-4 border-l-[#123e4a]">
                             <div class="flex items-center gap-3 mb-8">
-                                <span class="material-symbols-outlined text-[#5bbfd4]" style="font-size:22px;">gavel</span>
+                                <span class="material-symbols-outlined text-brand-teal-light" style="font-size:22px;">gavel</span>
                                 <h4 class="text-2xl font-serif text-white italic">Cancellation Policy</h4>
                             </div>
                             <div class="space-y-5 text-sm text-slate-400">
@@ -2035,7 +2035,7 @@
     <!-- END: Pricing & Participation -->
 
     <section
-        class="py-24 bg-slate-950 px-6 border-t border-white/5 relative overflow-hidden transition-colors duration-500"
+        class="py-32 bg-slate-950 px-6 border-t border-white/5 relative overflow-hidden transition-colors duration-500"
         id="venue" x-data="{ revealed: false }" x-intersect.once="revealed = true">
         <!-- Ambient Glow -->
         <div
