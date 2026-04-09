@@ -344,8 +344,8 @@
             theme: {
                 extend: {
                     colors: {
-                        "brand-navy": "#020617",
-                        "brand-navy-soft": "#0f172a",
+                        "brand-navy": "#0b1220",
+                        "brand-navy-soft": "#1e293b",
                         "brand-green": "#2dd4bf",
                         "brand-green-dark": "#0f4c5c",
                     },
@@ -361,7 +361,7 @@
     <style>
         [x-cloak] { display: none !important; }
         .glass {
-            background: rgba(15, 23, 42, 0.78);
+            background: rgba(30, 41, 59, 0.72);
             border: 1px solid rgba(148, 163, 184, 0.18);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
@@ -385,6 +385,19 @@
         .iti__search-input { background-color: #0f172a !important; color: #fff !important; border: 1px solid rgba(255,255,255,0.2) !important; border-radius: 0.25rem !important; padding: 8px !important; margin: 4px !important; width: calc(100% - 8px) !important; }
         .iti__selected-flag { background-color: transparent !important; padding-left: 0 !important; padding-right: 8px !important; }
         .iti__flag-container { padding-bottom: 2px !important; }
+
+        /* Improve readability for small-size muted texts site-wide without changing font weight */
+        :where(.text-xs, .text-sm, .text-\[9px\], .text-\[10px\], .text-\[11px\], .text-\[12px\]).text-slate-500 {
+            color: rgb(148 163 184);
+        }
+
+        :where(.text-xs, .text-sm, .text-\[9px\], .text-\[10px\], .text-\[11px\], .text-\[12px\]).text-slate-400 {
+            color: rgb(203 213 225);
+        }
+
+        :where(.text-xs, .text-sm, .text-\[9px\], .text-\[10px\], .text-\[11px\], .text-\[12px\]).text-slate-300 {
+            color: rgb(226 232 240);
+        }
 
         /* Keep browser autofill visually consistent with manual typing */
         #registration-wizard-form input:-webkit-autofill,
@@ -536,11 +549,11 @@
                                 </div>
                                 <template x-teleport="body">
                                     <div x-show="countryOpen" x-cloak x-transition.opacity
-                                        class="max-h-64 overflow-y-auto bg-slate-950 border border-white/10 rounded-xl shadow-2xl scrollbar-hide"
+                                        class="max-h-64 overflow-y-auto bg-slate-900 border border-white/10 rounded-xl shadow-2xl scrollbar-hide"
                                         :style="countryDropdownStyle">
-                                        <div class="sticky top-0 bg-slate-950 p-3 border-b border-white/5">
+                                        <div class="sticky top-0 bg-slate-900 p-3 border-b border-white/5">
                                             <input x-model="countrySearchText" type="text" placeholder="Search country..."
-                                                class="w-full text-sm bg-slate-900 border border-white/10 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-brand-green"
+                                                class="w-full text-sm bg-slate-800 border border-white/10 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-brand-green"
                                                 @click.stop>
                                         </div>
                                         <ul class="py-1">
@@ -592,11 +605,11 @@
                                 <input id="companyFieldIdInput" type="hidden" name="company_field_id" :value="formData.companyFieldId">
                                 <template x-teleport="body">
                                     <div x-show="companyFieldOpen" x-cloak x-transition.opacity
-                                        class="max-h-64 overflow-y-auto bg-slate-950 border border-white/10 rounded-xl shadow-2xl scrollbar-hide"
+                                        class="max-h-64 overflow-y-auto bg-slate-900 border border-white/10 rounded-xl shadow-2xl scrollbar-hide"
                                         :style="companyFieldDropdownStyle">
-                                        <div class="sticky top-0 bg-slate-950 p-3 border-b border-white/5">
+                                        <div class="sticky top-0 bg-slate-900 p-3 border-b border-white/5">
                                             <input x-model="companyFieldSearchText" type="text" placeholder="Search field..."
-                                                class="w-full text-sm bg-slate-900 border border-white/10 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-brand-green"
+                                                class="w-full text-sm bg-slate-800 border border-white/10 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-brand-green"
                                                 @click.stop>
                                         </div>
                                         <ul class="py-1">
@@ -626,11 +639,11 @@
                                 <input id="personRoleIdInput" type="hidden" name="person_role_id" :value="formData.personRoleId">
                                 <template x-teleport="body">
                                     <div x-show="personRoleOpen" x-cloak x-transition.opacity
-                                        class="max-h-64 overflow-y-auto bg-slate-950 border border-white/10 rounded-xl shadow-2xl scrollbar-hide"
+                                        class="max-h-64 overflow-y-auto bg-slate-900 border border-white/10 rounded-xl shadow-2xl scrollbar-hide"
                                         :style="personRoleDropdownStyle">
-                                        <div class="sticky top-0 bg-slate-950 p-3 border-b border-white/5">
+                                        <div class="sticky top-0 bg-slate-900 p-3 border-b border-white/5">
                                             <input x-model="personRoleSearchText" type="text" placeholder="Search position..."
-                                                class="w-full text-sm bg-slate-900 border border-white/10 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-brand-green"
+                                                class="w-full text-sm bg-slate-800 border border-white/10 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-brand-green"
                                                 @click.stop>
                                         </div>
                                         <ul class="py-1">
@@ -666,14 +679,18 @@
                                 <span class="text-[11px] text-brand-green font-bold uppercase tracking-widest block mb-4">1 Participant</span>
                                 <h3 class="text-4xl font-serif text-white mb-2">Individual</h3>
                                 <p class="text-slate-500 text-sm italic mb-4">Single delegate access</p>
-                                <div class="inline-flex items-center gap-1.5 mb-4 bg-brand-green/10 border border-brand-green/20 rounded-full px-3 py-1">
+                                <p class="text-[11px] text-slate-300 font-semibold uppercase tracking-[0.18em] mb-2">Standard Fee</p>
+                                <div class="flex items-baseline gap-2 mb-4">
+                                    <span class="text-4xl font-bold text-slate-400 tracking-tighter line-through decoration-2">&#8364;<span x-text="standardPrices.standard"></span></span>
+                                    <span class="text-xs text-slate-300 uppercase tracking-widest">/ person</span>
+                                </div>
+                                <div class="inline-flex items-center gap-1.5 mb-3 bg-brand-green/10 border border-brand-green/20 rounded-full px-3 py-1">
                                     <span class="text-[10px] text-brand-green font-bold uppercase tracking-widest">Early Bird &mdash; until 15 Jul 2026</span>
                                 </div>
-                                <div class="flex items-baseline gap-2 mb-1">
+                                <div class="flex items-baseline gap-2 mb-8">
                                     <span class="text-5xl font-bold text-white tracking-tighter">&#8364;<span x-text="prices.standard"></span></span>
-                                    <span class="text-slate-500 text-sm line-through">&#8364;<span x-text="standardPrices.standard"></span></span>
+                                    <span class="text-xs text-slate-300 uppercase tracking-widest">/ person</span>
                                 </div>
-                                <p class="text-xs text-slate-500 mb-8">Standard fee: &#8364;<span x-text="standardPrices.standard"></span> / person</p>
                                 <ul class="space-y-2 text-sm text-slate-400">
                                     <li>Full Summit Access</li>
                                     <li>Networking Sessions</li>
@@ -688,14 +705,18 @@
                                 <span class="text-[11px] text-brand-green font-bold uppercase tracking-widest block mb-4">2&ndash;4 Participants</span>
                                 <h3 class="text-4xl font-serif text-white mb-2">Corporate</h3>
                                 <p class="text-slate-500 text-sm italic mb-4">2&ndash;4 delegate delegation</p>
-                                <div class="inline-flex items-center gap-1.5 mb-4 bg-brand-green/10 border border-brand-green/20 rounded-full px-3 py-1">
+                                <p class="text-[11px] text-slate-300 font-semibold uppercase tracking-[0.18em] mb-2">Standard Fee</p>
+                                <div class="flex items-baseline gap-2 mb-4">
+                                    <span class="text-4xl font-bold text-slate-400 tracking-tighter line-through decoration-2">&#8364;<span x-text="standardPrices.vip"></span></span>
+                                    <span class="text-xs text-slate-300 uppercase tracking-widest">/ person</span>
+                                </div>
+                                <div class="inline-flex items-center gap-1.5 mb-3 bg-brand-green/10 border border-brand-green/20 rounded-full px-3 py-1">
                                     <span class="text-[10px] text-brand-green font-bold uppercase tracking-widest">Early Bird &mdash; until 15 Jul 2026</span>
                                 </div>
-                                <div class="flex items-baseline gap-2 mb-1">
+                                <div class="flex items-baseline gap-2 mb-8">
                                     <span class="text-5xl font-bold text-white tracking-tighter">&#8364;<span x-text="prices.vip"></span></span>
-                                    <span class="text-slate-500 text-sm line-through">&#8364;<span x-text="standardPrices.vip"></span></span>
+                                    <span class="text-xs text-slate-300 uppercase tracking-widest">/ person</span>
                                 </div>
-                                <p class="text-xs text-slate-500 mb-8">Standard fee: &#8364;<span x-text="standardPrices.vip"></span> / person</p>
                                 <ul class="space-y-2 text-sm text-slate-400">
                                     <li>Priority Summit Access</li>
                                     <li>Concierge Support</li>
@@ -710,14 +731,18 @@
                                 <span class="text-[11px] text-brand-green font-bold uppercase tracking-widest block mb-4">5+ Participants</span>
                                 <h3 class="text-4xl font-serif text-white mb-2">Global Group</h3>
                                 <p class="text-slate-500 text-sm italic mb-4">5+ large delegation</p>
-                                <div class="inline-flex items-center gap-1.5 mb-4 bg-brand-green/10 border border-brand-green/20 rounded-full px-3 py-1">
+                                <p class="text-[11px] text-slate-300 font-semibold uppercase tracking-[0.18em] mb-2">Standard Fee</p>
+                                <div class="flex items-baseline gap-2 mb-4">
+                                    <span class="text-4xl font-bold text-slate-400 tracking-tighter line-through decoration-2">&#8364;<span x-text="standardPrices.group"></span></span>
+                                    <span class="text-xs text-slate-300 uppercase tracking-widest">/ person</span>
+                                </div>
+                                <div class="inline-flex items-center gap-1.5 mb-3 bg-brand-green/10 border border-brand-green/20 rounded-full px-3 py-1">
                                     <span class="text-[10px] text-brand-green font-bold uppercase tracking-widest">Early Bird &mdash; until 15 Jul 2026</span>
                                 </div>
-                                <div class="flex items-baseline gap-2 mb-1">
+                                <div class="flex items-baseline gap-2 mb-8">
                                     <span class="text-5xl font-bold text-white tracking-tighter">&#8364;<span x-text="prices.group"></span></span>
-                                    <span class="text-slate-500 text-sm line-through">&#8364;<span x-text="standardPrices.group"></span></span>
+                                    <span class="text-xs text-slate-300 uppercase tracking-widest">/ person</span>
                                 </div>
-                                <p class="text-xs text-slate-500 mb-8">Standard fee: &#8364;<span x-text="standardPrices.group"></span> / person</p>
                                 <ul class="space-y-2 text-sm text-slate-400">
                                     <li>VIP Reserved Seating</li>
                                     <li>Exclusive Lounge Access</li>

@@ -2,9 +2,13 @@
 
 namespace App\Filament\Resources\Leads\Tables;
 
+use App\Models\Lead;
+use App\Services\LeadRegistrationConversionService;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Notifications\Notification;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -18,6 +22,17 @@ class LeadsTable
                 TextColumn::make('lead_type')
                     ->badge()
                     ->color(fn (string $state): string => $state === 'sponsorship' ? 'warning' : 'info')
+                    ->sortable(),
+                TextColumn::make('status')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'draft' => 'gray',
+                        'submitted' => 'info',
+                        'payment_pending' => 'warning',
+                        'payment_failed' => 'danger',
+                        'converted' => 'success',
+                        default => 'gray',
+                    })
                     ->sortable(),
                 TextColumn::make('full_name')
                     ->searchable(),
@@ -115,6 +130,34 @@ class LeadsTable
                 //
             ])
             ->recordActions([
+                Action::make('approvePayment')
+                    ->label('Approve Payment')
+                    ->icon('heroicon-m-check-badge')
+                    ->color('success')
+                    ->requiresConfirmation()
+                    ->visible(fn (Lead $record): bool => $record->lead_type === 'registration' && $record->status !== Lead::STATUS_CONVERTED)
+                    ->action(function (Lead $record): void {
+                        app(LeadRegistrationConversionService::class)->convertLeadToAttendee($record);
+
+                        Notification::make()
+                            ->title('Lead converted to attendee')
+                            ->success()
+                            ->send();
+                    }),
+                Action::make('markPaymentFailed')
+                    ->label('Mark Payment Failed')
+                    ->icon('heroicon-m-x-circle')
+                    ->color('danger')
+                    ->requiresConfirmation()
+                    ->visible(fn (Lead $record): bool => $record->lead_type === 'registration' && $record->status !== Lead::STATUS_CONVERTED)
+                    ->action(function (Lead $record): void {
+                        app(LeadRegistrationConversionService::class)->markPaymentFailed($record);
+
+                        Notification::make()
+                            ->title('Lead marked as payment failed')
+                            ->danger()
+                            ->send();
+                    }),
                 EditAction::make(),
             ])
             ->toolbarActions([

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Lead;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -26,7 +27,9 @@ class StoreLeadRequest extends FormRequest
         return [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255', Rule::unique('leads', 'email')->where(fn ($query) => $query->where('lead_type', 'registration')->where('gdpr_approved', true))],
+            'email' => ['required', 'email', 'max:255', Rule::unique('leads', 'email')->where(fn ($query) => $query
+                ->where('lead_type', 'registration')
+                ->whereIn('status', [Lead::STATUS_PAYMENT_PENDING, Lead::STATUS_CONVERTED]))],
             'company_name' => ['required', 'string', 'max:255'],
             'country' => ['required', 'string', 'max:255'],
             'company_field_id' => ['required', Rule::in(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'])],
@@ -49,7 +52,7 @@ class StoreLeadRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.unique' => 'This email is already registered.',
+            'email.unique' => 'This email already has an active registration.',
             'first_name.required' => 'First name is required.',
             'last_name.required' => 'Last name is required.',
             'country.required' => 'Please select your country.',

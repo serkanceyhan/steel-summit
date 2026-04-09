@@ -19,6 +19,15 @@ class LeadForm
                         'sponsorship' => 'Sponsorship',
                     ])
                     ->required(),
+                Select::make('status')
+                    ->options([
+                        'draft' => 'Draft',
+                        'submitted' => 'Submitted',
+                        'payment_pending' => 'Payment Pending',
+                        'payment_failed' => 'Payment Failed',
+                        'converted' => 'Converted',
+                    ])
+                    ->required(),
                 TextInput::make('full_name')
                     ->required(),
                 TextInput::make('email')
@@ -103,6 +112,7 @@ class LeadForm
                 TextInput::make('billing_tax_office'),
                 TextInput::make('billing_address'),
                 TextInput::make('phone'),
+                TextInput::make('payment_reference'),
                 Toggle::make('gdpr_approved')
                     ->required(),
                 Toggle::make('kvkk_approved')

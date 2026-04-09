@@ -5,25 +5,50 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
-it('stores a valid lead submission', function () {
-    $response = $this->post('/register', [
-        'full_name' => 'James Park',
+function validRegistrationPayload(array $overrides = []): array
+{
+    return array_merge([
+        'first_name' => 'James',
+        'last_name' => 'Park',
         'email' => 'james@cleveland.com',
         'company_name' => 'Cleveland-Cliffs',
+        'country' => 'Turkey',
+        'company_field_id' => '1',
+        'person_role_id' => '1',
+        'registration_package' => 'standard',
+        'billing_type' => 'corporate',
+        'billing_name' => 'Cleveland-Cliffs',
+        'billing_tax_number' => '1234567890',
+        'billing_tax_office' => 'Istanbul',
+        'billing_address' => 'Levent, Istanbul',
         'phone_country_code' => '+90',
         'phone' => '5551234567',
-        'gdpr_approved' => true,
-        'kvkk_approved' => true,
-        'privacy_approved' => true,
-    ]);
+        'consent_approved' => '1',
+    ], $overrides);
+}
+
+it('stores a valid lead submission', function () {
+    $response = $this->post('/register', validRegistrationPayload());
 
     $response->assertRedirect();
+    $response->assertSessionHas('status');
 
-    expect(Lead::where('email', 'james@cleveland.com')->exists())->toBeTrue();
+    $lead = Lead::query()->where('email', 'james@cleveland.com')->first();
+
+    expect($lead)->not->toBeNull()
+        ->and($lead->full_name)->toBe('James Park')
+        ->and($lead->lead_type)->toBe('registration')
+        ->and($lead->status)->toBe(Lead::STATUS_PAYMENT_PENDING)
+        ->and($lead->phone)->toBe('+905551234567')
+        ->and($lead->gdpr_approved)->toBeTrue()
+        ->and($lead->kvkk_approved)->toBeTrue()
+        ->and($lead->privacy_approved)->toBeTrue();
 });
 
 it('rejects duplicate email submission', function () {
     Lead::create([
+        'lead_type' => 'registration',
+        'status' => Lead::STATUS_PAYMENT_PENDING,
         'full_name' => 'James Park',
         'email' => 'james@cleveland.com',
         'company_name' => 'Cleveland-Cliffs',
@@ -33,125 +58,68 @@ it('rejects duplicate email submission', function () {
         'privacy_approved' => true,
     ]);
 
-    $response = $this->post('/register', [
-        'full_name' => 'James Park Again',
-        'email' => 'james@cleveland.com',
-        'company_name' => 'Cleveland-Cliffs',
-        'phone_country_code' => '+90',
-        'phone' => '5551234568',
-        'gdpr_approved' => true,
-        'kvkk_approved' => true,
-        'privacy_approved' => true,
-    ]);
+    $response = $this->post('/register', validRegistrationPayload([
+        'first_name' => 'James Again',
+    ]));
 
     $response->assertSessionHasErrors('email');
     expect(Lead::count())->toBe(1);
 });
 
-it('rejects submission without gdpr consent', function () {
-    $response = $this->post('/register', [
-        'full_name' => 'No Consent',
+it('rejects submission without consent approval', function () {
+    $response = $this->post('/register', validRegistrationPayload([
         'email' => 'noconsent@ssab.com',
-        'company_name' => 'SSAB',
-        'phone_country_code' => '+90',
-        'phone' => '5551234500',
-        'gdpr_approved' => false,
-        'kvkk_approved' => true,
-        'privacy_approved' => true,
-    ]);
+        'consent_approved' => '0',
+    ]));
 
-    $response->assertSessionHasErrors('gdpr_approved');
+    $response->assertSessionHasErrors('consent_approved');
     expect(Lead::count())->toBe(0);
 });
 
-it('rejects submission without kvkk consent', function () {
-    $response = $this->post('/register', [
-        'full_name' => 'No KVKK',
-        'email' => 'nokvkk@ssab.com',
-        'company_name' => 'SSAB',
-        'phone_country_code' => '+90',
-        'phone' => '5551234501',
-        'gdpr_approved' => true,
-        'kvkk_approved' => false,
-        'privacy_approved' => true,
-    ]);
+it('rejects submission without selected country', function () {
+    $response = $this->post('/register', validRegistrationPayload([
+        'email' => 'nocountry@ssab.com',
+        'country' => '',
+    ]));
 
-    $response->assertSessionHasErrors('kvkk_approved');
-    expect(Lead::count())->toBe(0);
-});
-
-it('rejects submission without privacy consent', function () {
-    $response = $this->post('/register', [
-        'full_name' => 'No Privacy Consent',
-        'email' => 'noprivacy@ssab.com',
-        'company_name' => 'SSAB',
-        'phone_country_code' => '+90',
-        'phone' => '5551234504',
-        'gdpr_approved' => true,
-        'kvkk_approved' => true,
-        'privacy_approved' => false,
-    ]);
-
-    $response->assertSessionHasErrors('privacy_approved');
+    $response->assertSessionHasErrors('country');
     expect(Lead::count())->toBe(0);
 });
 
 it('rejects missing phone number', function () {
-    $response = $this->post('/register', [
-        'full_name' => 'No Phone',
+    $response = $this->post('/register', validRegistrationPayload([
         'email' => 'nophone@ssab.com',
-        'company_name' => 'SSAB',
-        'phone_country_code' => '+90',
-        'gdpr_approved' => true,
-        'kvkk_approved' => true,
-        'privacy_approved' => true,
-    ]);
+        'phone' => '',
+    ]));
 
     $response->assertSessionHasErrors('phone');
     expect(Lead::count())->toBe(0);
 });
 
 it('rejects non-numeric phone number', function () {
-    $response = $this->post('/register', [
-        'full_name' => 'Invalid Phone',
+    $response = $this->post('/register', validRegistrationPayload([
         'email' => 'invalidphone@ssab.com',
-        'company_name' => 'SSAB',
         'phone_country_code' => '+44',
         'phone' => '555ABC123',
-        'gdpr_approved' => true,
-        'kvkk_approved' => true,
-        'privacy_approved' => true,
-    ]);
+    ]));
 
     $response->assertSessionHasErrors('phone');
     expect(Lead::count())->toBe(0);
 });
 
 it('rejects invalid email format', function () {
-    $response = $this->post('/register', [
-        'full_name' => 'Bad Email',
+    $response = $this->post('/register', validRegistrationPayload([
         'email' => 'not-an-email',
-        'company_name' => 'SMS Group',
-        'phone_country_code' => '+90',
-        'phone' => '5551234502',
-        'gdpr_approved' => true,
-        'kvkk_approved' => true,
-        'privacy_approved' => true,
-    ]);
+    ]));
 
     $response->assertSessionHasErrors('email');
 });
 
-it('rejects missing full name', function () {
-    $response = $this->post('/register', [
+it('rejects missing first name', function () {
+    $response = $this->post('/register', validRegistrationPayload([
         'email' => 'valid@smsgroup.com',
-        'company_name' => 'SMS Group',
-        'phone_country_code' => '+90',
-        'phone' => '5551234503',
-        'gdpr_approved' => true,
-        'kvkk_approved' => true,
-        'privacy_approved' => true,
-    ]);
+        'first_name' => '',
+    ]));
 
-    $response->assertSessionHasErrors('full_name');
+    $response->assertSessionHasErrors('first_name');
 });

@@ -9,6 +9,16 @@ class Lead extends Model
 {
     use HasFactory;
 
+    public const STATUS_DRAFT = 'draft';
+
+    public const STATUS_SUBMITTED = 'submitted';
+
+    public const STATUS_PAYMENT_PENDING = 'payment_pending';
+
+    public const STATUS_PAYMENT_FAILED = 'payment_failed';
+
+    public const STATUS_CONVERTED = 'converted';
+
     protected $guarded = [];
 
     /**
@@ -20,6 +30,7 @@ class Lead extends Model
             'gdpr_approved' => 'boolean',
             'kvkk_approved' => 'boolean',
             'privacy_approved' => 'boolean',
+            'converted_at' => 'datetime',
         ];
     }
 }

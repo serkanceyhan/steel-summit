@@ -16,6 +16,7 @@ class SponsorshipLeadController extends Controller
 
         Lead::create([
             'lead_type' => 'sponsorship',
+            'status' => Lead::STATUS_SUBMITTED,
             'full_name' => trim($request->string('first_name')->toString().' '.$request->string('last_name')->toString()),
             'email' => $request->string('email')->toString(),
             'company_name' => $request->string('company_name')->toString(),

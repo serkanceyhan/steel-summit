@@ -35,6 +35,7 @@ class StorePartialLeadController extends Controller
         ]);
 
         if (! $lead->exists) {
+            $lead->status = Lead::STATUS_DRAFT;
             $lead->gdpr_approved = false;
             $lead->kvkk_approved = false;
             $lead->privacy_approved = false;

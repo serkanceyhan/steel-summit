@@ -87,6 +87,24 @@
             box-shadow: 0 0 20px rgba(148, 163, 184, 0.1);
         }
 
+        /* Keep paragraph typography light but improve readability with a brighter tone */
+        p.text-slate-400 {
+            color: rgb(203 213 225);
+        }
+
+        /* Improve readability for small-size muted texts site-wide without changing font weight */
+        :where(.text-xs, .text-sm, .text-\[9px\], .text-\[10px\], .text-\[11px\], .text-\[12px\]).text-slate-500 {
+            color: rgb(148 163 184);
+        }
+
+        :where(.text-xs, .text-sm, .text-\[9px\], .text-\[10px\], .text-\[11px\], .text-\[12px\]).text-slate-400 {
+            color: rgb(203 213 225);
+        }
+
+        :where(.text-xs, .text-sm, .text-\[9px\], .text-\[10px\], .text-\[11px\], .text-\[12px\]).text-slate-300 {
+            color: rgb(226 232 240);
+        }
+
         /* Intl Tel Input & Tom Select Dark overrides */
         .iti {
             width: 100%;
@@ -413,7 +431,7 @@
 </head>
 
 <body @scroll.window="scrolled = (window.pageYOffset > 20); showToTop = (window.pageYOffset > 420)"
-    class="bg-slate-950 text-slate-200 font-sans antialiased overflow-x-hidden min-h-screen" x-data="{ 
+    class="bg-slate-900 text-slate-200 font-sans antialiased overflow-x-hidden min-h-screen" x-data="{ 
         mobileMenu: false, 
         scrolled: false, 
         showToTop: false, 
@@ -490,7 +508,7 @@
         </div>
     </nav>
     <section class="relative min-h-screen flex items-center justify-center overflow-hidden" id="main">
-        <div class="absolute inset-0 z-0 bg-slate-950">
+        <div class="absolute inset-0 z-0 bg-slate-900">
             <video autoplay loop muted playsinline class="w-full h-full object-cover opacity-90 scale-105"
                 poster="{{ asset('images/hero-istanbul.webp') }}">
                 <source src="{{ asset('video/istanbul.mp4') }}" type="video/mp4" />
@@ -498,7 +516,7 @@
                     src="{{ asset('images/hero-istanbul.webp') }}" />
             </video>
             <div class="absolute inset-0 hero-gradient opacity-30"></div>
-            <div class="absolute inset-0 bg-slate-950/30 mix-blend-overlay"></div>
+            <div class="absolute inset-0 bg-slate-900/20 mix-blend-overlay"></div>
         </div>
 
         <div class="relative z-10 text-center px-6 max-w-6xl mx-auto pt-24 md:pt-40 pb-32 md:pb-0">
@@ -547,7 +565,7 @@
     </section>
 
     <!-- Mobile Fixed CTA -->
-    <div class="md:hidden fixed bottom-0 left-0 w-full z-50 p-4 bg-gradient-to-t from-slate-950 via-slate-950/90 to-transparent pt-10 pointer-events-none"
+    <div class="md:hidden fixed bottom-0 left-0 w-full z-50 p-4 bg-gradient-to-t from-slate-900 via-slate-900/90 to-transparent pt-10 pointer-events-none"
         style="padding-bottom: max(0.75rem, env(safe-area-inset-bottom));">
         <a href="{{ route('register.page') }}"
             class="w-full flex items-center justify-center px-6 py-4 bg-gradient-to-r from-slate-200 to-slate-400 text-slate-950 font-extrabold tracking-[0.2em] text-[14px] md:text-[15px] rounded-xl shadow-[0_0_30px_rgba(148,163,184,0.3)] active:scale-95 transition-all duration-300 uppercase pointer-events-auto">
@@ -555,7 +573,7 @@
         </a>
     </div>
 
-    <section class="py-32 bg-slate-900 px-6 relative overflow-hidden transition-colors duration-500" id="agenda"
+    <section class="py-32 bg-slate-800 px-6 relative overflow-hidden transition-colors duration-500" id="agenda"
         x-data="{ activeTab: 1, revealed: false }" x-intersect.once="revealed = true">
         <!-- Ambient Glow -->
         <div class="absolute -top-24 -right-24 w-96 h-96 bg-blue-600/5 blur-[120px] rounded-full pointer-events-none">
@@ -714,7 +732,7 @@
     </section>
 
     <section
-        class="py-32 bg-slate-900 px-6 border-t border-slate-100 dark:border-white/5 relative overflow-hidden transition-colors duration-500"
+        class="py-32 bg-slate-800 px-6 border-t border-slate-100 dark:border-white/5 relative overflow-hidden transition-colors duration-500"
         id="about" x-data="{ revealed: false }" x-intersect.once="revealed = true">
         <!-- Ambient Glow -->
         <div
@@ -733,13 +751,17 @@
                             class="text-4xl md:text-6xl font-serif font-extrabold text-slate-900 dark:text-white uppercase tracking-wider mb-6">
                             About Us
                         </h2>
-                        <p class="text-slate-400 dark:text-slate-400 text-lg md:text-xl font-light leading-relaxed">
-                            Steel Networking Summits is an international steel conference, bringing together the most influential players of the global steel industry in Istanbul, Türkiye, on 25–27 October 2026.
-                            Designed as a truly global networking platform, the event unites all key stakeholders of the international steel trade—from producers and traders to industry associations, as well as finance and logistics providers.
-                            With a strong focus on global markets and trade, the conference offers direct engagement with decision-makers and provides a comprehensive perspective on the past, present, and future of the steel industry.
-
-
-                        </p>
+                        <div class="space-y-5 text-slate-300 dark:text-slate-200 text-lg md:text-xl font-light leading-relaxed text-justify">
+                            <p>
+                                Steel Networking Summits is an international steel conference, bringing together the most influential players of the global steel industry in Istanbul, Türkiye, on 25-27 October 2026.
+                            </p>
+                            <p>
+                                Designed as a truly global networking platform, the event unites all key stakeholders of the international steel trade-from producers and traders to industry associations, as well as finance and logistics providers.
+                            </p>
+                            <p>
+                                With a strong focus on global markets and trade, the conference offers direct engagement with decision-makers and provides a comprehensive perspective on the past, present, and future of the steel industry.
+                            </p>
+                        </div>
                     </div>
 
                     <div class="space-y-6">
@@ -768,28 +790,6 @@
                             To connect the global steel community, share knowledge, and create business opportunities.
                         </p>
 
-                        <div class="grid grid-cols-2 md:grid-cols-5 gap-8 pt-8 border-t border-white/5">
-                            <div class="space-y-1">
-                                <div class="text-3xl font-serif font-bold text-white">400+</div>
-                                <div class="text-[10px] uppercase tracking-widest text-slate-400">Participants</div>
-                            </div>
-                            <div class="space-y-1">
-                                <div class="text-3xl font-serif font-bold text-white">200+</div>
-                                <div class="text-[10px] uppercase tracking-widest text-slate-400">International Participants</div>
-                            </div>
-                            <div class="space-y-1">
-                                <div class="text-3xl font-serif font-bold text-white">80+</div>
-                                <div class="text-[10px] uppercase tracking-widest text-slate-400">Countries</div>
-                            </div>
-                            <div class="space-y-1">
-                                <div class="text-3xl font-serif font-bold text-white">40+</div>
-                                <div class="text-[10px] uppercase tracking-widest text-slate-400">Speakers</div>
-                            </div>
-                            <div class="space-y-1">
-                                <div class="text-3xl font-serif font-bold text-white">30+</div>
-                                <div class="text-[10px] uppercase tracking-widest text-slate-400">Networking Hours</div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -807,11 +807,36 @@
                 </div>
 
             </div>
+
+            <div class="mt-14 pt-8 border-t border-white/10">
+                <div class="flex flex-nowrap justify-between gap-6 overflow-x-auto pb-2">
+                    <div class="space-y-2 min-w-[150px] text-left">
+                        <div class="text-4xl md:text-5xl font-serif font-black text-white leading-none tracking-tight">400+</div>
+                        <div class="text-xs md:text-sm uppercase tracking-[0.2em] font-semibold text-slate-200">Participants</div>
+                    </div>
+                    <div class="space-y-2 min-w-[190px] text-left">
+                        <div class="text-4xl md:text-5xl font-serif font-black text-white leading-none tracking-tight">200+</div>
+                        <div class="text-xs md:text-sm uppercase tracking-[0.2em] font-semibold text-slate-200">International Participants</div>
+                    </div>
+                    <div class="space-y-2 min-w-[130px] text-left">
+                        <div class="text-4xl md:text-5xl font-serif font-black text-white leading-none tracking-tight">80+</div>
+                        <div class="text-xs md:text-sm uppercase tracking-[0.2em] font-semibold text-slate-200">Countries</div>
+                    </div>
+                    <div class="space-y-2 min-w-[130px] text-left">
+                        <div class="text-4xl md:text-5xl font-serif font-black text-white leading-none tracking-tight">40+</div>
+                        <div class="text-xs md:text-sm uppercase tracking-[0.2em] font-semibold text-slate-200">Speakers</div>
+                    </div>
+                    <div class="space-y-2 min-w-[180px] text-left">
+                        <div class="text-4xl md:text-5xl font-serif font-black text-white leading-none tracking-tight">30+</div>
+                        <div class="text-xs md:text-sm uppercase tracking-[0.2em] font-semibold text-slate-200">Networking Hours</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- BEGIN: Unique Value Proposition -->
-    <section class="py-32 bg-slate-900 overflow-hidden relative transition-colors duration-500" id="unique-value"
+    <section class="py-32 bg-slate-800 overflow-hidden relative transition-colors duration-500" id="unique-value"
         x-data="{ revealed: false }" x-intersect.once="revealed = true">
         <!-- Ambient Glow -->
         <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-red-600/5 blur-[120px] rounded-full pointer-events-none">
@@ -918,7 +943,7 @@
     </section>
 
     <!-- BEGIN: Who Attends -->
-    <section class="py-32 bg-slate-900 overflow-hidden relative transition-colors duration-500" id="who-attends"
+    <section class="py-32 bg-slate-800 overflow-hidden relative transition-colors duration-500" id="who-attends"
         x-data="{ revealed: false, isDragging: false, startX: 0, scrollLeft: 0, scrollProgress: 0 }"
         x-intersect.once="revealed = true">
         <!-- Ambient Glow -->
@@ -957,7 +982,7 @@
                     <div class="mt-8 px-4">
                         <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Steel Producers
                             and Traders</h4>
-                        <ul class="text-slate-600 dark:text-slate-400 text-base md:text-lg font-light leading-relaxed list-disc pl-5 space-y-1">
+                        <ul class="text-slate-500 dark:text-slate-300 text-base md:text-lg font-light leading-relaxed list-disc pl-5 space-y-1">
                             <li>Owners and senior executives of Fortune 500 companies</li>
                             <li>Board chairs and members</li>
                             <li>CEOs and C-level executives (C-suite), international steel traders</li>
@@ -978,10 +1003,10 @@
                     <div class="mt-8 px-4">
                         <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Raw Material and
                             Scrap Suppliers</h4>
-                        <p class="text-slate-600 dark:text-slate-400 text-base md:text-lg font-light leading-relaxed mb-2">
+                        <p class="text-slate-500 dark:text-slate-300 text-base md:text-lg font-light leading-relaxed mb-2">
                             Key players in the supply chain for major products such as:
                         </p>
-                        <ul class="text-slate-600 dark:text-slate-400 text-base md:text-lg font-light leading-relaxed list-disc pl-5 space-y-1">
+                        <ul class="text-slate-500 dark:text-slate-300 text-base md:text-lg font-light leading-relaxed list-disc pl-5 space-y-1">
                             <li>Iron ore</li>
                             <li>Scrap</li>
                             <li>Coal</li>
@@ -1004,10 +1029,10 @@
                     <div class="mt-8 px-4">
                         <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Machinery, Equipment,
                             and Production Technology Suppliers</h4>
-                        <p class="text-slate-600 dark:text-slate-400 text-base md:text-lg font-light leading-relaxed mb-2">
+                        <p class="text-slate-500 dark:text-slate-300 text-base md:text-lg font-light leading-relaxed mb-2">
                             Engineering firms developing technologies for:
                         </p>
-                        <ul class="text-slate-600 dark:text-slate-400 text-base md:text-lg font-light leading-relaxed list-disc pl-5 space-y-1">
+                        <ul class="text-slate-500 dark:text-slate-300 text-base md:text-lg font-light leading-relaxed list-disc pl-5 space-y-1">
                             <li>Rolling</li>
                             <li>Melting</li>
                             <li>Automation and process systems</li>
@@ -1028,7 +1053,7 @@
                     <div class="mt-8 px-4">
                         <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Logistics, Port, Insurance,
                             and Inspection Service Providers</h4>
-                        <ul class="text-slate-600 dark:text-slate-400 text-base md:text-lg font-light leading-relaxed list-disc pl-5 space-y-1">
+                        <ul class="text-slate-500 dark:text-slate-300 text-base md:text-lg font-light leading-relaxed list-disc pl-5 space-y-1">
                             <li>Port operators</li>
                             <li>Logistics and transportation companies</li>
                             <li>Warehousing and customs service providers</li>
@@ -1049,7 +1074,7 @@
                     <div class="mt-8 px-4">
                         <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Digitalization, Artificial Intelligence,
                             and High-Tech Companies</h4>
-                        <ul class="text-slate-600 dark:text-slate-400 text-base md:text-lg font-light leading-relaxed list-disc pl-5 space-y-1">
+                        <ul class="text-slate-500 dark:text-slate-300 text-base md:text-lg font-light leading-relaxed list-disc pl-5 space-y-1">
                             <li>Technology leaders offering AI solutions and efficiency innovations for the steel industry</li>
                         </ul>
                     </div>
@@ -1068,7 +1093,7 @@
                     </div>
                     <div class="mt-8 px-4">
                         <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Banking and Financial Institutions</h4>
-                        <ul class="text-slate-600 dark:text-slate-400 text-base md:text-lg font-light leading-relaxed list-disc pl-5 space-y-1">
+                        <ul class="text-slate-500 dark:text-slate-300 text-base md:text-lg font-light leading-relaxed list-disc pl-5 space-y-1">
                             <li>Banks</li>
                             <li>Trade finance organizations</li>
                             <li>Insurance and risk management firms</li>
@@ -1090,7 +1115,7 @@
                     </div>
                     <div class="mt-8 px-4">
                         <h4 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Industry Institutions & Organizations</h4>
-                        <ul class="text-slate-600 dark:text-slate-400 text-base md:text-lg font-light leading-relaxed list-disc pl-5 space-y-1">
+                        <ul class="text-slate-500 dark:text-slate-300 text-base md:text-lg font-light leading-relaxed list-disc pl-5 space-y-1">
                             <li>National and international steel associations, institutions, and organizations</li>
                             <li>Chambers of commerce and industry</li>
                             <li>Industry associations and their senior representatives</li>
@@ -1125,7 +1150,7 @@
 
     <!-- NEW: Why You Should Attend Section (Image B) -->
     <section
-        class="py-32 bg-slate-900 px-6 border-t border-slate-100 dark:border-white/5 relative overflow-hidden transition-colors duration-500"
+        class="py-32 bg-slate-800 px-6 border-t border-slate-100 dark:border-white/5 relative overflow-hidden transition-colors duration-500"
         id="why-attend" x-data="{ revealed: false }" x-intersect.once="revealed = true">
 
         <!-- Ambient Glow -->
@@ -1165,6 +1190,11 @@
                         class="absolute -bottom-12 -right-12 w-24 h-24 bg-brand-teal-light/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                     </div>
 
+                    <div class="absolute -bottom-6 -left-6 z-0 pointer-events-none">
+                        <span
+                            class="material-symbols-outlined text-brand-teal-light text-7xl opacity-30 group-hover:opacity-40 transition-all duration-500">verified</span>
+                    </div>
+
                     <h4 class="text-xl font-extrabold text-white mb-6 leading-tight relative z-10">Prestige
                         <br />& Visibility
                     </h4>
@@ -1172,10 +1202,6 @@
                         Participating in this event, which aims to make a global impact, strengthens your organization’s
                         international presence and industry reputation.
                     </p>
-                    <div class="mt-auto pt-6 border-t border-white/5 relative z-10">
-                        <span
-                            class="material-symbols-outlined text-brand-teal-light text-4xl opacity-80 group-hover:opacity-100 transition-all group-hover:scale-110">verified</span>
-                    </div>
                 </div>
 
                 <!-- Card 2: Perspective -->
@@ -1184,6 +1210,11 @@
                     <!-- Glow Effect -->
                     <div
                         class="absolute -bottom-12 -right-12 w-24 h-24 bg-brand-teal-light/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                    </div>
+
+                    <div class="absolute -bottom-6 -left-6 z-0 pointer-events-none">
+                        <span
+                            class="material-symbols-outlined text-brand-teal-light text-7xl opacity-30 group-hover:opacity-40 transition-all duration-500">public</span>
                     </div>
 
                     <h4 class="text-xl font-extrabold text-white mb-6 leading-tight relative z-10">Market
@@ -1217,10 +1248,6 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="mt-auto pt-6 border-t border-slate-900/5 dark:border-white/5 relative z-10">
-                        <span
-                            class="material-symbols-outlined text-brand-teal-light text-4xl opacity-80 group-hover:opacity-100 transition-all group-hover:scale-110">public</span>
-                    </div>
                 </div>
 
                 <!-- Card 3: Networking -->
@@ -1229,6 +1256,11 @@
                     <!-- Glow Effect -->
                     <div
                         class="absolute -bottom-12 -right-12 w-24 h-24 bg-brand-teal-light/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                    </div>
+
+                    <div class="absolute -bottom-6 -left-6 z-0 pointer-events-none">
+                        <span
+                            class="material-symbols-outlined text-brand-teal-light text-7xl opacity-30 group-hover:opacity-40 transition-all duration-500">diversity_3</span>
                     </div>
 
                     <h4 class="text-xl font-extrabold text-white mb-6 leading-tight relative z-10">
@@ -1259,10 +1291,6 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="mt-auto pt-6 border-t border-white/5 relative z-10">
-                        <span
-                            class="material-symbols-outlined text-brand-teal-light text-4xl opacity-80 group-hover:opacity-100 transition-all group-hover:scale-110">diversity_3</span>
-                    </div>
                 </div>
 
                 <!-- Card 4: Crossroads -->
@@ -1273,6 +1301,11 @@
                         class="absolute -bottom-12 -right-12 w-24 h-24 bg-brand-teal-light/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                     </div>
 
+                    <div class="absolute -bottom-6 -left-6 z-0 pointer-events-none">
+                        <span
+                            class="material-symbols-outlined text-brand-teal-light text-7xl opacity-30 group-hover:opacity-40 transition-all duration-500">hub</span>
+                    </div>
+
                     <h4 class="text-xl font-extrabold text-white mb-6 leading-tight relative z-10">The Crossroads
                         <br />of Global Trade
                     </h4>
@@ -1280,10 +1313,6 @@
                         With Istanbul’s strategic location, the opportunity to engage directly with decision-makers from
                         different regions simultaneously.
                     </p>
-                    <div class="mt-auto pt-6 border-t border-white/5 relative z-10">
-                        <span
-                            class="material-symbols-outlined text-brand-teal-light text-4xl opacity-80 group-hover:opacity-100 transition-all group-hover:scale-110">hub</span>
-                    </div>
                 </div>
             </div>
 
@@ -1298,7 +1327,7 @@
     </section>
 
     <section
-        class="py-32 bg-slate-900 px-6 border-t border-white/5 relative overflow-hidden transition-colors duration-500"
+        class="py-32 bg-slate-800 px-6 border-t border-white/5 relative overflow-hidden transition-colors duration-500"
         id="keynote-speakers" x-data="{ revealed: false }" x-intersect.once="revealed = true">
         <!-- Ambient Glow -->
         <div
@@ -1843,7 +1872,7 @@
 
     <!-- BEGIN: Pricing & Participation -->
     <section
-                class="py-32 bg-slate-900 px-6 border-t border-white/5 relative overflow-hidden transition-colors duration-500"
+                class="py-32 bg-slate-800 px-6 border-t border-white/5 relative overflow-hidden transition-colors duration-500"
                 id="pricing" x-data="{ revealed: false }" x-intersect.once="revealed = true">
 
                 <!-- Ambient Glow -->
@@ -1856,9 +1885,9 @@
                     <!-- Section Header -->
                     <div class="mb-20 text-center relative">
                         <div class="absolute -top-12 left-1/2 -translate-x-1/2 text-[140px] md:text-[180px] font-serif opacity-[0.03] select-none pointer-events-none italic text-white whitespace-nowrap">Pricing</div>
-                        <h2 class="text-4xl md:text-7xl font-serif font-bold text-white mb-8 leading-tight">Pricing &amp; <span class="text-slate-400">Participation</span></h2>
-                        <p class="text-slate-400 text-xl font-light max-w-2xl mx-auto leading-relaxed">
-                            Secure your presence at the Steel Networking Summit. Choose from our curated participation packages designed for industry leadership and strategic growth.
+                        <h2 class="text-4xl md:text-7xl font-serif font-bold text-white mb-8 leading-tight">Pricing &amp; <span class="text-slate-300">Participation</span></h2>
+                        <p class="text-slate-300 text-xl font-light max-w-2xl mx-auto leading-relaxed">
+                            Secure your presence at the Steel Networking Summit 2026.
                         </p>
                     </div>
 
@@ -1873,15 +1902,19 @@
                                 <p class="text-slate-500 text-sm italic">Single delegate access</p>
                             </div>
                             <div class="mb-10">
+                                <p class="text-[11px] text-slate-300 font-semibold uppercase tracking-[0.18em] mb-2">Standard Fee</p>
+                                <div class="flex items-baseline gap-2 mb-4">
+                                    <span class="text-4xl font-bold text-slate-400 tracking-tighter line-through decoration-2">€1,200</span>
+                                    <span class="text-xs text-slate-300 uppercase tracking-widest">/ person</span>
+                                </div>
                                 <div class="inline-flex items-center gap-2 mb-3 bg-brand-teal-light/10 border border-brand-teal-light/20 rounded-full px-3 py-1">
                                     <span class="material-symbols-outlined text-brand-teal-light" style="font-size:14px;">bolt</span>
                                     <span class="text-[11px] text-brand-teal-light font-bold uppercase tracking-widest">Early Bird — until 15 Jul 2026</span>
                                 </div>
                                 <div class="flex items-baseline gap-2">
                                     <span class="text-5xl font-bold text-white tracking-tighter">€1,050</span>
-                                    <span class="text-slate-500 text-sm line-through">€1,200</span>
+                                    <span class="text-xs text-slate-300 uppercase tracking-widest">/ person</span>
                                 </div>
-                                <p class="text-xs text-slate-500 mt-1">Standard fee: €1,200 / person</p>
                             </div>
                             <ul class="space-y-4 mb-12 flex-grow">
                                 <li class="flex items-center gap-3 text-sm text-slate-400">
@@ -1915,15 +1948,19 @@
                                 <p class="text-slate-500 text-sm italic">2–4 delegate delegation</p>
                             </div>
                             <div class="mb-10">
+                                <p class="text-[11px] text-slate-300 font-semibold uppercase tracking-[0.18em] mb-2">Standard Fee</p>
+                                <div class="flex items-baseline gap-2 mb-4">
+                                    <span class="text-4xl font-bold text-slate-400 tracking-tighter line-through decoration-2">€1,100</span>
+                                    <span class="text-xs text-slate-300 uppercase tracking-widest">/ person</span>
+                                </div>
                                 <div class="inline-flex items-center gap-2 mb-3 bg-brand-teal-light/10 border border-brand-teal-light/20 rounded-full px-3 py-1">
                                     <span class="material-symbols-outlined text-brand-teal-light" style="font-size:14px;">bolt</span>
                                     <span class="text-[11px] text-brand-teal-light font-bold uppercase tracking-widest">Early Bird — until 15 Jul 2026</span>
                                 </div>
                                 <div class="flex items-baseline gap-2">
                                     <span class="text-5xl font-bold text-white tracking-tighter">€950</span>
-                                    <span class="text-slate-500 text-sm line-through">€1,100</span>
+                                    <span class="text-xs text-slate-300 uppercase tracking-widest">/ person</span>
                                 </div>
-                                <p class="text-xs text-slate-500 mt-1">Standard fee: €1,100 / person</p>
                             </div>
                             <ul class="space-y-4 mb-12 flex-grow">
                                 <li class="flex items-center gap-3 text-sm text-slate-400">
@@ -1958,15 +1995,19 @@
                                 <p class="text-slate-500 text-sm italic">5+ large delegation</p>
                             </div>
                             <div class="mb-10">
+                                <p class="text-[11px] text-slate-300 font-semibold uppercase tracking-[0.18em] mb-2">Standard Fee</p>
+                                <div class="flex items-baseline gap-2 mb-4">
+                                    <span class="text-4xl font-bold text-slate-400 tracking-tighter line-through decoration-2">€1,000</span>
+                                    <span class="text-xs text-slate-300 uppercase tracking-widest">/ person</span>
+                                </div>
                                 <div class="inline-flex items-center gap-2 mb-3 bg-brand-teal-light/10 border border-brand-teal-light/20 rounded-full px-3 py-1">
                                     <span class="material-symbols-outlined text-brand-teal-light" style="font-size:14px;">bolt</span>
                                     <span class="text-[11px] text-brand-teal-light font-bold uppercase tracking-widest">Early Bird — until 15 Jul 2026</span>
                                 </div>
                                 <div class="flex items-baseline gap-2">
                                     <span class="text-5xl font-bold text-white tracking-tighter">€850</span>
-                                    <span class="text-slate-500 text-sm line-through">€1,000</span>
+                                    <span class="text-xs text-slate-300 uppercase tracking-widest">/ person</span>
                                 </div>
-                                <p class="text-xs text-slate-500 mt-1">Standard fee: €1,000 / person</p>
                             </div>
                             <ul class="space-y-4 mb-12 flex-grow">
                                 <li class="flex items-center gap-3 text-sm text-slate-400">
@@ -2050,7 +2091,7 @@
     <!-- END: Pricing & Participation -->
 
     <section
-        class="py-32 bg-slate-900 px-6 border-t border-white/5 relative overflow-hidden transition-colors duration-500"
+        class="py-32 bg-slate-800 px-6 border-t border-white/5 relative overflow-hidden transition-colors duration-500"
         id="venue" x-data="{ revealed: false }" x-intersect.once="revealed = true">
         <!-- Ambient Glow -->
         <div

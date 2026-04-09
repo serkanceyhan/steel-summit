@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Lead;
+use Illuminate\Database\QueryException;
 
 it('creates a lead with required fields', function () {
     $lead = Lead::create([
@@ -33,16 +34,36 @@ it('casts boolean fields correctly', function () {
 
 it('does not allow duplicate emails', function () {
     Lead::create([
+        'lead_type' => 'registration',
         'full_name' => 'First User',
         'email' => 'duplicate@arcelor.com',
         'company_name' => 'ArcelorMittal',
     ]);
 
     expect(fn () => Lead::create([
+        'lead_type' => 'registration',
         'full_name' => 'Second User',
         'email' => 'duplicate@arcelor.com',
         'company_name' => 'ArcelorMittal',
-    ]))->toThrow(\Illuminate\Database\QueryException::class);
+    ]))->toThrow(QueryException::class);
+});
+
+it('allows same email for different lead types', function () {
+    Lead::create([
+        'lead_type' => 'registration',
+        'full_name' => 'Registration User',
+        'email' => 'shared@arcelor.com',
+        'company_name' => 'ArcelorMittal',
+    ]);
+
+    Lead::create([
+        'lead_type' => 'sponsorship',
+        'full_name' => 'Sponsorship User',
+        'email' => 'shared@arcelor.com',
+        'company_name' => 'ArcelorMittal',
+    ]);
+
+    expect(Lead::query()->where('email', 'shared@arcelor.com')->count())->toBe(2);
 });
 
 it('defaults consent flags to false', function () {
