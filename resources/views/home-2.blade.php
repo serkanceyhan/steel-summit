@@ -1190,9 +1190,9 @@
                         class="absolute -bottom-12 -right-12 w-24 h-24 bg-brand-teal-light/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                     </div>
 
-                    <div class="absolute -bottom-6 -left-6 z-0 pointer-events-none">
+                        <div class="absolute -bottom-8 -right-8 z-0 pointer-events-none">
                         <span
-                            class="material-symbols-outlined text-brand-teal-light text-7xl opacity-30 group-hover:opacity-40 transition-all duration-500">verified</span>
+                            class="material-symbols-outlined text-brand-teal-light text-[92px] md:text-[108px] opacity-[0.1] group-hover:opacity-[0.16] transition-all duration-500">verified</span>
                     </div>
 
                     <h4 class="text-xl font-extrabold text-white mb-6 leading-tight relative z-10">Prestige
@@ -1212,9 +1212,9 @@
                         class="absolute -bottom-12 -right-12 w-24 h-24 bg-brand-teal-light/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                     </div>
 
-                    <div class="absolute -bottom-6 -left-6 z-0 pointer-events-none">
+                        <div class="absolute -bottom-8 -right-8 z-0 pointer-events-none">
                         <span
-                            class="material-symbols-outlined text-brand-teal-light text-7xl opacity-30 group-hover:opacity-40 transition-all duration-500">public</span>
+                            class="material-symbols-outlined text-brand-teal-light text-[92px] md:text-[108px] opacity-[0.1] group-hover:opacity-[0.16] transition-all duration-500">public</span>
                     </div>
 
                     <h4 class="text-xl font-extrabold text-white mb-6 leading-tight relative z-10">Market
@@ -1258,9 +1258,9 @@
                         class="absolute -bottom-12 -right-12 w-24 h-24 bg-brand-teal-light/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                     </div>
 
-                    <div class="absolute -bottom-6 -left-6 z-0 pointer-events-none">
+                        <div class="absolute -bottom-8 -right-8 z-0 pointer-events-none">
                         <span
-                            class="material-symbols-outlined text-brand-teal-light text-7xl opacity-30 group-hover:opacity-40 transition-all duration-500">diversity_3</span>
+                            class="material-symbols-outlined text-brand-teal-light text-[92px] md:text-[108px] opacity-[0.1] group-hover:opacity-[0.16] transition-all duration-500">diversity_3</span>
                     </div>
 
                     <h4 class="text-xl font-extrabold text-white mb-6 leading-tight relative z-10">
@@ -1301,9 +1301,9 @@
                         class="absolute -bottom-12 -right-12 w-24 h-24 bg-brand-teal-light/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                     </div>
 
-                    <div class="absolute -bottom-6 -left-6 z-0 pointer-events-none">
+                        <div class="absolute -bottom-8 -right-8 z-0 pointer-events-none">
                         <span
-                            class="material-symbols-outlined text-brand-teal-light text-7xl opacity-30 group-hover:opacity-40 transition-all duration-500">hub</span>
+                            class="material-symbols-outlined text-brand-teal-light text-[92px] md:text-[108px] opacity-[0.1] group-hover:opacity-[0.16] transition-all duration-500">hub</span>
                     </div>
 
                     <h4 class="text-xl font-extrabold text-white mb-6 leading-tight relative z-10">The Crossroads
