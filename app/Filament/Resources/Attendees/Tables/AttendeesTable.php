@@ -39,11 +39,12 @@ class AttendeesTable
                 TextColumn::make('amount_paid')
                     ->numeric()
                     ->sortable()
-                    ->suffix(fn ($record) => ' ' . $record->currency),
+                    ->suffix(fn ($record) => ' '.$record->currency),
                 TextColumn::make('created_at')
+                    ->label('Created Date')
                     ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(),
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()

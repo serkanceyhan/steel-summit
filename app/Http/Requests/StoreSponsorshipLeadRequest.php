@@ -15,6 +15,8 @@ class StoreSponsorshipLeadRequest extends StoreLeadRequest
     {
         $rules = parent::rules();
         $rules['email'] = ['required', 'email', 'max:255', Rule::unique('leads', 'email')->where('lead_type', 'sponsorship')];
+        $rules['company_field_id'] = ['nullable'];
+        $rules['person_role_id'] = ['nullable'];
         $rules['registration_package'] = ['nullable'];
         $rules['billing_type'] = ['nullable'];
         $rules['billing_name'] = ['nullable'];

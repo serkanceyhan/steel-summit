@@ -20,9 +20,10 @@ class EventDaysTable
                 TextColumn::make('title')
                     ->searchable(),
                 TextColumn::make('created_at')
+                    ->label('Created Date')
                     ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(),
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()

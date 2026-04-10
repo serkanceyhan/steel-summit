@@ -691,11 +691,6 @@
                                     <span class="text-5xl font-bold text-white tracking-tighter">&#8364;<span x-text="prices.standard"></span></span>
                                     <span class="text-xs text-slate-300 uppercase tracking-widest">/ person</span>
                                 </div>
-                                <ul class="space-y-2 text-sm text-slate-400">
-                                    <li>Full Summit Access</li>
-                                    <li>Networking Sessions</li>
-                                    <li>Summit Documentation</li>
-                                </ul>
                             </button>
 
                             <button type="button" class="text-left rounded-[2rem] p-7 border transition-all bg-brand-navy-soft relative"
@@ -717,12 +712,6 @@
                                     <span class="text-5xl font-bold text-white tracking-tighter">&#8364;<span x-text="prices.vip"></span></span>
                                     <span class="text-xs text-slate-300 uppercase tracking-widest">/ person</span>
                                 </div>
-                                <ul class="space-y-2 text-sm text-slate-400">
-                                    <li>Priority Summit Access</li>
-                                    <li>Concierge Support</li>
-                                    <li>B2B Matchmaking</li>
-                                    <li>Gala Dinner Entry</li>
-                                </ul>
                             </button>
 
                             <button type="button" class="text-left rounded-[2rem] p-7 border transition-all bg-brand-navy-soft"
@@ -743,11 +732,6 @@
                                     <span class="text-5xl font-bold text-white tracking-tighter">&#8364;<span x-text="prices.group"></span></span>
                                     <span class="text-xs text-slate-300 uppercase tracking-widest">/ person</span>
                                 </div>
-                                <ul class="space-y-2 text-sm text-slate-400">
-                                    <li>VIP Reserved Seating</li>
-                                    <li>Exclusive Lounge Access</li>
-                                    <li>Logo Recognition</li>
-                                </ul>
                             </button>
                         </div>
                     </section>

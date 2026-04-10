@@ -1916,20 +1916,6 @@
                                     <span class="text-xs text-slate-300 uppercase tracking-widest">/ person</span>
                                 </div>
                             </div>
-                            <ul class="space-y-4 mb-12 flex-grow">
-                                <li class="flex items-center gap-3 text-sm text-slate-400">
-                                    <span class="material-symbols-outlined text-brand-teal-light text-lg" style="font-size:18px;">check_circle</span>
-                                    Full Summit Access
-                                </li>
-                                <li class="flex items-center gap-3 text-sm text-slate-400">
-                                    <span class="material-symbols-outlined text-brand-teal-light text-lg" style="font-size:18px;">check_circle</span>
-                                    Networking Sessions
-                                </li>
-                                <li class="flex items-center gap-3 text-sm text-slate-400">
-                                    <span class="material-symbols-outlined text-brand-teal-light text-lg" style="font-size:18px;">check_circle</span>
-                                    Summit Documentation
-                                </li>
-                            </ul>
                             <a href="{{ route('register.page') }}"
                                 class="inline-flex items-center justify-center gap-2 w-full py-4 rounded-2xl font-bold text-white border border-white/10 hover:bg-white/5 hover:border-brand-teal-light/40 transition-all duration-300 group-hover:shadow-lg">
                                 Select Package
@@ -1962,24 +1948,6 @@
                                     <span class="text-xs text-slate-300 uppercase tracking-widest">/ person</span>
                                 </div>
                             </div>
-                            <ul class="space-y-4 mb-12 flex-grow">
-                                <li class="flex items-center gap-3 text-sm text-slate-400">
-                                    <span class="material-symbols-outlined text-brand-teal-light" style="font-size:18px;">check_circle</span>
-                                    Priority Summit Access
-                                </li>
-                                <li class="flex items-center gap-3 text-sm text-slate-400">
-                                    <span class="material-symbols-outlined text-brand-teal-light" style="font-size:18px;">check_circle</span>
-                                    Concierge Support
-                                </li>
-                                <li class="flex items-center gap-3 text-sm text-slate-400">
-                                    <span class="material-symbols-outlined text-brand-teal-light" style="font-size:18px;">check_circle</span>
-                                    B2B Matchmaking
-                                </li>
-                                <li class="flex items-center gap-3 text-sm text-slate-400">
-                                    <span class="material-symbols-outlined text-brand-teal-light" style="font-size:18px;">check_circle</span>
-                                    Gala Dinner Entry
-                                </li>
-                            </ul>
                             <a href="{{ route('register.page') }}"
                                 class="inline-flex items-center justify-center gap-2 w-full py-4 rounded-2xl font-bold text-white border border-white/10 hover:bg-white/5 hover:border-brand-teal-light/40 transition-all duration-300 group-hover:shadow-lg">
                                 Select Package
@@ -2009,20 +1977,6 @@
                                     <span class="text-xs text-slate-300 uppercase tracking-widest">/ person</span>
                                 </div>
                             </div>
-                            <ul class="space-y-4 mb-12 flex-grow">
-                                <li class="flex items-center gap-3 text-sm text-slate-400">
-                                    <span class="material-symbols-outlined text-brand-teal-light" style="font-size:18px;">check_circle</span>
-                                    VIP Reserved Seating
-                                </li>
-                                <li class="flex items-center gap-3 text-sm text-slate-400">
-                                    <span class="material-symbols-outlined text-brand-teal-light" style="font-size:18px;">check_circle</span>
-                                    Exclusive Lounge Access
-                                </li>
-                                <li class="flex items-center gap-3 text-sm text-slate-400">
-                                    <span class="material-symbols-outlined text-brand-teal-light" style="font-size:18px;">check_circle</span>
-                                    Logo Recognition
-                                </li>
-                            </ul>
                             <a href="{{ route('register.page') }}"
                                 class="inline-flex items-center justify-center gap-2 w-full py-4 rounded-2xl font-bold text-white border border-white/10 hover:bg-white/5 hover:border-brand-teal-light/40 transition-all duration-300 group-hover:shadow-lg">
                                 Select Package
